@@ -290,6 +290,7 @@ fileUploadForm.addEventListener("submit", (event) => {
 
   // Get the selected file
   const selectedFile = selectedFileInput.files[0];
+  console.log(selectedFile.name);
   if (selectedFile) {
     // Create a FormData object
     let formData = new FormData();
