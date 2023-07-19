@@ -304,6 +304,9 @@ fileUploadForm.addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then((data) => {
           console.log("File uploaded successfully. Server Response: ", data);
+          // Assume there is an img or video element to display the uploaded file
+          const fileDisplayElement = document.getElementById("fileDisplay");
+          fileDisplayElement.src = data.url;
         })
         .catch((error) => {
           console.error("Error uploading file: ", error);
