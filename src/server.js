@@ -103,6 +103,11 @@ wsServer.on("connection", (socket) => {
     done();
   });
   socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
+
+  // 파일 url 전달
+  socket.on("file_uploaded", (url, roomName) => {
+    socket.to(roomName).emit("new_file", url);
+  });
 });
 
 // Function to parse file for upload

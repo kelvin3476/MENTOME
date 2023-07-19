@@ -284,6 +284,12 @@ socket.on("room_change", (rooms) => {
   });
 });
 
+socket.on("new_file", (url) => {
+  const fileDisplayElement = document.getElementById("fileDisplay");
+  fileDisplayElement.src = url;
+});
+
+
 // 파일 업로드
 fileUploadForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -305,6 +311,7 @@ fileUploadForm.addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then((data) => {
           console.log("File uploaded successfully. Server Response: ", data);
+          socket.emit("file_uploaded", data.url, roomName);
           // Assume there is an img or video element to display the uploaded file
           const fileDisplayElement = document.getElementById("fileDisplay");
           fileDisplayElement.src = data.url;
