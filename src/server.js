@@ -108,6 +108,20 @@ wsServer.on("connection", (socket) => {
   socket.on("file_uploaded", (url, roomName) => {
     socket.to(roomName).emit("new_file", url);
   });
+
+  // 동영상 동기화
+  socket.on('play_video', (timestamp, roomName) => {
+    socket.to(roomName).emit('play_video', timestamp);
+  });
+
+  socket.on('pause_video', (timestamp, roomName) => {
+    socket.to(roomName).emit('pause_video', timestamp);
+  });
+
+  socket.on('seek_video', (timestamp, roomName) => {
+    socket.to(roomName).emit('seek_video', timestamp);
+  });
+
 });
 
 // Function to parse file for upload

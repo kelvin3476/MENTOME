@@ -12,6 +12,9 @@ const call = document.getElementById("call");
 const fileUploadForm = document.getElementById("fileUpload");
 const selectedFileInput = document.getElementById("selectedFile");
 
+// 동영상 동기화
+const videoPlayer = document.getElementById("fileDisplay");
+
 call.hidden = true;
 
 let myStream;
@@ -323,4 +326,46 @@ fileUploadForm.addEventListener("submit", (event) => {
     // Clear the input
     selectedFileInput.value = "";
   }
+});
+
+
+
+// 이벤트 전송 함수
+
+
+// 비디오 플레이어에 이벤트 리스너 추가
+async function playVideo(timestamp) {
+  return new Promise((resolve) => {
+    videoPlayer.currentTime = timestamp;
+    videoPlayer.play().then(() => {
+      resolve();
+    });
+  });
+}
+
+async function pauseVideo(timestamp) {
+  return new Promise((resolve) => {
+    videoPlayer.currentTime = timestamp;
+    videoPlayer.pause();
+    resolve();
+  });
+}
+
+videoPlayer.addEventListener("seeked", (event) => {
+  sendEvent("seek_video", videoPlayer.currentTime, roomName);
+});
+
+// socket.io 이벤트 리스너 추가
+socket.on("play_video", async (timestamp) => {
+  await playVideo(timestamp);
+});
+
+socket.on("pause_video", async (timestamp) => {
+  await pauseVideo(timestamp);
+});
+
+socket.on("seek_video", (timestamp) => {
+  serverEvent = true;
+  videoPlayer.currentTime = timestamp;
+  serverEvent = false;
 });
