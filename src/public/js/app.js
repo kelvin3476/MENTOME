@@ -1,4 +1,3 @@
-// app.js
 const socket = io();
 
 const myFace = document.getElementById("myFace");
@@ -14,6 +13,7 @@ const selectedFileInput = document.getElementById("selectedFile");
 
 // 동영상 동기화
 const videoPlayer = document.getElementById("fileDisplay");
+let serverEvent = false;
 
 call.hidden = true;
 
@@ -56,7 +56,7 @@ async function getMedia(deviceId) {
 
   try {
     myStream = await navigator.mediaDevices.getUserMedia(
-      deviceId ? cameraConstraints : initialConstraints
+        deviceId ? cameraConstraints : initialConstraints
     );
 
     myFace.srcObject = myStream;
@@ -69,9 +69,7 @@ async function getMedia(deviceId) {
 }
 
 function handleMuteClick() {
-  myStream
-    .getAudioTracks()
-    .forEach((track) => (track.enabled = !track.enabled));
+  myStream.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
   if (!muted) {
     muteBtn.innerText = "Unmute";
     muted = true;
@@ -82,9 +80,7 @@ function handleMuteClick() {
 }
 
 function handleCameraClick() {
-  myStream
-    .getVideoTracks()
-    .forEach((track) => (track.enabled = !track.enabled));
+  myStream.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
   if (cameraOff) {
     cameraBtn.innerText = "Turn Camera Off";
     cameraOff = false;
@@ -106,8 +102,8 @@ async function handleCameraChange() {
   if (myPeerConnection) {
     const videoTrack = myStream.getVideoTracks()[0];
     const videoSender = myPeerConnection
-      .getSenders()
-      .find((sender) => sender.track.kind === "video");
+        .getSenders()
+        .find((sender) => sender.track.kind === "video");
     videoSender.replaceTrack(videoTrack);
   }
 }
@@ -119,7 +115,7 @@ camerasSelect.addEventListener("input", handleCameraChange);
 // Welcome Form (join a room)
 
 const welcome = document.getElementById("welcome");
-welcomeForm = welcome.querySelector("form");
+const welcomeForm = welcome.querySelector("form");
 
 async function initCall() {
   welcome.hidden = true;
@@ -194,9 +190,7 @@ function makeConnection() {
   });
   myPeerConnection.addEventListener("icecandidate", handleIce);
   myPeerConnection.addEventListener("addstream", handleAddStream);
-  myStream
-    .getTracks()
-    .forEach((track) => myPeerConnection.addTrack(track, myStream));
+  myStream.getTracks().forEach((track) => myPeerConnection.addTrack(track, myStream));
 }
 
 function handleIce(data) {
@@ -292,7 +286,6 @@ socket.on("new_file", (url) => {
   fileDisplayElement.src = url;
 });
 
-
 // 파일 업로드
 fileUploadForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -328,44 +321,65 @@ fileUploadForm.addEventListener("submit", (event) => {
   }
 });
 
-
-
-// 이벤트 전송 함수
-
-
-// 비디오 플레이어에 이벤트 리스너 추가
+// 동영상 동기화
 async function playVideo(timestamp) {
+  serverEvent = true;
   return new Promise((resolve) => {
-    videoPlayer.currentTime = timestamp;
-    videoPlayer.play().then(() => {
+    videoPlayer.onplaying = function() {
+      videoPlayer.onplaying = null;
+      serverEvent = false;
       resolve();
-    });
+    };
+    videoPlayer.currentTime = timestamp;
+    videoPlayer.play();
   });
 }
 
 async function pauseVideo(timestamp) {
+  serverEvent = true;
   return new Promise((resolve) => {
+    videoPlayer.onpause = function() {
+      videoPlayer.onpause = null;
+      serverEvent = false;
+      resolve();
+    };
     videoPlayer.currentTime = timestamp;
     videoPlayer.pause();
-    resolve();
   });
 }
-
-videoPlayer.addEventListener("seeked", (event) => {
-  sendEvent("seek_video", videoPlayer.currentTime, roomName);
-});
 
 // socket.io 이벤트 리스너 추가
 socket.on("play_video", async (timestamp) => {
   await playVideo(timestamp);
+  serverEvent = false;
 });
 
 socket.on("pause_video", async (timestamp) => {
   await pauseVideo(timestamp);
+  serverEvent = false;
 });
 
 socket.on("seek_video", (timestamp) => {
-  serverEvent = true;
-  videoPlayer.currentTime = timestamp;
-  serverEvent = false;
+  if (!serverEvent) {
+    videoPlayer.currentTime = timestamp;
+  }
+});
+
+// 비디오 플레이어의 play, pause, seeked 이벤트를 사용자가 발생시키면 서버로 이벤트를 전송합니다
+videoPlayer.addEventListener("play", (event) => {
+  if (!serverEvent) {
+    socket.emit("play_video", videoPlayer.currentTime, roomName);
+  }
+});
+
+videoPlayer.addEventListener("pause", (event) => {
+  if (!serverEvent) {
+    socket.emit("pause_video", videoPlayer.currentTime, roomName);
+  }
+});
+
+videoPlayer.addEventListener("seeked", (event) => {
+  if (!serverEvent) {
+    socket.emit("seek_video", videoPlayer.currentTime, roomName);
+  }
 });
