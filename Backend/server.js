@@ -12,6 +12,8 @@ import { Transform } from 'stream';
 
 console.log("Region1: ", process.env.S3_REGION); // 이 줄을 추가하세요.
 
+const path = require("path");
+
 const app = express();
 const httpServer = http.createServer(app);
 const wsServer = new Server(httpServer, {
@@ -23,9 +25,10 @@ const wsServer = new Server(httpServer, {
 
 // setting up the view engine and static file serving
 app.set("view engine", "html");
-app.set("views", __dirname + "/views");
-app.use("/public", express.static(__dirname + "/public"));
-app.get("/", (_, res) => res.sendFile(__dirname + "/views/home.html"));
+app.set("public", __dirname + "/public");
+app.use(express.static(path.join(__dirname, "../Frontend/public")));
+app.use(express.static(path.join(__dirname, "../Frontend/src"), { type: 'text/javascript' }));
+app.get("/", (_, res) => res.sendFile(path.join(__dirname, "../Frontend/public/index.html")));
 app.get("/*", (_, res) => res.redirect("/"));
 app.set('json spaces', 5);
 
