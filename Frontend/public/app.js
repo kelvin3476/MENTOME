@@ -341,7 +341,13 @@ fileUploadForm.addEventListener("submit", (event) => {
   }
 });
 
+
+
+
+
 // 동영상 동기화
+let throttleTimeout;
+
 async function playVideo(timestamp) {
   serverEvent = true;
   return new Promise((resolve) => {
@@ -385,32 +391,46 @@ socket.on("seek_video", (timestamp) => {
   }
 });
 
-// 비디오 플레이어의 play, pause, seeked 이벤트를 사용자가 발생시키면 서버로 이벤트를 전송합니다
 videoPlayer.addEventListener("play", (event) => {
   if (!serverEvent) {
-    socket.emit("play_video", videoPlayer.currentTime, roomName);
+    if (throttleTimeout) clearTimeout(throttleTimeout);
+
+    throttleTimeout = setTimeout(() => {
+      socket.emit("play_video", videoPlayer.currentTime, roomName);
+    }, 100);
   }
 });
 
 videoPlayer.addEventListener("pause", (event) => {
   if (!serverEvent) {
-    socket.emit("pause_video", videoPlayer.currentTime, roomName);
+    if (throttleTimeout) clearTimeout(throttleTimeout);
+
+    throttleTimeout = setTimeout(() => {
+      socket.emit("pause_video", videoPlayer.currentTime, roomName);
+    }, 100);
   }
 });
 
 videoPlayer.addEventListener("seeked", (event) => {
   if (!serverEvent) {
-    socket.emit("seek_video", videoPlayer.currentTime, roomName);
+    if (throttleTimeout) clearTimeout(throttleTimeout);
+
+    throttleTimeout = setTimeout(() => {
+      socket.emit("seek_video", videoPlayer.currentTime, roomName);
+    }, 100);
   }
 });
 
 
+
+
+
+
+// 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({locateFile: (file) => {
     return `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/${file}`;
   }});
 
-
-// 동영상 위에 스켈레톤 이미지를 씌우는 함수
 async function addSkeletonToVideo() {
   skeletonEnabled = !skeletonEnabled; // 버튼 클릭시 토글
   if(skeletonEnabled) { // 스켈레톤 활성화시 pose 설정
@@ -505,4 +525,3 @@ function onResultsPose(results) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 }
-
