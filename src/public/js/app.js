@@ -1,3 +1,4 @@
+// app.js
 const socket = io();
 
 const myFace = document.getElementById("myFace");
@@ -13,7 +14,17 @@ const selectedFileInput = document.getElementById("selectedFile");
 
 // 동영상 동기화
 const videoPlayer = document.getElementById("fileDisplay");
+console.log("Video player src: ", videoPlayer.src);
 let serverEvent = false;
+
+// 특정 버튼을 누르면 동영상 위에 스켈레톤 이미지 씌우기
+const addSkeletonButton = document.getElementById("addSkeletonButton");
+addSkeletonButton.addEventListener("click", addSkeletonToVideo);
+const canvas = document.getElementById("canvas");
+const canvasCtx5 = canvas.getContext('2d');
+
+const video = document.getElementById('fileDisplay');
+
 
 call.hidden = true;
 
@@ -63,8 +74,11 @@ async function getMedia(deviceId) {
     if (!deviceId) {
       await getCameras();
     }
+
+    // 성공적으로 스트림을 가져왔는지 확인하기 위해 콘솔에 출력합니다.
+    console.log("Successfully acquired media stream:", myStream);
   } catch (e) {
-    console.log(e);
+    console.error("Error getting media stream:", e);
   }
 }
 
@@ -242,6 +256,12 @@ function showRoom() {
   const nameForm = room.querySelector("#name");
   msgForm.addEventListener("submit", handleMessageSubmit);
   nameForm.addEventListener("submit", handleNicknameSubmit);
+
+  // 스켈레톤 이미지 관련
+  video.addEventListener('loadedmetadata', function() {
+    canvasCtx5.width = video.videoWidth;
+    canvasCtx5.height = video.videoHeight;
+  });
 }
 
 function handleRoomSubmit(event) {
@@ -383,3 +403,102 @@ videoPlayer.addEventListener("seeked", (event) => {
     socket.emit("seek_video", videoPlayer.currentTime, roomName);
   }
 });
+
+
+
+
+
+// 동영상 위에 스켈레톤 이미지를 씌우는 함수
+const pose = new Pose({locateFile: (file) => {
+    return `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/${file}`;
+  }});
+console.log("Pose object created: ", pose);
+
+async function addSkeletonToVideo() {
+  console.log("addSkeletonToVideo called")
+  // 이미 스켈레톤이 적용되어있으면 함수 종료
+
+  pose.setOptions({
+    modelComplexity: 1,
+    smoothLandmarks: true,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5
+  });
+
+  pose.onResults(onResultsPose);
+
+  // 비디오 플레이어가 로드되면 포즈를 감지합니다.
+  console.log("Before setting videoPlayer.onloadedmetadata");
+  console.log("Video player src2: ", videoPlayer.src);
+  videoPlayer.oncanplay = () => {
+    console.log("onloadstarted");
+    window.skeletonApplied = true;
+
+    // Set the canvas size to the video size
+    canvas.width = videoPlayer.videoWidth;
+    canvas.height = videoPlayer.videoHeight;
+
+    // 현재 동영상의 시간이 변경될 때마다 스켈레톤을 그립니다.
+    videoPlayer.ontimeupdate = () => {
+      const currentTime = videoPlayer.currentTime;
+      // 현재 동영상의 시간을 기준으로 스켈레톤 이미지를 그립니다.
+      console.log("Before pose.send call");
+      console.log(videoPlayer);
+      console.log(currentTime);
+      pose.send({ image: videoPlayer, timestamp: currentTime });
+      console.log("After pose.send call");
+    };
+  };
+}
+
+function zColor(data) {
+  const z = clamp(data.from.z + 0.5, 0, 1);
+  return `rgba(0, ${255 * z}, ${255 * (1 - z)}, 1)`;
+}
+
+
+// Modify the onResults function
+function onResultsPose(results) {
+  console.log("onResultsPose called with results:");
+  console.log(results);
+
+  canvasCtx5.save();
+  canvasCtx5.clearRect(0, 0, canvas.width, canvas.height);
+  canvasCtx5.drawImage(
+      results.image, 0, 0, canvas.width, canvas.height);
+  drawConnectors(
+      canvasCtx5, results.poseLandmarks, POSE_CONNECTIONS, {
+        color: (data) => {
+          const x0 = canvas.width * data.from.x;
+          const y0 = canvas.height * data.from.y;
+          const x1 = canvas.width * data.to.x;
+          const y1 = canvas.height * data.to.y;
+
+          const z0 = clamp(data.from.z + 0.5, 0, 1);
+          const z1 = clamp(data.to.z + 0.5, 0, 1);
+
+          const gradient = canvasCtx5.createLinearGradient(x0, y0, x1, y1);
+          gradient.addColorStop(
+              0, `rgba(0, ${255 * z0}, ${255 * (1 - z0)}, 1)`);
+          gradient.addColorStop(
+              1.0, `rgba(0, ${255 * z1}, ${255 * (1 - z1)}, 1)`);
+          return gradient;
+        }
+      });
+  drawLandmarks(
+      canvasCtx5,
+      Object.values(POSE_LANDMARKS_LEFT)
+          .map(index => results.poseLandmarks[index]),
+      {color: zColor, fillColor: '#FF0000'});
+  drawLandmarks(
+      canvasCtx5,
+      Object.values(POSE_LANDMARKS_RIGHT)
+          .map(index => results.poseLandmarks[index]),
+      {color: zColor, fillColor: '#00FF00'});
+  drawLandmarks(
+      canvasCtx5,
+      Object.values(POSE_LANDMARKS_NEUTRAL)
+          .map(index => results.poseLandmarks[index]),
+      {color: zColor, fillColor: '#AAAAAA'});
+  canvasCtx5.restore();
+}

@@ -59,6 +59,7 @@
             <input placeholder="message" required type="text">
             <button>Send</button>
         </form>
+        <button id="addSkeletonButton">Add Skeleton</button>
     </div>
     <div id="call">
         <div id="myStream">
@@ -76,11 +77,16 @@
         <button type="submit">Upload</button>
     </form>
     <div id="uploadedFile">
-        <video id="fileDisplay" controls style="max-width: 100%;"></video>
+        <canvas id="canvas" width="640" height="480" style="position: absolute;"></canvas>
+        <video id="fileDisplay" controls style="max-width: 100%;" crossorigin="anonymous"></video>
     </div>
-    </div>
+
 </main>
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js" crossorigin="anonymous"></script>
 <script src="/public/js/app.js"></script>
 </body>
 
