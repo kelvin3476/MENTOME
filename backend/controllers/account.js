@@ -17,7 +17,7 @@ exports.signUp = (req, res) => {
                     });
             } else {
                 console.log('Fail!');
-                return res.json({
+                res.json({
                     signUpSuccess: false,
                     message: "이미 존재하는 아이디입니다."
                 })
@@ -30,18 +30,11 @@ exports.logIn = (req, res) => {
     User.findOne({ userId: req.body.userId })
         .then(user => {
             if (!user) {
-                return res.json({
-                    logInSuccess: false,
-                    message: "아이디가 존재하지 않습니다."
-                });
+                res.json({ logInSuccess: false, message: "아이디 또는 비밀번호가 틀렸습니다."});
             } else if (user.password !== req.body.password) {
-                return res.json({
-                    logInSuccess: false,
-                    message: "비밀번호가 틀렸습니다."
-                });
+                res.json({ logInSuccess: false, message: "아이디 또는 비밀번호가 틀렸습니다."});
             } else {
-                res.setHeader('set-Cookie', `user_id=${user.userId}`);
-                res.redirect('/');
+                res.json({ logInSuccess: true, message: "로그인 성공"});
             }
         });
 };
@@ -50,7 +43,7 @@ exports.logIn = (req, res) => {
 exports.logOut = (req, res) => {
     const currentUser = req.get('Cookie');
     if (currentUser) {
-        res.setHeader('set-Cookie', `user_id=${currentUser.split('=')[1]}; Max-Age=-1`);
+        res.cookie('user_id', currentUser.split('=')[1], {maxAge: -1});
     }
     res.redirect('/');
 };

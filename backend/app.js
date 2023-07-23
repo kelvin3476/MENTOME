@@ -34,7 +34,7 @@ app.use(account);
 app.use(content);
 
 // Connect to React
-app.use(express.static(path.join(__dirname, '../community_fe/build')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Defende Error Page
 // app.use('/', (req, res) => {

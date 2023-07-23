@@ -1,0 +1,33 @@
+.home {
+    display: 'flex';
+    justify-content: space-between;
+}
+
+.home h1 {
+    display: flex;
+    width: 3rem;
+    height: 3.5625rem;
+    margin-top: 4rem;
+    margin-left: 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #1b1c1d;
+    font-family: Pretendard;
+    font-size: 1.625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.4375rem; /* 150% */
+    letter-spacing: -0.01875rem;
+}
+
+.home h3 {
+    display: inline;
+    color: #484848;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.2425rem; /* 142% */
+}
