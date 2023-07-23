@@ -7,7 +7,7 @@ function Posting() {
     const [formData, setFormData] = useState({
         title: '',
         content: '',
-        // career: '',
+        career: '',
         sport: ''
     });
 
@@ -18,6 +18,7 @@ function Posting() {
 
     const handleEditorChange = (content) => {
         setFormData((prevData) => ({ ...prevData, content }));
+        console.log(content);
     };
 
     const handleSubmit = (e) => {
@@ -52,6 +53,13 @@ function Posting() {
                         value={formData.sport}
                         onChange={handleChange}
                         placeholder="운동 종목을 입력하세요"
+                    ></input>
+                    <input
+                        type="text"
+                        name="career"
+                        value={formData.career}
+                        onChange={handleChange}
+                        placeholder="경력을 입력하세요"
                     ></input>
                     <EditorBox
                         name="content"
