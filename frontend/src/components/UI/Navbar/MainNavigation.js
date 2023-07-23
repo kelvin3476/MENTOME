@@ -4,10 +4,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import LoginButton from './LoginButton/LoginButton';
 import { Link } from 'react-router-dom';
 import styles from './MainNavigation.module.css';
-// import TopbarAlarm from './TopbarAlarm/TopbarAlarm';
-// import TopbarDropdown from './Dropdowns/TopbarDropdowns';
+import TopbarAlarm from './TopbarAlarm/TopbarAlarm';
+import TopbarDropdown from './Dropdowns/TopbarDropdowns';
+import { useCookies } from 'react-cookie';
 
 const MainNavigation = () => {
+    const [cookies] = useCookies(['logInUser']); // 쿠키 정보 가져오기
+
     return (
         <div id="top-navbar">
             <Navbar bg="light" data-bs-theme="light">
@@ -35,11 +38,16 @@ const MainNavigation = () => {
                                 새 글 쓰기
                             </Link>
                         </Nav.Link>
-                        {/* 로그아웃의 경우 */}
-                        <LoginButton />
-                        {/* 로그인의 경우 */}
-                        {/* <TopbarAlarm /> */}
-                        {/* <TopbarDropdown /> */}
+                        {cookies.logInUser ? (
+                            <>
+                                {/* 로그인의 경우 */}
+                                <TopbarAlarm />
+                                <TopbarDropdown />
+                            </>
+                        ) : (
+                            // {/* 로그아웃의 경우 */}
+                            <LoginButton />
+                        )}
                     </Nav>
                 </Container>
             </Navbar>

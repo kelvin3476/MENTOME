@@ -1,8 +1,11 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Person } from 'react-bootstrap-icons';
-import { logoutUser } from '../../../Authentication/LogOutUser/LogoutUser';
+import { useLogoutUser } from '../../../Authentication/LogOutUser/LogoutUser';
 function TopbarDropdown() {
+    const logoutUser = useLogoutUser();
+
     const handleLogout = () => {
+        console.log('LogoutUser');
         logoutUser();
     };
     return (
@@ -15,7 +18,7 @@ function TopbarDropdown() {
                 <Dropdown.Item href="mypage">마이 페이지</Dropdown.Item>
                 <Dropdown.Item href="">멘토링 신청하기</Dropdown.Item>
                 <Dropdown.Item href="account-setting">설정</Dropdown.Item>
-                <Dropdown.Item href="logout" onClick={handleLogout}>
+                <Dropdown.Item href="/" onClick={handleLogout}>
                     로그아웃
                 </Dropdown.Item>
             </Dropdown.Menu>
