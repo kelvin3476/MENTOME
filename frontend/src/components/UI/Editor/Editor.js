@@ -1,16 +1,56 @@
-import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor.css';
+import React, { useState, useMemo } from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-function EditorBox() {
+const formats = [
+    'font',
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'align',
+    'color',
+    'background',
+    'size',
+    'h1'
+];
+
+const QuillEditor = ({ name, value, onChange }) => {
+    const modules = useMemo(() => {
+        return {
+            toolbar: {
+                container: [
+                    [{ size: ['small', false, 'large', 'huge'] }],
+                    [{ align: [] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    [
+                        {
+                            color: []
+                        },
+                        { background: [] }
+                    ]
+                ]
+            }
+        };
+    }, []);
+
     return (
-        <Editor
-            initialValue="내용을 입력하세요!"
-            previewStyle="vertical"
-            height="600px"
-            initialEditType="wysiwyg"
-            useCommandShortcut={false}
+        <ReactQuill
+            theme="snow"
+            modules={modules}
+            formats={formats}
+            name={name}
+            value={value}
+            onChange={onChange}
         />
     );
-}
+};
 
-export default EditorBox;
+export default QuillEditor;

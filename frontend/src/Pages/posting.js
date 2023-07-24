@@ -1,24 +1,20 @@
 // 새글쓰기
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
-import EditorBox from '../components/UI/Editor/Editor';
 import axios from 'axios';
+import QuillEditor from '../components/UI/Editor/Editor';
+
 function Posting() {
     const [formData, setFormData] = useState({
         title: '',
-        content: '',
-        career: '',
-        sport: ''
+        sport: '',
+        carrer: '',
+        content: ''
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
-    const handleEditorChange = (content) => {
-        setFormData((prevData) => ({ ...prevData, content }));
-        console.log(content);
     };
 
     const handleSubmit = (e) => {
@@ -54,17 +50,23 @@ function Posting() {
                         onChange={handleChange}
                         placeholder="운동 종목을 입력하세요"
                     ></input>
+
                     <input
                         type="text"
-                        name="career"
-                        value={formData.career}
+                        name="carrer"
+                        value={formData.carrer}
                         onChange={handleChange}
                         placeholder="경력을 입력하세요"
                     ></input>
-                    <EditorBox
+                    <QuillEditor
                         name="content"
                         value={formData.content}
-                        onChange={(e) => handleEditorChange(e.target.value)}
+                        onChange={(content) =>
+                            setFormData((prevData) => ({
+                                ...prevData,
+                                content
+                            }))
+                        }
                     />
 
                     <button>나가기</button>
