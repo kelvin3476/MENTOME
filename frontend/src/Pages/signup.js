@@ -1,6 +1,6 @@
 // 회원가입 페이지
 import axios from 'axios';
-import { json, redirect } from 'react-router-dom';
+import { json } from 'react-router-dom';
 import styles from './signup.module.css';
 import { useState } from 'react';
 

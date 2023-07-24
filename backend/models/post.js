@@ -5,30 +5,30 @@ const Schema = mongoose.Schema;
 const postSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: true,
     },
     content: {
         type: String,
-        required: true
+        // required: true
     },
     sport: {
         type: String,
-        required: true
+        required: true,
     },
     carrer: {
-        type: Number,
-        required: true
+        type: String,
+        required: true,
     },
     writer: {
         type: String,
-        required: true
+        required: true,
     },
     comments: [
         {
-            comment: { type: String, required: true},
-            commentWriter: { type: String, required: true}
-        }
-    ]
+            comment: { type: String, required: true },
+            commentWriter: { type: String, required: true },
+        },
+    ],
 });
 
 module.exports = mongoose.model('Post', postSchema);
