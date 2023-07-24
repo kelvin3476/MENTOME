@@ -1,9 +1,9 @@
 // 메인 페이지
 
 import React from 'react';
-import Header from '../components/Header/Header';
-import RegisterGuide from '../components/registerguide/registerguide';
-import MentoringWrappers from '../components/MentoringWrappers.js/mentoringwrapper';
+import Header from '../components/Home/Header/Header';
+import RegisterGuide from '../components/Home/registerguide/registerguide';
+import MentoringWrappers from '../components/Home/MentoringWrappers.js/mentoringwrapper';
 import { Container, Row } from 'react-bootstrap';
 import styles from './Pages.module.css';
 function Home() {

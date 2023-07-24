@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Container, Col, Row } from 'react-bootstrap';
-import PostCard from '../UI/Card/PostCard';
+import PostCard from '../../UI/Card/PostCard';
 
 const MentoringWrappers = () => {
     const [data, setData] = useState([]);
