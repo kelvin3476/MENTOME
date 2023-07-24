@@ -1,5 +1,5 @@
 // 멘티 게시판
-import Header from '../components/Header/Header';
+import Header from '../components/Home/Header/Header';
 
 function Mentee() {
     return (

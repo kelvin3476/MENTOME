@@ -1,5 +1,5 @@
 import styles from './InstructionBar.module.css';
-import HeaderImg from '../../assets/images/headerRightImg.png';
+import HeaderImg from '../../../assets/images/headerRightImg.png';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const InstructionBar = () => {
