@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ajax from '../../utils/ajax';
 import moment from 'moment';
-import Editor from '../EditorComponent';
+// import Editor from '../EditorComponent';
 
 import 'react-quill/dist/quill.snow.css';
 
@@ -12,6 +12,7 @@ const NoticeDetailComponent = (props) => {
             state: { _id }
         }
     } = props;
+
     const [post, setPost] = useState([]);
     const [fileList, setFileList] = useState([]);
     const [isWriter, setIsWriter] = useState(false);
@@ -38,7 +39,7 @@ const NoticeDetailComponent = (props) => {
             ajax('/api/notice/deleteNotice', { _id: _id }, (res) => {
                 if (res.data && res.data.ok === 1) {
                     alert('삭제 완료');
-                    location.href = '/';
+                    window.location.href = '/';
                 }
             });
         }

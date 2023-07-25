@@ -1,12 +1,12 @@
 // 페이지
-import NoticeDetailComponent from '../components/Post/NoticeDetailComponent';
+// import NoticeDetailComponent from '../components/Post/NoticeDetailComponent';
+import { useParams } from 'react-router-dom';
+import PostDetail from '../components/Post/PostDetail';
+
 function Post() {
-    return (
-        <>
-            <h1>Post</h1>
-            <NoticeDetailComponent />
-        </>
-    );
+    const { postId } = useParams();
+
+    return <PostDetail></PostDetail>;
 }
 
 export default Post;
