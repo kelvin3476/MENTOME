@@ -8,7 +8,7 @@ function Posting() {
     const [formData, setFormData] = useState({
         title: '',
         sport: '',
-        carrer: '',
+        career: '',
         content: ''
     });
 
@@ -24,6 +24,7 @@ function Posting() {
             .then((response) => {
                 // 요청이 성공적으로 처리된 경우의 작업
                 console.log('요청이 성공적으로 처리되었습니다.', response);
+                window.location.href = '/';
             })
             .catch((error) => {
                 // 요청이 실패한 경우의 작업
@@ -50,11 +51,10 @@ function Posting() {
                         onChange={handleChange}
                         placeholder="운동 종목을 입력하세요"
                     ></input>
-
                     <input
                         type="text"
-                        name="carrer"
-                        value={formData.carrer}
+                        name="career"
+                        value={formData.career}
                         onChange={handleChange}
                         placeholder="경력을 입력하세요"
                     ></input>

@@ -19,9 +19,9 @@ const LoginModal = ({ props, isOpen, onRequestClose }) => {
                 password: formRef.current.password.value
             })
             .then((res) => {
-                console.log(formRef.current.id.value)
+                console.log(formRef.current.id.value);
                 if (res.data.logInSuccess === false) {
-                    alert(res.data.message)
+                    alert(res.data.message);
                 } else {
                     setCookie('logInUser', formRef.current.id.value);
                     window.location.href = '/';

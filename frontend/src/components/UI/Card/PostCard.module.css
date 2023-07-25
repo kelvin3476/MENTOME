@@ -94,6 +94,8 @@
 .left img {
     width: 1.875rem;
     height: 1.875rem;
+    object-fit: contain;
+
     flex-shrink: 0;
     display: inline;
     flex-direction: column;
