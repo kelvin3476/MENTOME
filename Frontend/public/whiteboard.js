@@ -1,6 +1,4 @@
-// 일반 그림판 기능
-
-// Add the general drawing-related variables and functions here
+// whiteboard.js
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
@@ -15,8 +13,10 @@ function drawLine(x1, y1, x2, y2) {
     canvasCtx.lineTo(x2, y2);
     canvasCtx.stroke();
     canvasCtx.closePath();
+}
 
-    // Emit the drawing data to the server
+function drawAndEmit(x1, y1, x2, y2, roomName) {
+    drawLine(x1, y1, x2, y2);
     socket.emit("drawing", { x1, y1, x2, y2, roomName });
 }
 
@@ -34,7 +34,7 @@ window.onload = () => {
         if (!isDrawing) return;
         const x = e.offsetX;
         const y = e.offsetY;
-        drawLine(lastX, lastY, x, y);
+        drawAndEmit(lastX, lastY, x, y, roomName);
         [lastX, lastY] = [x, y];
     });
 

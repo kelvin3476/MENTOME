@@ -20,9 +20,8 @@ function canPlayEventHandler() {
     canvas.height = videoPlayer.videoHeight;
 
     const updatePose = async () => {
-        const currentTime = videoPlayer.currentTime;
         try {
-            // pass the video element instead of the time
+            // pass the video element
             await pose.send({ image: videoPlayer });
         } catch (error) {
             console.error("Error in pose.send:", error);
@@ -30,10 +29,11 @@ function canPlayEventHandler() {
         // call the next frame
         requestAnimationFrame(updatePose);
     };
-
     // start the loop
     updatePose();
+    videoPlayer.removeEventListener('canplay', canPlayEventHandler);
 }
+
 
 
 async function addSkeletonToVideo() {
