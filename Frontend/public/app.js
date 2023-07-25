@@ -174,7 +174,7 @@ function makeConnection() {
         urls: [
           "stun:stun.l.google.com:19302",
           "stun:stun1.l.google.com:19302",
-          "stun:stun2.l.google.com:19302",
+          //"stun:stun2.l.google.com:19302",
           // "stun:stun3.l.google.com:19302",
           // "stun:stun4.l.google.com:19302",
         ],
@@ -237,7 +237,7 @@ function showRoom() {
   // 파일 업로드 관련
   fileUploadForm.style.display = "block";
 
-  // 스켈레톤 이미지 관련
+  // pose (스켈레톤) 이미지 관련
   video.addEventListener('loadedmetadata', function() {
     canvasCtx5.width = video.videoWidth;
     canvasCtx5.height = video.videoHeight;
