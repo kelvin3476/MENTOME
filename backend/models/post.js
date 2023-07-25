@@ -15,7 +15,7 @@ const postSchema = new Schema({
         type: String,
         required: true,
     },
-    carrer: {
+    career: {
         type: String,
         required: true,
     },
