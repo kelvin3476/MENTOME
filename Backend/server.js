@@ -125,6 +125,16 @@ wsServer.on("connection", (socket) => {
     socket.to(roomName).emit('seek_video', timestamp);
   });
 
+  // 캔버스 동기화
+  socket.on("drawing", (data) => {
+    // Broadcast the drawing data to other clients in the same room
+    socket.to(data.roomName).emit('drawing', data);
+  });
+
+  socket.on('start_drawing', (data) => {
+    // Broadcast the start of drawing event to other clients in the same room
+    socket.to(data.roomName).emit('start_drawing', data);
+  });
 
 });
 
@@ -232,3 +242,4 @@ app.post('/api/upload', async (req, res) => {
 httpServer.listen(PORT, () => {
   console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
 });
+

@@ -32,6 +32,12 @@
         #peerFace {
             margin: 0 10px;
         }
+
+        /* canvas 선 추가 */
+        #drawcanvas {
+            position: absolute;
+            border: 2px solid black; /* Add a border to the drawcanvas */
+        }
     </style>
 </head>
 
@@ -78,8 +84,9 @@
     </form>
     <div id="uploadedFile">
         <canvas id="canvas" width="640" height="480" style="position: absolute;"></canvas>
-        <video id="fileDisplay" controls style="max-width: 100%;" crossorigin="anonymous"></video>
+        <video id="fileDisplay" controls loop style="max-width: 100%;" crossorigin="anonymous"></video>
     </div>
+    <canvas id="drawcanvas" width="640" height="480" style="position: absolute;"></canvas>
 
 </main>
 <script src="/socket.io/socket.io.js"></script>
@@ -88,6 +95,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js" crossorigin="anonymous"></script>
 <script src="./app.js"></script>
+<script src="./pose.js"></script>
+<script src="./videosync.js"></script>
+<script src="./fileupload.js"></script>
+<script src="./whiteboard.js"></script>
 </body>
 
 </html>
