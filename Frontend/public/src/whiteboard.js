@@ -7,8 +7,8 @@ function drawLine(x1, y1, x2, y2) {
     const canvas = document.getElementById('drawcanvas');
     const canvasCtx = canvas.getContext('2d');
     canvasCtx.beginPath();
-    canvasCtx.strokeStyle = 'black';
-    canvasCtx.lineWidth = 2;
+    canvasCtx.strokeStyle = 'red';
+    canvasCtx.lineWidth = 4;
     canvasCtx.moveTo(x1, y1);
     canvasCtx.lineTo(x2, y2);
     canvasCtx.stroke();
