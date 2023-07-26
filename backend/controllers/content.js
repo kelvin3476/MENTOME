@@ -66,7 +66,7 @@ exports.getAllContents = (req, res) => {
 
 // Get a Content Detail and Return
 exports.getContentDetail = (req, res) => {
-    Post.findOne({ _id: req.body._id })
+    Post.findOne({ _id: req.params._id })
         .then(post => {
             res.json(post);
             console.log('Get a Content Detail Success!');
