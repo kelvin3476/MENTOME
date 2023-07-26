@@ -15,6 +15,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    profilePicture: {
+        type: String,
+        required: true
+    },
     stars: {
         type: Number,
         required: true
@@ -23,9 +27,13 @@ const userSchema = new Schema({
         type: Number,
         required: true
     },
-    profilePicture: {
-        type: String
-    }
+    notice: [
+        {
+            noticeType: { type: String, required: true },
+            noticeSender: { type: String, required: true },
+            roomName: { type: String }
+        }
+    ]
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,4 +1,4 @@
-const Post = require('../models/post'); // Road User Schema model
+const Post = require('../models/post');
 
 // Upload Post
 exports.uploadPost = (req, res) => {
@@ -6,15 +6,23 @@ exports.uploadPost = (req, res) => {
     if (currentUser) {
         let newPost = req.body;
         newPost.writer = currentUser.split('=')[1];
-        newPost.comment = [];
+        newPost.date = Date();
+        newPost.comments = [];
         const post = new Post(newPost);
         post.save()
             .then(post => {
-                console.log('Successed!');
-                res.redirect('/');
+                res.json({ 
+                    uploadPostSuccess: true,
+                    message: "게시글 업로드 성공"
+                });
+                console.log('Upload Post Success!');
             });
     } else {
-        res.json({ message: "로그인 하세요."});
+        res.json({ 
+            uploadPostSuccess: false,
+            message: "로그인 후 시도하세요."
+        });
+        console.log('Upload Post Fail! (NOT LOG IN)');
     }
 };
 
@@ -23,34 +31,44 @@ exports.uploadComment = (req, res) => {
     const currentUser = req.get('Cookie');
     if (currentUser) {
         let newComment = {};
-        newComment.comment = req.body.commentContent;
+        newComment.commentContent = req.body.commentContent;
         newComment.commentWriter = currentUser.split('=')[1];
+        newComment.commentDate = Date();
         Post.findOne({ _id: req.body._id })
             .then(post => {
                 post.comments.push(newComment);
                 Post.findOneAndUpdate({ _id: req.body._id }, post)
-                    .then(comments => {
-                        console.log('Successed!');
-                        res.redirect('/');
+                    .then(post => {
+                        res.json({ 
+                            uploadCommentSuccess: true,
+                            message: "댓글 업로드 성공"
+                        });
+                        console.log('Upload Comment Success!');
                     });
             });
     } else {
-        res.json({ message: "로그인 하세요."});
+        res.json({ 
+            uploadCommentSuccess: false,
+            message: "로그인 후 시도하세요."
+        });
+        console.log('Upload Comment Fail! (NOT LOG IN)');
     }
 };
 
-// Find all Posts and return
-exports.findAllContents = (req, res) => {
+// Get all Contents and Return
+exports.getAllContents = (req, res) => {
     Post.find()
         .then(posts => {
             res.json(posts);
+            console.log('Get All Contents Success!');
         });
 };
 
-// Find a post and return
-// exports.findContent = (req, res) => {
-//     Post.findOne({ _id: req.body._id })
-//         .then(post => {
-//             res.json(post);
-//         });
-// };
+// Get a Content Detail and Return
+exports.getContentDetail = (req, res) => {
+    Post.findOne({ _id: req.body._id })
+        .then(post => {
+            res.json(post);
+            console.log('Get a Content Detail Success!');
+        });
+};
