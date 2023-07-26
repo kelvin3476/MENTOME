@@ -20,6 +20,14 @@ function drawAndEmit(x1, y1, x2, y2, roomName) {
     socket.emit('drawing', { x1, y1, x2, y2, roomName });
 }
 
+// 지우개
+function clearCanvas() {
+    const canvas = document.getElementById('drawcanvas');
+    const canvasCtx = canvas.getContext('2d');
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+
 const drawCanvas = document.getElementById('drawcanvas');
 const toggleDrawCanvasButton = document.getElementById('toggleDrawCanvasButton');
 
@@ -59,13 +67,24 @@ window.onload = () => {
         isDrawing = false;
     });
 
-    // // In the client-side code, after the Socket.IO connection is established
+    // In the client-side code, after the Socket.IO connection is established
     socket.on('drawing', (data) => {
         drawLine(data.x1, data.y1, data.x2, data.y2);
     });
 
-    socket.on('start_drawing', (data) => {
-        [lastX, lastY] = [data.x, data.y];
-        isDrawing = true;
+
+    // 지우개
+    const clearCanvasButton = document.getElementById('clearCanvasButton');
+    clearCanvasButton.addEventListener('click', () => {
+        clearCanvas();
+        socket.emit('clear_canvas', roomName);
     });
+
+    socket.on('clear_canvas', () => {
+        clearCanvas();
+    });
+
 };
+
+
+

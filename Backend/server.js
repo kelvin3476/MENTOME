@@ -210,10 +210,10 @@ wsServer.on('connection', (socket) => {
         socket.to(data.roomName).emit('drawing', data);
     });
 
-    socket.on('start_drawing', (data) => {
-        // Broadcast the start of drawing event to other clients in the same room
-        socket.to(data.roomName).emit('start_drawing', data);
+    socket.on('clear_canvas', (roomName) => {
+        socket.to(roomName).emit('clear_canvas');
     });
+
 });
 
 // 파일 업로드 관련
