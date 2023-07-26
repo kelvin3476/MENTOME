@@ -65,7 +65,6 @@
             <input placeholder="message" required type="text">
             <button>Send</button>
         </form>
-        <button id="addSkeletonButton">Add Skeleton</button>
     </div>
     <div id="call">
         <div id="myStream">
@@ -83,16 +82,18 @@
         <button type="submit">Upload</button>
     </form>
     <div id="uploadedFile">
-        <canvas id="canvas" width="640" height="480" style="position: absolute;"></canvas>
+        <canvas id="canvas" width="0" height="0" style="position: absolute;"></canvas>
         <video id="fileDisplay" controls loop style="max-width: 100%;" crossorigin="anonymous"></video>
+        <button id="addSkeletonButton">Add Skeleton</button>
     </div>
     <form id="fileUpload2" style="display: none;">
         <input type="file" id="selectedFile2" required>
         <button type="submit">Upload</button>
     </form>
     <div id="uploadedFile2">
-        <canvas id="canvas2" width="640" height="480" style="position: absolute;"></canvas>
+        <canvas id="canvas2" width="0" height="0" style="position: absolute;"></canvas>
         <video id="fileDisplay2" controls loop style="max-width: 100%;" crossorigin="anonymous"></video>
+        <button id="addSkeletonButton2">Add Skeleton</button>
     </div>
     <canvas id="drawcanvas" width="640" height="480" style="position: absolute;"></canvas>
 

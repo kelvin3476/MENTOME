@@ -1,3 +1,5 @@
+// fileupload.js
+
 // 파일 업로드
 const fileUploadForm = document.getElementById("fileUpload");
 const selectedFileInput = document.getElementById("selectedFile");
@@ -62,7 +64,7 @@ fileUploadForm2.addEventListener("submit", (event) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log("File uploaded successfully. Server Response: ", data);
-                socket.emit("file_uploaded", data.url, roomName);
+                socket.emit("file_uploaded2", data.url, roomName);
                 // Assume there is an img or video element to display the uploaded file
                 const fileDisplayElement2 = document.getElementById("fileDisplay2");
                 fileDisplayElement2.src = data.url;
@@ -79,8 +81,10 @@ fileUploadForm2.addEventListener("submit", (event) => {
 socket.on("new_file", (url) => {
     const fileDisplayElement = document.getElementById("fileDisplay");
     fileDisplayElement.src = url;
+});
 
-    // 파일2 업로드
+// 파일2 업로드
+socket.on("new_file2", (url) => {
     const fileDisplayElement2 = document.getElementById("fileDisplay2");
     fileDisplayElement2.src = url;
 });

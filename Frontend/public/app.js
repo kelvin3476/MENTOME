@@ -281,4 +281,3 @@ socket.on("room_change", (rooms) => {
     roomList.append(li);
   });
 });
-
