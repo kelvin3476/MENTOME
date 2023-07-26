@@ -109,9 +109,13 @@ wsServer.on("connection", (socket) => {
   });
   socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 
-  // 파일 url 전달
+  // 파일 업로드 관련 (파일 url 전달)
   socket.on("file_uploaded", (url, roomName) => {
     socket.to(roomName).emit("new_file", url);
+  });
+
+  socket.on("file_uploaded2", (url, roomName) => {
+    socket.to(roomName).emit("new_file2", url);
   });
 
   // 동영상 동기화
@@ -157,6 +161,52 @@ wsServer.on("connection", (socket) => {
     }
     videoStateMap.set(roomName, videoState);
   });
+
+  // 동영상 동기화2
+  socket.on('play_video2', (roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.isPlaying2 = true;
+    } else {
+      videoState = { isPlaying2: true, time2: 0 };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit('play_video2', videoState.time2);
+  });
+
+  socket.on('pause_video2', (roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.isPlaying2 = false;
+    } else {
+      videoState = { isPlaying2: false, time2: 0 };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit('pause_video2', videoState.time2);
+  });
+
+  socket.on('seek_video2', (timestamp, roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.time2 = timestamp;
+    } else {
+      videoState = { isPlaying2: false, time2: timestamp };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit('seek_video2', videoState.time2);
+  });
+
+  socket.on('update_time2', (timestamp, roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.time2 = timestamp;
+    } else {
+      videoState = { isPlaying2: false, time2: timestamp };
+    }
+    videoStateMap.set(roomName, videoState);
+  });
+
+
 
   // 캔버스 동기화
   socket.on("drawing", (data) => {
