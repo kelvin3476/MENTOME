@@ -210,6 +210,14 @@ main {
     display: none;
 }
 
+#uploadedFile2 {
+    z-index: 500;
+}
+
+#uploadedFile2 video {
+    display: none;
+}
+
 #call {
     position: absolute;
     bottom: 0;

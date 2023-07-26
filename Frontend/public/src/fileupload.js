@@ -1,5 +1,3 @@
-// fileupload.js
-
 // 파일 업로드
 const fileUploadForm = document.getElementById('fileUpload');
 const selectedFileInput = document.getElementById('selectedFile');
@@ -70,6 +68,8 @@ fileUploadForm2.addEventListener('submit', (event) => {
                 // Assume there is an img or video element to display the uploaded file
                 const fileDisplayElement2 = document.getElementById('fileDisplay2');
                 fileDisplayElement2.src = data.url;
+                // Show the video player
+                fileDisplayElement2.style.display = 'block';
             })
             .catch((error) => {
                 console.error('Error uploading file: ', error);
