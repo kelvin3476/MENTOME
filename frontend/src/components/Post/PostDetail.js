@@ -1,8 +1,10 @@
 import { Container } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const PostDetail = () => {
+
     // const [post, setPost] = useState([]); // 댓글을 저장할 배열 상태
     const [post, setPost] = useState({
         // title: '더미 제목',
@@ -12,18 +14,22 @@ const PostDetail = () => {
     });
     // const [comments, setComments] = useState([]); // 댓글을 저장할 배열 상태
     const [comments, setComments] = useState([
-        // { content: '더미 댓글 1' },
-        // { content: '더미 댓글 2' },
-        // { content: '더미 댓글 3' }
+        { content: '더미 댓글 1' },
+        { content: '더미 댓글 2' },
+        { content: '더미 댓글 3' }
     ]);
     const [newCommentContent, setNewCommentContent] = useState('');
 
+    // 게시물 디테일 경로를 가져오기
+    const location = useLocation();
+    const { pathname } = location;
+
     useEffect(() => {
         // 게시물 데이터를 가져올 API 엔드포인트의 URL
-        const postApiUrl = 'api/content/findcontent'; // 실제 API URL로 교체해주세요
+        const postApiUrl = `/api/content/getcontentdetail/${pathname.split('/')[2]}`; // 실제 API URL로 교체해주세요
 
         // 댓글 데이터를 가져올 API 엔드포인트의 URL
-        const commentsApiUrl = 'api/content/findcontent'; // 실제 API URL로 교체해주세요
+        const commentsApiUrl = `/api/content/getcontentcomments/${pathname.split('/')[2]}`; // 실제 API URL로 교체해주세요
 
         // Promise.all을 사용하여 게시물 데이터와 댓글 데이터를 한번에 가져옵니다
         Promise.all([axios.get(postApiUrl), axios.get(commentsApiUrl)])
@@ -57,6 +63,12 @@ const PostDetail = () => {
         event.target.reset(); // 폼 초기화
     };
 
+    const formattedDate = new Date(post.date).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+
     return (
         <Container>
             <div>
@@ -78,9 +90,11 @@ const PostDetail = () => {
                         </div>
                         {/* Name / separate / date */}
                         <div>
-                            <span>{post.username}</span>
-                            <span>·</span>
-                            <span>{post.date}</span>
+                            <span>{post.writer}</span>
+                            <p>·</p>
+                            <span>{formattedDate}</span>
+                            <p>{post.sport}</p>
+                            <p>{post.career}</p>
                         </div>
                         {/* 2개의 여백 class="sc-kHOZwM gbIuGG" */}
                         <div></div>
@@ -97,7 +111,7 @@ const PostDetail = () => {
                             {/* 댓글 */}
                             {comments.map((comment, index) => (
                                 <div key={index}>
-                                    <p>{comment.content}</p>
+                                    <p>{comment.commentContent}</p>
                                     {/* True or False - True 답글 달기 - 
                                     False 숨기기 댓글 작성하기 텍스트 박스 */}
                                     <div>
