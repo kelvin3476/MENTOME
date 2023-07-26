@@ -1,5 +1,5 @@
-Backend server for main page
+Backend server
 
-'npm stert' to run server
+'npm start' to run server
 
 'npm run dev' to run server to developer
