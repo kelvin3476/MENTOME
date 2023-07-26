@@ -1,0 +1,203 @@
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 900;
+    font-display: swap;
+    src: local('Pretendard Black'), url('../web/static/woff2/Pretendard-Black.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-Black.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    font-display: swap;
+    src: local('Pretendard ExtraBold'), url('../web/static/woff2/Pretendard-ExtraBold.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-ExtraBold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-display: swap;
+    src: local('Pretendard Bold'), url('../web/static/woff2/Pretendard-Bold.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-display: swap;
+    src: local('Pretendard SemiBold'), url('../web/static/woff2/Pretendard-SemiBold.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-SemiBold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-display: swap;
+    src: local('Pretendard Medium'), url('../web/static/woff2/Pretendard-Medium.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-Medium.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-display: swap;
+    src: local('Pretendard Regular'), url('../web/static/woff2/Pretendard-Regular.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    font-display: swap;
+    src: local('Pretendard Light'), url('../web/static/woff2/Pretendard-Light.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-Light.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 200;
+    font-display: swap;
+    src: local('Pretendard ExtraLight'), url('../web/static/woff2/Pretendard-ExtraLight.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-ExtraLight.woff') format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 100;
+    font-display: swap;
+    src: local('Pretendard Thin'), url('../web/static/woff2/Pretendard-Thin.woff2') format('woff2'),
+        url('../web/static/woff/Pretendard-Thin.woff') format('woff');
+}
+
+body {
+    color: #4a4a4a;
+    font-family: 'Pretendard';
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#root {
+    left: 0;
+    position: fixed;
+    top: 0;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+.footer {
+    flex-shrink: 0;
+}
+
+.welcome {
+    /* margin: 5rem; */
+    z-index: 200;
+}
+
+.canvas {
+    /* position: relative; */
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+/* welcome modal */
+
+/* 모달 스타일 */
+.modal {
+    visibility: visible; /* 모달을 보이도록 변경 */
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 400px;
+}
+
+/* .close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: red;
+} */
+
+.hideme-close {
+    visibility: hidden;
+}
+
+.footer {
+    -webkit-backdrop-filter: blur(48px);
+    backdrop-filter: blur(48px);
+    background: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    color: hsla(0, 0%, 100%, 0.5);
+    font-size: 12px;
+    height: 52px;
+    left: 0;
+    position: fixed;
+    transition: -webkit-transform 0.2s ease-out;
+    transition: transform 0.2s ease-out;
+    transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+    width: 100%;
+    z-index: 200;
+}
+
+.foot__inner {
+    display: flex !important;
+    flex-wrap: nowrap;
+    height: 100%;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-button__wrapper {
+    position: relative;
+}
+
+.footer-button-base__button {
+    width: 90px;
+    background-color: transparent;
+    border-radius: 8px;
+    color: hsla(0, 0%, 100%, 0.62);
+    cursor: pointer;
+    float: left;
+    height: 48px;
+    margin: 1px 0;
+    max-width: 160px;
+    min-width: 80px;
+    position: relative;
+    outline: 2px solid transparent;
+    outline-offset: 1px;
+    transition: all 0.2s ease-in;
+}
+
+.footer-button-base__button-label {
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0 12px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s ease-in;
+    white-space: nowrap;
+    word-break: break-all;
+}
