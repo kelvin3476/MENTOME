@@ -236,6 +236,7 @@ function showRoom() {
 
   // 파일 업로드 관련
   fileUploadForm.style.display = "block";
+  fileUploadForm2.style.display = "block";
 
   // pose (스켈레톤) 이미지 관련
   video.addEventListener('loadedmetadata', function() {

@@ -68,9 +68,6 @@ function zColor(data) {
 // Modify the onResults function
 function onResultsPose(results) {
     if(skeletonEnabled) { // 스켈레톤이 활성화되어 있을 때만 그림
-        console.log("onResultsPose called with results:");
-        console.log(results);
-
         canvasCtx5.save();
         canvasCtx5.clearRect(0, 0, canvas.width, canvas.height);
         canvasCtx5.drawImage(
