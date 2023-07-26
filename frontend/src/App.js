@@ -8,6 +8,7 @@ import Mentee from './Pages/mentee';
 import Actset from './Pages/actset';
 import Post from './Pages/post';
 import RootLayout from './Pages/Root';
+import PostDetail from '../src/components/Post/PostDetail';
 
 import Signup from './Pages/signup';
 
@@ -67,6 +68,7 @@ function App() {
                     </Route>
                     <Route path="post" element={<Post />} />
                     <Route path="posting" element={<Posting />} />
+                    <Route path="/PostDetail/:id" element={<PostDetail />} />
                     <Route path="signup" element={<Signup />} />
                     <Route path="mypage" element={<Mypage />} />
                     <Route path="account-setting" element={<Actset />} />

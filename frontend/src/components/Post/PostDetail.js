@@ -20,10 +20,10 @@ const PostDetail = () => {
 
     useEffect(() => {
         // 게시물 데이터를 가져올 API 엔드포인트의 URL
-        const postApiUrl = 'api/cotent/findcontent'; // 실제 API URL로 교체해주세요
+        const postApiUrl = 'api/content/findcontent'; // 실제 API URL로 교체해주세요
 
         // 댓글 데이터를 가져올 API 엔드포인트의 URL
-        const commentsApiUrl = 'api/cotent/findcontent'; // 실제 API URL로 교체해주세요
+        const commentsApiUrl = 'api/content/findcontent'; // 실제 API URL로 교체해주세요
 
         // Promise.all을 사용하여 게시물 데이터와 댓글 데이터를 한번에 가져옵니다
         Promise.all([axios.get(postApiUrl), axios.get(commentsApiUrl)])
