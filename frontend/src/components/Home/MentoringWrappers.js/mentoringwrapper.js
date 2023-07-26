@@ -63,8 +63,9 @@ const MentoringWrappers = () => {
     useEffect(() => {
         // 서버로부터 데이터를 가져오는 API 요청
         axios
-            .get('/api/content/findallcontents')
+            .get('/api/content/getallcontents')
             .then((response) => {
+                console.log(response.data);
                 setData(response.data.slice(0, 5));
                 // setData(response.data);
             })
@@ -97,8 +98,8 @@ const MentoringWrappers = () => {
                     {data.map((item) => (
                         <Col>
                             <PostCard
-                                key={item.id}
-                                id={item.id}
+                                key={item._id}
+                                id={item._id}
                                 title={item.title}
                                 value={item.value}
                                 career={item.career}

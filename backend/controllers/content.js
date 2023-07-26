@@ -69,6 +69,17 @@ exports.getContentDetail = (req, res) => {
     Post.findOne({ _id: req.params._id })
         .then(post => {
             res.json(post);
+            console.log(post);
             console.log('Get a Content Detail Success!');
+        });
+};
+
+// Get Content comment and Return
+exports.getContentComments = (req, res) => {
+    Post.findOne({ _id: req.params._id })
+        .then(post => {
+            res.json(post.comments);
+            console.log(post.comments)
+            console.log('Get Content Comments Success!');
         });
 };

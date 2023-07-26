@@ -6,7 +6,7 @@ import PostDetail from '../components/Post/PostDetail';
 function Post() {
     const { postId } = useParams();
 
-    return <PostDetail></PostDetail>;
+    return <PostDetail />;
 }
 
 export default Post;
