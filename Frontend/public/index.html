@@ -19,13 +19,13 @@
             }
 
             /* 버튼과 select 태그를 비디오 아래로 이동 */
-            #controls {
+            /* #controls {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
                 margin-top: 10px;
-            }
+            } */
 
             /* 비디오 요소들을 약간씩 벌어지게 만듦 */
             #myFace,
@@ -69,25 +69,27 @@
                         <input placeholder="message" required type="text" />
                         <button>Send</button>
                     </form>
-                    <button id="addSkeletonButton">Add Skeleton</button>
                 </div>
-                <div id="call">
-                    <div id="myStream">
-                        <video id="myFace" autoplay playsinline width="400" height="400"></video>
-                        <video id="peerFace" autoplay playsinline width="400" height="400"></video>
-                    </div>
-                </div>
-                <form id="fileUpload" style="display: none">
-                    <input type="file" id="selectedFile" required />
-                    <button type="submit">Upload</button>
-                </form>
                 <!-- 비디오 업로드 -->
                 <div id="uploadedFile">
                     <canvas id="canvas" width="640" height="480" style="position: absolute"></canvas>
                     <video id="fileDisplay" controls loop style="max-width: 100%" crossorigin="anonymous"></video>
                 </div>
                 <!-- 그림판 완료 -->
-                <canvas id="drawcanvas" class="canvas" width="3000" height="3000"></canvas>
+                <canvas
+                    id="drawcanvas"
+                    class="canvas"
+                    width="3000"
+                    height="3000"
+                    controls
+                    style="display: none"
+                ></canvas>
+                <div id="call">
+                    <div id="myStream">
+                        <video id="myFace" autoplay playsinline width="400" height="400"></video>
+                        <video id="peerFace" autoplay playsinline width="400" height="400"></video>
+                    </div>
+                </div>
             </main>
             <footer class="footer">
                 <div class="foot__inner">
@@ -113,7 +115,16 @@
                             <select id="cameras"></select>
                         </div>
                         <div>
+                            <button id="toggleDrawCanvasButton">Toggle Draw Canvas</button>
+                            <button id="addSkeletonButton">Add Skeleton</button>
+
                             <!-- <select id="cameras"></select> -->
+                        </div>
+                        <div>
+                            <form id="fileUpload" style="display: none">
+                                <input type="file" id="selectedFile" required />
+                                <button type="submit">Upload</button>
+                            </form>
                         </div>
                     </div>
                 </div>
