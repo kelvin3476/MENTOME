@@ -23,6 +23,8 @@ const wsServer = new Server(httpServer, {
   },
 });
 
+const videoStateMap = new Map();
+
 // setting up the view engine and static file serving
 app.set("view engine", "html");
 app.set("public", __dirname + "/public");
@@ -113,16 +115,47 @@ wsServer.on("connection", (socket) => {
   });
 
   // 동영상 동기화
-  socket.on('play_video', (timestamp, roomName) => {
-    socket.to(roomName).emit('play_video', timestamp);
+  socket.on('play_video', (roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.isPlaying = true;
+    } else {
+      videoState = { isPlaying: true, time: 0 };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit('play_video', videoState.time);
   });
 
-  socket.on('pause_video', (timestamp, roomName) => {
-    socket.to(roomName).emit('pause_video', timestamp);
+  socket.on('pause_video', (roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.isPlaying = false;
+    } else {
+      videoState = { isPlaying: false, time: 0 };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit('pause_video', videoState.time);
   });
 
   socket.on('seek_video', (timestamp, roomName) => {
-    socket.to(roomName).emit('seek_video', timestamp);
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.time = timestamp;
+    } else {
+      videoState = { isPlaying: false, time: timestamp };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit('seek_video', videoState.time);
+  });
+
+  socket.on('update_time', (timestamp, roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.time = timestamp;
+    } else {
+      videoState = { isPlaying: false, time: timestamp };
+    }
+    videoStateMap.set(roomName, videoState);
   });
 
   // 캔버스 동기화
@@ -138,7 +171,7 @@ wsServer.on("connection", (socket) => {
 
 });
 
-// Function to parse file for upload
+// 파일 업로드 관련
 const parsefile = async (req) => {
   return new Promise((resolve, reject) => {
     let options = {
