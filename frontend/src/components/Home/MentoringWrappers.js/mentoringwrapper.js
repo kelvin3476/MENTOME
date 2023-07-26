@@ -98,6 +98,7 @@ const MentoringWrappers = () => {
                         <Col>
                             <PostCard
                                 key={item.id}
+                                id={item.id}
                                 title={item.title}
                                 value={item.value}
                                 career={item.career}
