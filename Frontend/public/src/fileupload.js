@@ -83,10 +83,14 @@ fileUploadForm2.addEventListener('submit', (event) => {
 socket.on('new_file', (url) => {
     const fileDisplayElement = document.getElementById('fileDisplay');
     fileDisplayElement.src = url;
+    // Show the video player
+    fileDisplayElement.style.display = 'block';
 });
 
 // 파일2 업로드
 socket.on('new_file2', (url) => {
     const fileDisplayElement2 = document.getElementById('fileDisplay2');
     fileDisplayElement2.src = url;
+    // Show the video player
+    fileDisplayElement2.style.display = 'block';
 });
