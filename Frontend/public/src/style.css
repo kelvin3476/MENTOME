@@ -3,63 +3,63 @@
     font-weight: 900;
     font-display: swap;
     src: local('Pretendard Black'), url('../web/static/woff2/Pretendard-Black.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-Black.woff') format('woff');
+    url('../web/static/woff/Pretendard-Black.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 800;
     font-display: swap;
     src: local('Pretendard ExtraBold'), url('../web/static/woff2/Pretendard-ExtraBold.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-ExtraBold.woff') format('woff');
+    url('../web/static/woff/Pretendard-ExtraBold.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 700;
     font-display: swap;
     src: local('Pretendard Bold'), url('../web/static/woff2/Pretendard-Bold.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-Bold.woff') format('woff');
+    url('../web/static/woff/Pretendard-Bold.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 600;
     font-display: swap;
     src: local('Pretendard SemiBold'), url('../web/static/woff2/Pretendard-SemiBold.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-SemiBold.woff') format('woff');
+    url('../web/static/woff/Pretendard-SemiBold.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 500;
     font-display: swap;
     src: local('Pretendard Medium'), url('../web/static/woff2/Pretendard-Medium.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-Medium.woff') format('woff');
+    url('../web/static/woff/Pretendard-Medium.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 400;
     font-display: swap;
     src: local('Pretendard Regular'), url('../web/static/woff2/Pretendard-Regular.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-Regular.woff') format('woff');
+    url('../web/static/woff/Pretendard-Regular.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 300;
     font-display: swap;
     src: local('Pretendard Light'), url('../web/static/woff2/Pretendard-Light.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-Light.woff') format('woff');
+    url('../web/static/woff/Pretendard-Light.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 200;
     font-display: swap;
     src: local('Pretendard ExtraLight'), url('../web/static/woff2/Pretendard-ExtraLight.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-ExtraLight.woff') format('woff');
+    url('../web/static/woff/Pretendard-ExtraLight.woff') format('woff');
 }
 @font-face {
     font-family: 'Pretendard';
     font-weight: 100;
     font-display: swap;
     src: local('Pretendard Thin'), url('../web/static/woff2/Pretendard-Thin.woff2') format('woff2'),
-        url('../web/static/woff/Pretendard-Thin.woff') format('woff');
+    url('../web/static/woff/Pretendard-Thin.woff') format('woff');
 }
 
 body {
@@ -78,6 +78,10 @@ body {
     left: 0;
     position: fixed;
     top: 0;
+}
+
+#room {
+    z-index: 8000;
 }
 
 .page-container {
@@ -223,3 +227,31 @@ main {
     bottom: 0;
     z-index: 500;
 }
+
+.parent-container {
+    z-index: 300;
+    width: 40%;
+    height: 40%;
+}
+
+.mystream-center {
+    z-index: 5000;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    /* height: 100vh; 화면 높이를 기준으로 중앙 정렬 */
+}
+
+#call {
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; 세로 방향 가운데 정렬도 추가합니다 */
+    width: 100%; /* 가로 크기를 100%로 설정하여 부모 요소의 가로 폭을 채우도록 합니다 */
+    /* height: 100vh; 가로 선이 화면 전체 높이를 차지하도록 설정합니다 */
+}
+
+/* .parent-container { */
+/* width: 100%; 가로 폭을 100%로 설정하여 가로로 꽉 차게 합니다 */
+/* max-width: 800px; 필요한 경우 최대 가로 폭을 지정합니다 */
+/* } */
