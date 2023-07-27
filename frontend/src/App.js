@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/Home';
-import Posting from './Pages/posting';
-import Mypage from './Pages/myPage';
-import Mentor from './Pages/mentor';
-import Mentee from './Pages/mentee';
-import Actset from './Pages/actset';
-import Post from './Pages/post';
+import Posting from './Pages/Posting';
+import Mypage from './Pages/MyPage';
+import Mentor from './Pages/Mentor';
+import Mentee from './Pages/Mentee';
+import Actset from './Pages/Actset';
+import Post from './Pages/Post';
 import RootLayout from './Pages/Root';
-import PostDetail from '../src/components/Post/PostDetail';
+import PostDetail from './Components/Post/PostDetail';
 
-import Signup from './Pages/signup';
+import Signup from './Pages/Signup';
 
 function App() {
     return (
