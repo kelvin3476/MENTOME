@@ -1,0 +1,139 @@
+.CardSize {
+    display: flex;
+    width: 13.9rem;
+    height: 13.8rem;
+    margin: 1.63rem 1.56rem 1.44rem;
+    flex-shrink: 0;
+    border-radius: 0.3125rem;
+    border: 1px solid #abb0b5;
+    background: rgba(217, 217, 217, 0);
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.line {
+    position: absolute;
+    bottom: +51px;
+    left: +20px;
+    content: '';
+    display: block;
+    width: calc(90% - 1.5rem); /* 가로선의 길이를 조절할 수 있습니다. */
+    height: 0.1px;
+    background-color: #0000001a;
+    margin: 0.5rem 0; /* 원하는 간격으로 조정 */
+}
+
+.left {
+    display: flex;
+    /* position: relative; */
+    /* 가운데 정렬 */
+    align-items: center;
+    /* h2, h3와 img, h4, h5 사이 여백 */
+    margin-bottom: 0.5rem;
+}
+
+.CardSize h1 {
+    width: 10.8125rem;
+    height: 4.5rem;
+    margin: 1.63rem 1.56rem 2.25rem;
+    /* justify-content: center; */
+    flex-shrink: 0;
+    color: #1b1c1d;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem; /* 150% */
+    letter-spacing: -0.01875rem;
+}
+
+.left {
+    margin: 0px 1.56rem;
+}
+
+.left h2 {
+    display: inline;
+    width: 1.5rem;
+    height: 1.5625rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #abb0b5;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; /* 142.857% */
+    letter-spacing: -0.01875rem;
+}
+
+.left h3 {
+    display: inline;
+    width: 8.6875rem;
+    height: 1.5625rem;
+    margin-left: 0.62rem;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #858a8d;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; /* 142.857% */
+    letter-spacing: -0.01875rem;
+}
+
+.CardSize hr {
+    border: 1px solid #000000;
+    margin: 0.5rem 0; /* 원하는 간격으로 조정 */
+}
+
+.left img {
+    width: 1.875rem;
+    height: 1.875rem;
+    object-fit: contain;
+
+    flex-shrink: 0;
+    display: inline;
+    flex-direction: column;
+    margin-left: 1.25rem;
+}
+
+.left h4 {
+    display: inline;
+    width: 5.52719rem;
+    height: 1.125rem;
+    margin-top: 0.5rem;
+    margin-left: 0.56rem;
+    flex-shrink: 0;
+    color: #abb0b5;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3125rem; /* 150% */
+    letter-spacing: -0.01875rem;
+    text-decoration-line: underline;
+}
+
+.left h5 {
+    display: inline;
+    flex-direction: column;
+    justify-content: center;
+    width: 2.8125rem;
+    height: 1.1875rem;
+    margin-top: 0.5rem;
+    margin-right: 1.6rem;
+    flex-shrink: 0;
+    color: #858a8d;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; /* 142.857% */
+    letter-spacing: -0.01875rem;
+}

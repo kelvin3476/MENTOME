@@ -1,0 +1,17 @@
+.buttonTeal {
+    margin-left: 1rem;
+
+    height: 3rem;
+    font-size: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 1.5rem;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    word-break: keep-all;
+    background: #05d183;
+    color: #ffffff;
+    transition: all 0.125s ease-in 0s;
+    cursor: pointer;
+}
