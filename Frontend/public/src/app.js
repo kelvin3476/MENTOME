@@ -11,7 +11,7 @@ call.hidden = true;
 let myStream;
 let muted = false;
 let cameraOff = false;
-let roomName;
+let roomName = document.getElementById('roomName');;
 let myPeerConnection;
 let myDataChannel;
 
@@ -115,11 +115,12 @@ async function initCall() {
 
 async function handleWelcomeSubmit(event) {
     event.preventDefault();
-    const input = welcomeForm.querySelector('input');
+    // const input = welcomeForm.querySelector('input');
     await initCall();
-    socket.emit('join_room', input.value);
-    roomName = input.value;
-    input.value = '';
+    socket.emit('join_room', roomName);
+    console.log(roomName);
+    // roomName = input.value;
+    // input.value = '';
 
     // 모달 창 닫기 로직 추가
     const modal = document.getElementById('modal');
@@ -257,13 +258,15 @@ form.addEventListener('submit', handleRoomSubmit);
 
 socket.on('welcome', (user, newCount) => {
     const h3 = room.querySelector('h3');
-    h3.innerText = `Room ${roomName} (${newCount})`;
+    // h3.innerText = `Room ${roomName} (${newCount})`;
+    h3.innerText = `Room ${roomName}`;
     // addMessage(`${user} arrived!`);
 });
 
 socket.on('bye', (left, newCount) => {
     const h3 = room.querySelector('h3');
-    h3.innerText = `Room ${roomName} (${newCount})`;
+    // h3.innerText = `Room ${roomName} (${newCount})`;
+    h3.innerText = `Room ${roomName}`;
     addMessage(`${left} left ㅠㅠ`);
 });
 
