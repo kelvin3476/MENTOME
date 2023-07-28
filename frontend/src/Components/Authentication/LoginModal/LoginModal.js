@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const LoginModal = ({ props, isOpen, onRequestClose }) => {
     const formRef = useRef();
+    // eslint-disable-next-line
     const [cookies, setCookie] = useCookies(['id']);
     const navigate = useNavigate();
 
