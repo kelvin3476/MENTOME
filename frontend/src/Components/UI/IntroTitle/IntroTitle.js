@@ -1,14 +1,18 @@
 import ArrowIcon from '../../Assets/Icon/ArrowIcon';
 import styles from './IntroTitle.module.css';
-const IntroTitle = ({ name }) => {
+import { Link } from 'react-router-dom';
+
+const IntroTitle = ({ name, url }) => {
     return (
         <div className={styles.home}>
             <div className={styles.intro__title}>
                 {name}
-                <a className={styles.intro__title_link} type="external" href="mentor">
-                    {name} 더보기
-                    <ArrowIcon width={16} height={16} />
-                </a>
+                <Link to={url}>
+                    <a className={styles.intro__title_link} type="external">
+                        {name} 더보기
+                        <ArrowIcon width={16} height={16} />
+                    </a>
+                </Link>
             </div>
         </div>
     );

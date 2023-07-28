@@ -7,6 +7,7 @@ import MentoringWrappers from '../Components/Home/MentoringWrappers/MentoringWra
 import { Container, Row } from 'react-bootstrap';
 
 import IntroTitle from '../Components/UI/IntroTitle/IntroTitle';
+import PostCard from '../Components/UI/Card/PostCard';
 function Home() {
     return (
         <>
@@ -15,13 +16,14 @@ function Home() {
 
                 <RegisterGuide />
                 <Container>
-                    <IntroTitle name="멘토" />
+                    <IntroTitle name="멘토" url="mentor" />
                     <Row>
+                        {/* <PostCard /> */}
                         <MentoringWrappers />
                     </Row>
                 </Container>
                 <Container>
-                    <IntroTitle name="멘티" />
+                    <IntroTitle name="멘티" url="mentee" />
                     <Row>
                         <MentoringWrappers />
                     </Row>
