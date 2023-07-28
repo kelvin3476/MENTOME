@@ -21,7 +21,7 @@ const formats = [
     'h1',
 ];
 
-const QuillEditor = ({ name, value, onChange }) => {
+const QuillEditor = ({ name, value, onChange, placeholder }) => {
     const modules = useMemo(() => {
         return {
             toolbar: {
@@ -41,8 +41,22 @@ const QuillEditor = ({ name, value, onChange }) => {
         };
     }, []);
 
+    const editorStyle = {
+        width: '100%',
+        height: '700px',
+    };
+
     return (
-        <ReactQuill theme="snow" modules={modules} formats={formats} name={name} value={value} onChange={onChange} />
+        <ReactQuill
+            theme="snow"
+            placeholder={placeholder}
+            modules={modules}
+            formats={formats}
+            name={name}
+            value={value}
+            onChange={onChange}
+            style={editorStyle}
+        />
     );
 };
 

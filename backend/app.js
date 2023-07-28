@@ -24,7 +24,7 @@ const contentRouter = require('./routes/content');
 
 // Sample Page for Develop
 app.get('/meeting', (req, res) => {
-  res.sendFile(__dirname + '/views/meeting.html');
+    res.sendFile(__dirname + '/views/meeting.html');
 });
 
 app.use(accountRouter);
@@ -32,16 +32,15 @@ app.use(contentRouter);
 
 connectController.connectManagement(io);
 
-// Defend Error Page
+// // Defend Error Page
 app.use('/', (req, res) => {
-  res.redirect('/');
+    res.redirect('/');
 });
 
 // Connecting MongoDB
-mongoose.connect(process.env.CONNECTION_URL_FOR_MONGODB)
-  .then(result => {
+mongoose.connect(process.env.CONNECTION_URL_FOR_MONGODB).then((result) => {
     console.log('Connected MongoDB!');
-  });
+});
 
 // Running Server
 server.listen(process.env.PORT, () => {

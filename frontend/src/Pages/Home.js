@@ -16,14 +16,14 @@ function Home() {
 
                 <RegisterGuide />
                 <Container>
-                    <IntroTitle name="멘토" />
+                    <IntroTitle name="멘토" url="mentor" />
                     <Row>
                         {/* <PostCard /> */}
                         <MentoringWrappers />
                     </Row>
                 </Container>
                 <Container>
-                    <IntroTitle name="멘티" />
+                    <IntroTitle name="멘티" url="mentee" />
                     <Row>
                         <MentoringWrappers />
                     </Row>

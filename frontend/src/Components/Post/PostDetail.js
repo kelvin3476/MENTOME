@@ -6,10 +6,10 @@ import { useLocation } from 'react-router-dom';
 const PostDetail = () => {
     // const [post, setPost] = useState([]); // 댓글을 저장할 배열 상태
     const [post, setPost] = useState({
-        // title: '더미 제목',
-        // username: '더미 유저',
-        // date: '2023-07-25',
-        // content: '더미 게시물 내용'
+        title: '더미 제목',
+        username: '더미 유저',
+        date: '2023-07-25',
+        content: '더미 게시물 내용',
     });
     // const [comments, setComments] = useState([]); // 댓글을 저장할 배열 상태
     const [comments, setComments] = useState([
