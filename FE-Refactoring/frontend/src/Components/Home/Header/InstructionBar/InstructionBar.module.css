@@ -1,0 +1,73 @@
+/* bootstrap 형식에 맞춰서 반응형 웹 짤것. */
+
+.header {
+    background: #05d183aa;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 8.875rem;
+    padding: 1rem 3rem;
+    width: auto;
+    /* align-items: flex-start; */
+    /* flex-end: 0; */
+}
+
+.verticalcenter {
+    display: flex;
+    align-items: center;
+}
+
+.leftDiv {
+    /* display: flex; */
+    padding: 0rem 0.3rem;
+    margin-top: flex;
+    margin-bottom: flex;
+}
+.leftDiv h1 {
+    font-size: 1.625em;
+    font-weight: 700;
+    /* 멘토링과 p태그의 간격 */
+    line-height: 2.4rem;
+    margin: 0px 0px 0.1px;
+}
+.leftDiv p {
+    font-size: 1em;
+    margin: 0px 0px 0.1px;
+}
+
+.rightDiv {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: auto;
+    /* height: 1rem; */
+    padding: 0rem 0.5rem;
+}
+
+.rightDiv img {
+    width: 10rem;
+    height: auto;
+    align-self: flex-end;
+}
+
+@media screen and (max-width: 887px) {
+    .header {
+        padding: 1rem 0.5rem; /* 작은 화면에선 좀 더 적은 padding 적용 */
+    }
+
+    .leftDiv {
+        padding: 0.5rem 0.9375rem; /* 작은 화면에선 좀 더 적은 padding 적용 */
+    }
+
+    .leftDiv h1 {
+        font-size: 1.5rem; /* 작은 화면에선 더 작은 폰트 크기로 조정 */
+    }
+
+    .leftDiv p {
+        font-size: 0.875rem; /* 작은 화면에선 더 작은 폰트 크기로 조정 */
+    }
+
+    .rightDiv {
+        padding: 0.5rem 0.5rem; /* 작은 화면에선 좀 더 적은 padding 적용 */
+    }
+}
