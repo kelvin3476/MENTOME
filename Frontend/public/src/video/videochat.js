@@ -10,7 +10,7 @@ call.hidden = true;
 let myStream;
 let muted = false;
 let cameraOff = false;
-let roomName;
+let roomName = document.getElementById('roomName');
 let myPeerConnection;
 let myDataChannel;
 
@@ -114,11 +114,12 @@ async function initCall() {
 
 async function handleWelcomeSubmit(event) {
     event.preventDefault();
-    const input = welcomeForm.querySelector('input');
+    // const input = welcomeForm.querySelector('input');
     await initCall();
-    socket.emit('join_room', input.value);
-    roomName = input.value;
-    input.value = '';
+    socket.emit('join_room', roomName);
+    console.log(roomName);
+    // roomName = input.value;
+    // input.value = '';
 
     // 모달 창 닫기 로직 추가
     const modal = document.getElementById('modal');

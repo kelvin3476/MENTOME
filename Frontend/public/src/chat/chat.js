@@ -59,13 +59,15 @@ form.addEventListener('submit', handleRoomSubmit);
 
 socket.on('welcome', (user, newCount) => {
     const h3 = room.querySelector('h3');
-    h3.innerText = `Room ${roomName} (${newCount})`;
+    // h3.innerText = `Room ${roomName} (${newCount})`;
+    h3.innerText = `Room ${roomName}`;
     // addMessage(`${user} arrived!`);
 });
 
 socket.on('bye', (left, newCount) => {
     const h3 = room.querySelector('h3');
-    h3.innerText = `Room ${roomName} (${newCount})`;
+    // h3.innerText = `Room ${roomName} (${newCount})`;
+    h3.innerText = `Room ${roomName}`;
     addMessage(`${left} left ㅠㅠ`);
 });
 
@@ -73,13 +75,13 @@ socket.on('new_message', addMessage);
 
 socket.on('room_change', (rooms) => {
     const roomList = welcome.querySelector('ul');
-    // roomList.innerHTML = '';
+    roomList.innerHTML = '';
     if (rooms.length === 0) {
         return;
     }
     rooms.forEach((room) => {
         const li = document.createElement('li');
         li.innerText = room;
-        // roomList.append(li);
+        roomList.append(li);
     });
 });
