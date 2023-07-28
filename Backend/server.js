@@ -35,7 +35,7 @@ app.get('/*', (_, res) => res.redirect('/'));
 app.set('json spaces', 5);
 
 // setup S3 configurations
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 const region = process.env.S3_REGION;
