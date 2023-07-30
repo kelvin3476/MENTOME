@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Container } from 'react-bootstrap';
-import PostCard from '../../UI/Card/PostCard';
+import PostCard from '../../../UI/Card/PostCard';
 import axios from 'axios';
 import styles from './MentoringWrapper.module.css';
 
@@ -13,8 +13,8 @@ const MentoringWrappers = () => {
             .get('/api/content/getallcontents')
             .then((response) => {
                 console.log(response.data);
-                setData(response.data.slice(response.data.length - 4, response.data.length));
-                // setData(response.data);
+                // setData(response.data.slice(response.data.length - 4, response.data.length));
+                setData(response.data);
             })
             .catch((error) => {
                 console.error('Error data:', error);

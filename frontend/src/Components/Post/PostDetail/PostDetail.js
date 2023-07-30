@@ -65,6 +65,7 @@ const PostDetail = () => {
                 // 댓글 생성 성공 시 서버에서 저장된 댓글 데이터를 받아와서 배열에 추가
                 const newComment = response.data;
                 setComments([...comments, newComment]);
+                setNewCommentContent('');
             })
             .catch((error) => {
                 console.error('Error creating comment:', error);
@@ -100,7 +101,7 @@ const PostDetail = () => {
                         {/* Name / separate / date */}
                         <div className={styles.profile_bar}>
                             <div className={styles.profile_bar__info}>
-                                <span className={styles.username}>{post.username}</span>
+                                <span className={styles.username}>{post.writer}</span>
                                 <span className={styles.separator}>·</span>
                                 <span>{formattedDate}</span>
                                 {/* <p>{post.sport}</p>
@@ -121,6 +122,7 @@ const PostDetail = () => {
                                 <div>
                                     <textarea
                                         placeholder="댓글을 작성하세요"
+                                        name="commentContent"
                                         value={newCommentContent}
                                         className={styles.comment__textarea}
                                         onChange={(e) => setNewCommentContent(e.target.value)}
@@ -131,6 +133,7 @@ const PostDetail = () => {
                                         <button
                                             color="teal"
                                             className={styles.comment__button}
+                                            type="submit"
                                             onClick={handleCommentSubmit}
                                         >
                                             댓글 작성
@@ -150,7 +153,8 @@ const PostDetail = () => {
                                                             ></img>
                                                             <div className={styles.comment_Info}>
                                                                 <div className={styles.comment__username}>
-                                                                    <a>{comments.commentWriter}</a>
+                                                                    {/* // eslint-disable-next-line */}
+                                                                    <p>{comments.commentWriter}</p>
                                                                 </div>
                                                                 <div className={styles.date}>
                                                                     {comments.commentDate}
@@ -187,16 +191,6 @@ const PostDetail = () => {
                                                 </div>
                                             </>
                                         ))}
-                                        {/* 댓글 남긴 사람의 프로필 */}
-                                        {/* <div></div> */}
-                                        {/* 남긴 댓글의 content */}
-                                        {/* <div> */}
-                                        {/* <p>{comments.content}</p> */}
-                                        {/* </div> */}
-                                        {/* 댓글 달기 버튼 */}
-                                        {/* <div> */}
-                                        {/* 이부분에서 조건부 설정을 해놔야함. true/false -> 답글 달기 / 숨기기 */}
-                                        {/* </div> */}
                                     </div>
                                 </div>
                             </div>
