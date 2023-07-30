@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 import styles from './LoginModal.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
@@ -10,7 +10,7 @@ const LoginModal = ({ props, isOpen, onRequestClose }) => {
     const formRef = useRef();
     // eslint-disable-next-line
     const [cookies, setCookie] = useCookies(['id']);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const login = (e) => {
         e.preventDefault();

@@ -8,7 +8,7 @@ import Mentee from './Pages/Mentee';
 import Actset from './Pages/Actset';
 import Post from './Pages/Post';
 import RootLayout from './Pages/Root';
-import PostDetail from './Components/Post/PostDetail';
+import PostDetail from './Components/Post/PostDetail/PostDetail';
 
 import Signup from './Pages/Signup';
 

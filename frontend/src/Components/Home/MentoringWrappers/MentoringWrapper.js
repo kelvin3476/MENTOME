@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import PostCard from '../../UI/Card/PostCard';
 import axios from 'axios';
 import styles from './MentoringWrapper.module.css';

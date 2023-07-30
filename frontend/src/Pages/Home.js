@@ -7,7 +7,7 @@ import MentoringWrappers from '../Components/Home/MentoringWrappers/MentoringWra
 import { Container, Row } from 'react-bootstrap';
 
 import IntroTitle from '../Components/UI/IntroTitle/IntroTitle';
-import PostCard from '../Components/UI/Card/PostCard';
+
 function Home() {
     return (
         <>

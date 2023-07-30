@@ -9,7 +9,7 @@ function Posting() {
     const [isMentor, setIsMentor] = useState(true);
 
     const [formData, setFormData] = useState({
-        mento: '',
+        // mento: '',
         title: '',
         sport: '',
         career: '',
@@ -67,8 +67,8 @@ function Posting() {
                                         </span>
                                         <button
                                             type="button"
-                                            name="mento"
-                                            value={isMentor ? '멘토' : '멘티'}
+                                            // name="mento"
+                                            // value={isMentor ? '멘토' : '멘티'}
                                             className={styles.alert_button}
                                             onClick={handleButton}
                                         >
