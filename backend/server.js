@@ -1,18 +1,22 @@
-// server.js
-import dotenv from 'dotenv';
+const path = require('path');
+
+import dotenv from "dotenv";
 dotenv.config();
 import http from "http";
 import { Server } from "socket.io";
 import { instrument } from "@socket.io/admin-ui";
 import express from "express";
-import formidable from 'formidable';
+import formidable from "formidable";
 import { Upload } from "@aws-sdk/lib-storage";
 import { S3Client } from "@aws-sdk/client-s3";
-import { Transform } from 'stream';
+import { Transform } from "stream";
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+
+
 
 console.log("Region1: ", process.env.S3_REGION); // 이 줄을 추가하세요.
-
-const path = require("path");
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -22,20 +26,41 @@ const wsServer = new Server(httpServer, {
     credentials: true,
   },
 });
-
+app.use(bodyParser.urlencoded({ extended: false })); // For get argument from Client
+app.use(bodyParser.json()); // For get argument from Client
 const videoStateMap = new Map();
 
+app.use(express.static(path.join(__dirname, '../frontend/main/build'))); // Connect to React
+app.use(express.static(path.join(__dirname, '../frontend/meeting'))); // test meeting room
+const connectController = require('./controllers/connect');
+
+const accountRouter = require('./routes/account');
+const contentRouter = require('./routes/content');
+
+app.get('/meeting', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/meeting/index.html'));
+});
+
+app.use(accountRouter);
+app.use(contentRouter);
+
 // setting up the view engine and static file serving
-app.set("view engine", "html");
-app.set("public", __dirname + "/public");
-app.use(express.static(path.join(__dirname, "../Frontend/public")));
-app.use(express.static(path.join(__dirname, "../Frontend/src"), { type: 'text/javascript' }));
-app.get("/", (_, res) => res.sendFile(path.join(__dirname, "../Frontend/public/index.html")));
-app.get("/*", (_, res) => res.redirect("/"));
-app.set('json spaces', 5);
+// app.set("view engine", "html");
+// app.set("public", __dirname + "/public");
+// app.use(express.static(path.join(__dirname, "../Frontend/public")));
+// app.use(
+//   express.static(path.join(__dirname, "../Frontend/src"), {
+//     type: "text/javascript",
+//   })
+// );
+// app.get("/", (_, res) =>
+//   res.sendFile(path.join(__dirname, "../Frontend/public/index.html"))
+// );
+// app.get("/*", (_, res) => res.redirect("/"));
+// app.set("json spaces", 5);
 
 // setup S3 configurations
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 const region = process.env.S3_REGION;
@@ -97,7 +122,7 @@ wsServer.on("connection", (socket) => {
   });
   socket.on("disconnecting", () => {
     socket.rooms.forEach((room) =>
-        socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1)
+      socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1)
     );
     socket.on("disconnect", () => {
       wsServer.sockets.emit("room_change", publicRooms());
@@ -109,13 +134,17 @@ wsServer.on("connection", (socket) => {
   });
   socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 
-  // 파일 url 전달
+  // 파일 업로드 관련 (파일 url 전달)
   socket.on("file_uploaded", (url, roomName) => {
     socket.to(roomName).emit("new_file", url);
   });
 
+  socket.on("file_uploaded2", (url, roomName) => {
+    socket.to(roomName).emit("new_file2", url);
+  });
+
   // 동영상 동기화
-  socket.on('play_video', (roomName) => {
+  socket.on("play_video", (roomName) => {
     let videoState = videoStateMap.get(roomName);
     if (videoState) {
       videoState.isPlaying = true;
@@ -123,10 +152,10 @@ wsServer.on("connection", (socket) => {
       videoState = { isPlaying: true, time: 0 };
     }
     videoStateMap.set(roomName, videoState);
-    socket.to(roomName).emit('play_video', videoState.time);
+    socket.to(roomName).emit("play_video", videoState.time);
   });
 
-  socket.on('pause_video', (roomName) => {
+  socket.on("pause_video", (roomName) => {
     let videoState = videoStateMap.get(roomName);
     if (videoState) {
       videoState.isPlaying = false;
@@ -134,10 +163,10 @@ wsServer.on("connection", (socket) => {
       videoState = { isPlaying: false, time: 0 };
     }
     videoStateMap.set(roomName, videoState);
-    socket.to(roomName).emit('pause_video', videoState.time);
+    socket.to(roomName).emit("pause_video", videoState.time);
   });
 
-  socket.on('seek_video', (timestamp, roomName) => {
+  socket.on("seek_video", (timestamp, roomName) => {
     let videoState = videoStateMap.get(roomName);
     if (videoState) {
       videoState.time = timestamp;
@@ -145,15 +174,59 @@ wsServer.on("connection", (socket) => {
       videoState = { isPlaying: false, time: timestamp };
     }
     videoStateMap.set(roomName, videoState);
-    socket.to(roomName).emit('seek_video', videoState.time);
+    socket.to(roomName).emit("seek_video", videoState.time);
   });
 
-  socket.on('update_time', (timestamp, roomName) => {
+  socket.on("update_time", (timestamp, roomName) => {
     let videoState = videoStateMap.get(roomName);
     if (videoState) {
       videoState.time = timestamp;
     } else {
       videoState = { isPlaying: false, time: timestamp };
+    }
+    videoStateMap.set(roomName, videoState);
+  });
+
+  // 동영상 동기화2
+  socket.on("play_video2", (roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.isPlaying2 = true;
+    } else {
+      videoState = { isPlaying2: true, time2: 0 };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit("play_video2", videoState.time2);
+  });
+
+  socket.on("pause_video2", (roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.isPlaying2 = false;
+    } else {
+      videoState = { isPlaying2: false, time2: 0 };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit("pause_video2", videoState.time2);
+  });
+
+  socket.on("seek_video2", (timestamp, roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.time2 = timestamp;
+    } else {
+      videoState = { isPlaying2: false, time2: timestamp };
+    }
+    videoStateMap.set(roomName, videoState);
+    socket.to(roomName).emit("seek_video2", videoState.time2);
+  });
+
+  socket.on("update_time2", (timestamp, roomName) => {
+    let videoState = videoStateMap.get(roomName);
+    if (videoState) {
+      videoState.time2 = timestamp;
+    } else {
+      videoState = { isPlaying2: false, time2: timestamp };
     }
     videoStateMap.set(roomName, videoState);
   });
@@ -161,14 +234,12 @@ wsServer.on("connection", (socket) => {
   // 캔버스 동기화
   socket.on("drawing", (data) => {
     // Broadcast the drawing data to other clients in the same room
-    socket.to(data.roomName).emit('drawing', data);
+    socket.to(data.roomName).emit("drawing", data);
   });
 
-  socket.on('start_drawing', (data) => {
-    // Broadcast the start of drawing event to other clients in the same room
-    socket.to(data.roomName).emit('start_drawing', data);
+  socket.on("clear_canvas", (roomName) => {
+    socket.to(roomName).emit("clear_canvas");
   });
-
 });
 
 // 파일 업로드 관련
@@ -183,18 +254,18 @@ const parsefile = async (req) => {
 
     form.parse(req, (err, fields, files) => {});
 
-    form.on('error', error => {
+    form.on("error", (error) => {
       reject(error.message);
     });
 
-    form.on('data', data => {
+    form.on("data", (data) => {
       if (data.name === "complete") {
         resolve(data.value);
       }
     });
 
     // Handling the file upload
-    form.on('fileBegin', (formName, file) => {
+    form.on("fileBegin", (formName, file) => {
       file.open = async function () {
         this._writeStream = new Transform({
           transform(chunk, encoding, callback) {
@@ -202,8 +273,8 @@ const parsefile = async (req) => {
           },
         });
 
-        this._writeStream.on('error', e => {
-          form.emit('error', e);
+        this._writeStream.on("error", (e) => {
+          form.emit("error", e);
         });
 
         console.log("Region2: ", process.env.S3_REGION);
@@ -211,33 +282,34 @@ const parsefile = async (req) => {
           client: new S3Client({
             credentials: {
               accessKeyId,
-              secretAccessKey
+              secretAccessKey,
             },
-            region
+            region,
           }),
           params: {
-            ACL: 'public-read',
+            ACL: "public-read",
             Bucket,
             Key: `${Date.now().toString()}-${this.name}`,
-            Body: this._writeStream
+            Body: this._writeStream,
           },
           tags: [], // optional tags
           queueSize: 4, // optional concurrency configuration
           partSize: 1024 * 1024 * 5, // optional size of each part, in bytes, at least 5MB
           leavePartsOnError: false, // optional manually handle dropped parts
         })
-            .done()
-            .then(data => {
-              const url = `https://${Bucket}.s3.${region}.amazonaws.com/${data.Key}`;
-              form.emit('data', { name: "complete", value: { ...data, url } });
-            }).catch((err) => {
-          form.emit('error', err);
-        });
+          .done()
+          .then((data) => {
+            const url = `https://${Bucket}.s3.${region}.amazonaws.com/${data.Key}`;
+            form.emit("data", { name: "complete", value: { ...data, url } });
+          })
+          .catch((err) => {
+            form.emit("error", err);
+          });
       };
 
       file.end = function (cb) {
-        this._writeStream.on('finish', () => {
-          this.emit('end');
+        this._writeStream.on("finish", () => {
+          this.emit("end");
           cb();
         });
         this._writeStream.end();
@@ -247,14 +319,14 @@ const parsefile = async (req) => {
 };
 
 // Handle root route
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send(`
     // HTML and Javascript code goes here...
   `);
 });
 
 // Handle file upload
-app.post('/api/upload', async (req, res) => {
+app.post("/api/upload", async (req, res) => {
   try {
     const data = await parsefile(req);
     const url = data.url; // URL of the uploaded file
@@ -271,8 +343,20 @@ app.post('/api/upload', async (req, res) => {
   }
 });
 
+// Defend Error Page
+// app.use('/', (req, res) => {
+//   res.redirect('/');
+// });
+
+
+// Connecting MongoDB
+mongoose.connect(process.env.CONNECTION_URL_FOR_MONGODB)
+  .then(result => {
+    console.log('Connected MongoDB!');
+  });
+
+
 // Start server
 httpServer.listen(PORT, () => {
   console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
 });
-
