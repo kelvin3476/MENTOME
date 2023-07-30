@@ -62,10 +62,8 @@ async function getMedia(deviceId) {
 function handleMuteClick() {
     myStream.getAudioTracks().forEach((track) => (track.enabled = !track.enabled));
     if (!muted) {
-        muteBtn.innerText = 'Unmute';
         muted = true;
     } else {
-        muteBtn.innerText = 'Mute';
         muted = false;
     }
 }
@@ -73,10 +71,8 @@ function handleMuteClick() {
 function handleCameraClick() {
     myStream.getVideoTracks().forEach((track) => (track.enabled = !track.enabled));
     if (cameraOff) {
-        cameraBtn.innerText = 'Turn Camera Off';
         cameraOff = false;
     } else {
-        cameraBtn.innerText = 'Turn Camera On';
         cameraOff = true;
     }
 }
@@ -117,7 +113,6 @@ async function handleWelcomeSubmit(event) {
     // const input = welcomeForm.querySelector('input');
     await initCall();
     socket.emit('join_room', roomName);
-    console.log(roomName);
     // roomName = input.value;
     // input.value = '';
 
