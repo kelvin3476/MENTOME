@@ -38,15 +38,20 @@
             <!-- 채팅 완료 -->
             <div id="room">
                 <h3></h3>
-                <ul></ul>
-                <form id="name">
-                    <input placeholder="nickname" required type="text" />
-                    <button>Save</button>
-                </form>
-                <form id="msg">
-                    <input placeholder="message" required type="text" />
-                    <button>Send</button>
-                </form>
+                <input id="ToggleChat" type="button" value="Chat" onclick="handleToggleChat()">
+                <div id="chat-info">
+                    <p id="info"></p>
+                    <div id="SendMessage-Container">
+                        <form id="msg">
+                            <input id="SendMessage" required type="text" />
+                            <button id="Send-Btn"></button>
+                        </form>
+                    </div>
+                    <form id="name">
+                        <input placeholder="nickname" required type="text" />
+                        <button>Save</button>
+                    </form>
+                </div>
             </div>
             <!-- 비디오 업로드 -->
             <div id="uploadedFile">
@@ -60,10 +65,10 @@
 
             <!-- 그림판 완료 -->
             <canvas id="drawcanvas" class="canvas" width="3000" height="3000" controls style="display: none"></canvas>
-            <div id="call" style="display: flex; justify-content: center">
+            <div id="call">
                 <div id="myStream">
-                    <video id="myFace" autoplay playsinline width="200" height="250"></video>
-                    <video id="peerFace" autoplay playsinline width="200" height="250"></video>
+                    <video id="myFace" autoplay playsinline></video>
+                    <video id="peerFace" autoplay playsinline></video>
                 </div>
             </div>
         </main>
@@ -111,11 +116,11 @@
                         <div id="controls">
                             <select id="cameras" class="custom-select"></select>
                             <P>
-                                <button id="mute">Mute</button>
-                                <button id="camera">Turn Camera Off</button>
+                                <button id="mute"></button>
+                                <button id="camera" class="camera-btn"></button>
                             </P>
                         </div>
-                        <!-- <select id="cameras"></select> -->
+                        <button id="exit"></button>
                     </div>
                 </div>
             </div>
