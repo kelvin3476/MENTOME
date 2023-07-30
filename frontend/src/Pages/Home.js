@@ -3,7 +3,7 @@
 import React from 'react';
 import Header from '../Components/Home/Header/Header';
 import RegisterGuide from '../Components/Home/RegisterGuide/RegisterGuide';
-import MentoringWrappers from '../Components/Home/MentoringWrappers/MentoringWrapper';
+import MentoringWrappers from '../Components/Home/MentoringWrappers/Main/MentoringWrapper';
 import { Container, Row } from 'react-bootstrap';
 
 import IntroTitle from '../Components/UI/IntroTitle/IntroTitle';
