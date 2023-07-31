@@ -34,10 +34,10 @@ exports.uploadComment = (req, res) => {
         newComment.commentContent = req.body.commentContent;
         newComment.commentWriter = currentUser.split('=')[1];
         newComment.commentDate = Date();
-        Post.findOne({ _id: req.body._id })
+        Post.findOne({ _id: req.params._id })
             .then(post => {
                 post.comments.push(newComment);
-                Post.findOneAndUpdate({ _id: req.body._id }, post)
+                Post.findOneAndUpdate({ _id: req.params._id }, post)
                     .then(post => {
                         res.json({ 
                             uploadCommentSuccess: true,
