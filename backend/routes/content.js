@@ -6,7 +6,7 @@ const contentController = require('../controllers/content');
 
 router.post('/api/content/uploadpost', contentController.uploadPost);
 
-router.post('/api/content/uploadcomment', contentController.uploadComment);
+router.post('/api/content/uploadcomment/:_id', contentController.uploadComment);
 
 router.get('/api/content/getallcontents', contentController.getAllContents);
 
