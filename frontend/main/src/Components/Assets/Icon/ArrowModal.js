@@ -6,7 +6,6 @@ const ArrowModal = () => {
             width="24"
             height="13"
             viewBox="0 0 24 13"
-            class="layer-header-member__arrow"
         >
             <title></title>
             <g fill="none" fill-rule="evenodd">
