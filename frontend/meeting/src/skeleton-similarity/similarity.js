@@ -21,7 +21,7 @@ function extractSkeletonCoordinates(results) {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
             const confidence = results.poseLandmarks[index].visibility;
-            skeletonCoordinates.push({x, y,confidence});
+            skeletonCoordinates.push({ x, y, confidence });
         });
     }
 
@@ -38,7 +38,7 @@ function extractSkeletonCoordinates2(results) {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
             const confidence = results.poseLandmarks[index].visibility;
-            skeletonCoordinates2.push({x, y,confidence});
+            skeletonCoordinates2.push({ x, y, confidence });
         });
     }
 
@@ -75,20 +75,16 @@ function convertPoseToVector(pose) {
         vectorPoseConfidences.push(point.confidence);
     });
 
-    return [
-        vectorPoseXY,
-        vectorPoseConfidences,
-        [translateX / scaler, translateY / scaler, scaler]
-    ];
+    return [vectorPoseXY, vectorPoseConfidences, [translateX / scaler, translateY / scaler, scaler]];
 }
 
 // 함수: scaleAndTranslate
 function scaleAndTranslate(vectorPoseXY, transformValues) {
-    var transX = transformValues[0], transY = transformValues[1], scaler = transformValues[2];
+    var transX = transformValues[0],
+        transY = transformValues[1],
+        scaler = transformValues[2];
     return vectorPoseXY.map(function (position, index) {
-        return (index % 2 === 0 ?
-            position / scaler - transX :
-            position / scaler - transY);
+        return index % 2 === 0 ? position / scaler - transX : position / scaler - transY;
     });
 }
 
@@ -143,21 +139,19 @@ function calculateSimilarity() {
     // console.log("Video 2 Skeleton Coordinates:", video2SkeletonCoordinates);
 
     if (video1SkeletonCoordinates.length > 0 && video2SkeletonCoordinates.length > 0) {
-        
-
         const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
         // console.log("Pose Similarity:", similarity);
         // var maxPossibleDist = 2;
         // var similarityPercentage = poseSimilarityPercentage(video1SkeletonCoordinates, video2SkeletonCoordinates, maxPossibleDist);
         var minPossibleDist = 0;
         var maxPossibleDist = 2;
-        
+
         var similarityNormalized = (similarity - minPossibleDist) / (maxPossibleDist - minPossibleDist); // 유사도 정규화
-        
-        var similarityPercentage = (1- similarityNormalized) * 100; // 백분율로 변환
-        console.log("Pose Similarity Percentage:", similarityPercentage.toFixed(1) + "%");
+
+        var similarityPercentage = (1 - similarityNormalized) * 100; // 백분율로 변환
+        console.log('Pose Similarity Percentage:', similarityPercentage.toFixed(1) + '%');
     } else {
-        console.log("스켈레톤 이미지가 없습니다");
+        console.log('스켈레톤 이미지가 없습니다');
     }
 }
 
@@ -165,12 +159,10 @@ function poseSimilarityPercentage(pose1, pose2, maxPossibleDist) {
     var similarity = poseSimilarity(pose1, pose2);
 
     // 최대 가능한 유사도 값으로 나누어 백분율을 얻습니다.
-    var similarityPercentage = 1 - (similarity / maxPossibleDist);
+    var similarityPercentage = 1 - similarity / maxPossibleDist;
 
     return similarityPercentage;
 }
-
-
 
 const measureSimilarityButton = document.getElementById('measureSimilarity');
 measureSimilarityButton.addEventListener('click', calculateSimilarity);
