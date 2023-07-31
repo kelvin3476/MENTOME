@@ -2,10 +2,11 @@ const Post = require('../models/post');
 
 // Upload Post
 exports.uploadPost = (req, res) => {
-    const currentUser = req.get('Cookie');
-    if (currentUser) {
+    const getCookies = req.get('Cookie');
+    const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    if (cookies.logInUser) {
         let newPost = req.body;
-        newPost.writer = currentUser.split('=')[1];
+        newPost.writer = cookies.logInUser;
         newPost.date = Date();
         newPost.comments = [];
         const post = new Post(newPost);
@@ -28,11 +29,12 @@ exports.uploadPost = (req, res) => {
 
 // Upload Comment
 exports.uploadComment = (req, res) => {
-    const currentUser = req.get('Cookie');
-    if (currentUser) {
+    const getCookies = req.get('Cookie');
+    const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    if (cookies.logInUser) {
         let newComment = {};
         newComment.commentContent = req.body.commentContent;
-        newComment.commentWriter = currentUser.split('=')[1];
+        newComment.commentWriter = cookies.logInUser;
         newComment.commentDate = Date();
         Post.findOne({ _id: req.params._id })
             .then(post => {
@@ -66,7 +68,7 @@ exports.getAllContents = (req, res) => {
 
 // Get mento Contents and Return
 exports.getMentoContents = (req, res) => {
-    Post.find({ postType: 'mento'})
+    Post.find({ postType: '멘토'})
         .then(posts => {
             res.json(posts);
             console.log('Get Mento Contents Success!');
@@ -75,7 +77,7 @@ exports.getMentoContents = (req, res) => {
 
 // Get mentee Contents and Return
 exports.getMenteeContents = (req, res) => {
-    Post.find({ postType: 'mentee'})
+    Post.find({ postType: '멘티'})
         .then(posts => {
             res.json(posts);
             console.log('Get Mentee Contents Success!');

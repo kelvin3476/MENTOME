@@ -3,15 +3,16 @@ const User = require('../models/user');
 
 // Add Comment Notice
 exports.addCommentNotice = (req, res) => {
-    const currentUser = req.get('Cookie');
-    if (currentUser) {
+    const getCookies = req.get('Cookie');
+    const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    if (cookies.logInUser) {
         let newNotice = {};
         newNotice.noticeType = 'comment';
-        newNotice.noticeSender = currentUser.split('=')[1];
+        newNotice.noticeSender = cookies.logInUser;
         newNotice.noticeDate = Date();
         Post.findOne({ _id: req.params._id })
             .then(post => {
-                if (currentUser.split('=')[1] != post.writer) {
+                if (cookies.logInUser != post.writer) {
                     User.findOne({ userId: post.writer })
                         .then(user => {
                             user.notices.push(newNotice);
@@ -36,11 +37,12 @@ exports.addCommentNotice = (req, res) => {
 
 // Add Invite Notice
 exports.addInviteNotice = (req, res) => {
-    const currentUser = req.get('Cookie');
-    if (currentUser) {
+    const getCookies = req.get('Cookie');
+    const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    if (cookies.logInUser) {
         let newNotice = {};
         newNotice.noticeType = 'invite';
-        newNotice.noticeSender = currentUser.split('=')[1];
+        newNotice.noticeSender = cookies.logInUser;
         newNotice.noticeDate = Date();
         newNotice.roomName = '';
         newNotice.roomEnter = 'false';
