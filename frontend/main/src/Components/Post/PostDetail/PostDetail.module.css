@@ -196,7 +196,7 @@
     overflow-wrap: break-word;
 }
 
-p {
+.comment__Content_top p {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;

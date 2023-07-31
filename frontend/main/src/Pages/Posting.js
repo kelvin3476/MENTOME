@@ -9,7 +9,7 @@ function Posting() {
     const [isMentor, setIsMentor] = useState(true);
 
     const [formData, setFormData] = useState({
-        // mento: '',
+        mento: '',
         title: '',
         sport: '',
         career: '',
@@ -63,7 +63,11 @@ function Posting() {
                                         <span className={styles.alert_span}>
                                             🧚🏻 안녕하세요 회원님 !🖐🏻
                                             <span>
-                                                <span className={styles.alert__span_p}>
+                                                <span
+                                                    className={
+                                                        styles.alert__span_p
+                                                    }
+                                                >
                                                     {isMentor ? '멘티' : '멘토'}
                                                 </span>
                                                 가 되기 위해서{' '}
@@ -77,8 +81,11 @@ function Posting() {
                                             className={styles.alert_button}
                                             onClick={handleButton}
                                         >
-                                            ⚠️혹여나 {isMentor ? '멘티' : '멘토'}님이 아니시라면?{' '}
-                                            {isMentor ? '멘토🏃🏻' : '멘티🐣'}로 바꾸기{' '}
+                                            ⚠️혹여나{' '}
+                                            {isMentor ? '멘티' : '멘토'}님이
+                                            아니시라면?{' '}
+                                            {isMentor ? '멘토🏃🏻' : '멘티🐣'}로
+                                            바꾸기{' '}
                                         </button>
                                     </div>
                                 </div>
@@ -93,7 +100,9 @@ function Posting() {
                                             style={{ height: '66px' }}
                                             className={styles.title__textaria}
                                         ></textarea>
-                                        <div className={styles.title__line}></div>
+                                        <div
+                                            className={styles.title__line}
+                                        ></div>
                                         <div className={styles.title__value}>
                                             <input
                                                 type="text"
@@ -103,7 +112,9 @@ function Posting() {
                                                 placeholder={` - 어떤 분야의 멘토링을 ${
                                                     isMentor ? '받기' : '하기'
                                                 } 원하시나요? | 원하시는 분야를 입력해주세요.`}
-                                                className={styles.title__value_input}
+                                                className={
+                                                    styles.title__value_input
+                                                }
                                             ></input>
                                             <input
                                                 type="text"
@@ -111,7 +122,9 @@ function Posting() {
                                                 value={formData.career}
                                                 onChange={handleChange}
                                                 placeholder=" - 경력이 몇 년차이신가요? | 숫자로 입력해주세요. "
-                                                className={styles.title__value_input}
+                                                className={
+                                                    styles.title__value_input
+                                                }
                                             ></input>
                                         </div>
                                         {/* Bookmark */}
