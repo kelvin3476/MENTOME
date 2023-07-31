@@ -20,7 +20,7 @@ fileUploadForm.addEventListener('submit', (event) => {
         formData.append('file', selectedFile);
 
         // Send the form data using fetch
-        fetch('/api/upload', {
+        fetch('/api/s3/upload', {
             method: 'POST',
             body: formData,
         })
@@ -57,7 +57,7 @@ fileUploadForm2.addEventListener('submit', (event) => {
         formData.append('file', selectedFile);
 
         // Send the form data using fetch
-        fetch('/api/upload', {
+        fetch('/api/s3/upload', {
             method: 'POST',
             body: formData,
         })
