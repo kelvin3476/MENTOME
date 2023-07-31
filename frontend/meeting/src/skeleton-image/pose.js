@@ -5,6 +5,11 @@ const canvas = document.getElementById('canvas');
 const canvasCtx5 = canvas.getContext('2d');
 const video = document.getElementById('fileDisplay');
 let skeletonEnabled = false;
+//추가 
+let recentV1Time = 0;
+let recentV2Time = 0;
+let video1SkeletonCoordinates = [];
+let video2SkeletonCoordinates = [];
 
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({
@@ -105,6 +110,12 @@ function onResultsPose(results) {
             { color: zColor, fillColor: '#AAAAAA' }
         );
         canvasCtx5.restore();
+        // 유사도 좌표 받아오기 pose1
+        if (skeletonEnabled && video.currentTime !== recentV1Time) {
+            const skeletonCoordinates = extractSkeletonCoordinates(results);
+            video1SkeletonCoordinates = skeletonCoordinates;
+            recentV1Time = video.currentTime
+        }
     } else {
         addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas.getContext('2d');
@@ -218,6 +229,12 @@ function onResultsPose2(results) {
             { color: zColor, fillColor: '#AAAAAA' }
         );
         canvasCtx6.restore();
+        // 유사도 측정좌표 pose2
+        if (skeletonEnabled && video2.currentTime !== recentV2Time) {
+            const skeletonCoordinates2 = extractSkeletonCoordinates2(results);
+            video2SkeletonCoordinates = skeletonCoordinates2;
+            recentV2Time = video2.currentTime
+        }
     } else {
         addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas2.getContext('2d');
