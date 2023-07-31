@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import { Container } from 'react-bootstrap';
-import PostCard from '../../../UI/Card/PostCard';
+import PostCard from '../../UI/Card/PostCard';
 import axios from 'axios';
-import styles from './MentoringWrapper.module.css';
+import styles from './MentorCard.css';
 
-const MentoringWrappers = () => {
+const MentorCard = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         axios
-            .get('/api/content/getallcontents')
+            .get('/api/content/getmentocontents')
             .then((response) => {
                 console.log(response.data);
                 // setData(response.data.slice(response.data.length - 4, response.data.length));
@@ -46,4 +46,4 @@ const MentoringWrappers = () => {
     );
 };
 
-export default MentoringWrappers;
+export default MentorCard;

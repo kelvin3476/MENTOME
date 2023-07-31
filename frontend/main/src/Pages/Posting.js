@@ -6,10 +6,11 @@ import QuillEditor from '../Components/UI/Editor/Editor';
 import styles from './Posting.module.css';
 
 function Posting() {
+    const [postType, setPostType] = useState('멘티');
     const [isMentor, setIsMentor] = useState(true);
 
     const [formData, setFormData] = useState({
-        mento: '',
+        postType: '멘티',
         title: '',
         sport: '',
         career: '',
@@ -23,6 +24,8 @@ function Posting() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // formData에 postType 값을 추가합니다.
+        formData.postType = postType;
 
         axios
             .post('/api/content/uploadpost', formData)
@@ -49,6 +52,7 @@ function Posting() {
 
     const handleButton = () => {
         setIsMentor((prevState) => !prevState);
+        setPostType((prevType) => (prevType === '멘토' ? '멘티' : '멘토'));
     };
 
     return (
