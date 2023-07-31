@@ -111,7 +111,7 @@ const PostDetail = () => {
                         <div className={styles.line}></div>
                         {/* 내용(Content) */}
                         <div className={styles.body__head}>
-                            <p>{post.content}</p>
+                            <div dangerouslySetInnerHTML={{ __html: post.content }} />
                         </div>
                         {/* 여백 div */}
                         <div></div>
@@ -157,15 +157,18 @@ const PostDetail = () => {
                                                                     <p>{comments.commentWriter}</p>
                                                                 </div>
                                                                 <div className={styles.date}>
-                                                                    {comments.commentDate}
+                                                                    <textarea>{comments.commentDate}</textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div className={styles.comment__Content_top} key={comments._id}>
-                                                        <div className={styles.comment__Content_top}>
-                                                            <p>{comments.commentContent}</p>
-                                                        </div>
+                                                        <div
+                                                            className={styles.comment__Content_top}
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: comments.commentContent,
+                                                            }}
+                                                        />
                                                     </div>
                                                     {/* True or False - True 답글 달기 - 
                                             False 숨기기 댓글 작성하기 텍스트 박스 */}
