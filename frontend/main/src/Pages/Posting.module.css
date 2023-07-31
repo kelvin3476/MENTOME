@@ -47,7 +47,7 @@
     line-height: 1.5;
     font-size: 17px;
     font-weight: 600;
-    color: #3baf83;
+    color: #05d183;
 }
 
 .alert__span {
@@ -58,11 +58,11 @@
 
 .alert__span_p {
     position: relative;
-    font-size: 1.3rem;
-    font-weight: 800;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #05d183;
 }
-
-.alert_button {
+s .alert_button {
     background-color: transparent;
     font-weight: 500;
     letter-spacing: -0.3px;
