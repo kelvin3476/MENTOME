@@ -64,6 +64,24 @@ exports.getAllContents = (req, res) => {
         });
 };
 
+// Get mento Contents and Return
+exports.getMentoContents = (req, res) => {
+    Post.find({ postType: 'mento'})
+        .then(posts => {
+            res.json(posts);
+            console.log('Get Mento Contents Success!');
+        });
+}
+
+// Get mentee Contents and Return
+exports.getMenteeContents = (req, res) => {
+    Post.find({ postType: 'mentee'})
+        .then(posts => {
+            res.json(posts);
+            console.log('Get Mentee Contents Success!');
+        });
+}
+
 // Get a Content Detail and Return
 exports.getContentDetail = (req, res) => {
     Post.findOne({ _id: req.params._id })
