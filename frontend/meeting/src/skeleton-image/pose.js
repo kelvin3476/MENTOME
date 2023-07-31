@@ -36,7 +36,6 @@ function canPlayEventHandler() {
     videoPlayer.removeEventListener('canplay', canPlayEventHandler);
 }
 
-// 스케렐톤 씌우기 2
 async function addSkeletonToVideo() {
     skeletonEnabled = !skeletonEnabled; // 버튼 클릭시 토글
     if (skeletonEnabled) {
@@ -224,4 +223,10 @@ function onResultsPose2(results) {
         const ctx = canvas2.getContext('2d');
         ctx.clearRect(0, 0, canvas2.width, canvas2.height);
     }
+
+    // impactpoint 구현
+    if (skeletonEnabled2 && !calculated2) {
+        calculateImpactPoint2(results);
+    }
+
 }
