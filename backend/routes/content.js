@@ -10,6 +10,10 @@ router.post('/api/content/uploadcomment', contentController.uploadComment);
 
 router.get('/api/content/getallcontents', contentController.getAllContents);
 
+router.get('/api/content/getmentocontents', contentController.getMentoContents);
+
+router.get('/api/content/getmenteecontents', contentController.getMenteeContents);
+
 router.get('/api/content/getcontentdetail/:_id', contentController.getContentDetail);
 
 router.get('/api/content/getcontentcomments/:_id', contentController.getContentComments);

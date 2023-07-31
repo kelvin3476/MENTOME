@@ -31,7 +31,9 @@ const userSchema = new Schema({
         {
             noticeType: { type: String, required: true },
             noticeSender: { type: String, required: true },
-            roomName: { type: String }
+            noticeDate: { type: Date, required: true},
+            roomName: { type: String },
+            roomEnter: { type: String }
         }
     ]
 });

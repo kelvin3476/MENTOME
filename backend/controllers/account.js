@@ -55,15 +55,6 @@ exports.logIn = (req, res) => {
         });
 };
 
-// Log Out
-// exports.logOut = (req, res) => {
-//     const currentUser = req.get('Cookie');
-//     if (currentUser) {
-//         res.cookie('user_id', currentUser.split('=')[1], {maxAge: -1});
-//     }
-//     res.redirect('/');
-// };
-
 // Get User Info
 exports.getUserInfo = (req, res) => {
     const currentUser = req.get('Cookie');
