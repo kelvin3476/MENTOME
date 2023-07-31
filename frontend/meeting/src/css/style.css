@@ -166,6 +166,7 @@ body {
     height: 488px;
     flex-shrink: 0;
     margin: 0;
+    overflow: scroll;
 }
 
 .page-container {
@@ -244,7 +245,7 @@ main {
     transform: translateY(-50%);
     color: hsla(0, 0%, 100%, 0.5);
     font-size: 12px;
-    height: 45vh;
+    height: 52vh;
     bottom: 36vh;
     /* height: 52px; */
     position: fixed;
