@@ -1,4 +1,9 @@
 // whiteboard.js
+
+// 브러쉬 색상 선택 및 선굵기 선택
+const color = document.getElementById('color'); // 브러쉬 색상 선택
+const linewidth = document.querySelector('#line-width'); // 선 굵기 조절
+
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
@@ -7,8 +12,8 @@ function drawLine(x1, y1, x2, y2) {
     const canvas = document.getElementById('drawcanvas');
     const canvasCtx = canvas.getContext('2d');
     canvasCtx.beginPath();
-    canvasCtx.strokeStyle = 'red';
-    canvasCtx.lineWidth = 4;
+    canvasCtx.strokeStyle = color.value;
+    canvasCtx.lineWidth = linewidth.value;
     canvasCtx.moveTo(x1, y1);
     canvasCtx.lineTo(x2, y2);
     canvasCtx.stroke();
@@ -86,5 +91,16 @@ window.onload = () => {
 
 };
 
+/* 변경된 선 굵기 값을 적용 받게 하는 함수 */
+function handleChangeWidth(event) {
+    canvasCtx.linewidth = event.target.value;
+}
 
+/* 변경된 색상 값을 적용 받게 하는 함수 */
+function handleChangeColor(event) {
+    canvasCtx.strokeStyle = event.target.value; // 선 색상 변경
+    canvasCtx.fillStyle = event.target.value; // 채우기 색상 변경
+}
 
+linewidth.addEventListener("change", handleChangeWidth);
+color.addEventListener("change", handleChangeColor);
