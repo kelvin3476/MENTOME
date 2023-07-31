@@ -62,7 +62,12 @@ function Posting() {
                                     <div className={styles.alert__main}>
                                         <span className={styles.alert_span}>
                                             🧚🏻 안녕하세요 회원님 !🖐🏻
-                                            <span> {isMentor ? '멘티' : '멘토'}가 되기 위해서 </span>
+                                            <span>
+                                                <span className={styles.alert__span_p}>
+                                                    {isMentor ? '멘티' : '멘토'}
+                                                </span>
+                                                가 되기 위해서{' '}
+                                            </span>
                                             글을 작성 해주세요.
                                         </span>
                                         <button
