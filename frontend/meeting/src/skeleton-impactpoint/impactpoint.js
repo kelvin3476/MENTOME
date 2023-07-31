@@ -101,6 +101,8 @@ video2.addEventListener('timeupdate', () => {
 document.getElementById('impactTime').addEventListener('click', function() {
     video.currentTime = closestTime;
     video2.currentTime = closestTime2;
+    video.pause();
+    video2.pause();
     console.log(`leftHandAboveLeftShoulder 상태 : ${leftHandAboveLeftShoulder}`);
     console.log(`closestTime 상태 : ${closestTime}`);
     console.log(`calculated 상태 : ${calculated}`)
@@ -111,13 +113,15 @@ function resetImpactTime() {
     closestTime = null; // 임팩트 시점
     calculated = false; // 한번만 계산하기 위해
     minDistance = null;
-    video.currentTime = 0.0; // 동영상을 처음부터 다시 시작합니다.
+    video.currentTime = 0; // 동영상을 처음부터 다시 시작합니다.
+    video.play();
 
     leftHandAboveLeftShoulder2 = false; // 상태 변수
     closestTime2 = null; // 임팩트 시점
     calculated2 = false; // 한번만 계산하기 위해
     minDistance2 = null;
-    video2.currentTime = 0.0; // 동영상을 처음부터 다시 시작합니다.
+    video2.currentTime = 0; // 동영상을 처음부터 다시 시작합니다.
+    video2.play();
 
     console.log("Impact time has been reset, ready to recalculate.");
     console.log(`leftHandAboveLeftShoulder 상태 : ${leftHandAboveLeftShoulder}`);
