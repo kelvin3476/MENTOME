@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-const LoginModal = ({ props, isOpen, onRequestClose }) => {
+const LoginModal = ({ isOpen, onRequestClose }) => {
     const formRef = useRef();
     // eslint-disable-next-line
     const [cookies, setCookie] = useCookies(['id']);
@@ -34,7 +34,10 @@ const LoginModal = ({ props, isOpen, onRequestClose }) => {
 
     return (
         <div className={styles.aligncenter}>
-            <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
+            <div
+                className={styles.wrapper}
+                onClick={(e) => e.stopPropagation()}
+            >
                 <div className={styles.grayblock}>
                     <div>
                         <div>
@@ -68,7 +71,10 @@ const LoginModal = ({ props, isOpen, onRequestClose }) => {
                                 <h2>로그인</h2>
                                 <section>
                                     {/* <h4>이메일로 로그인</h4> */}
-                                    <form className={styles.formstyle} ref={formRef}>
+                                    <form
+                                        className={styles.formstyle}
+                                        ref={formRef}
+                                    >
                                         <input
                                             // _onChange={(e) => {
                                             // dispatch({type:"INPUT"}, payload:{id:"", pwd:""})
@@ -97,7 +103,11 @@ const LoginModal = ({ props, isOpen, onRequestClose }) => {
                             <div className={styles.foot}>
                                 <span>아직 회원이 아니신가요?</span>
                                 <div className={styles.link} tabindex="7">
-                                    <Link to="signup" className={styles.removecolor} onClick={onRequestClose}>
+                                    <Link
+                                        to="signup"
+                                        className={styles.removecolor}
+                                        onClick={onRequestClose}
+                                    >
                                         회원가입
                                     </Link>
                                 </div>

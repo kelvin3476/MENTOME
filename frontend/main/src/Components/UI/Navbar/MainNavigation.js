@@ -4,9 +4,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import LoginButton from './LoginButton/LoginButton';
 import { Link } from 'react-router-dom';
 import styles from './MainNavigation.module.css';
-import TopbarAlarm from './TopbarAlarm/TopbarAlarm';
 import TopbarDropdown from './Dropdowns/TopbarDropdowns';
 import { useCookies } from 'react-cookie';
+import AlarmModal from '../Modal/Alarm/AlarmModal';
 
 const MainNavigation = () => {
     const [cookies] = useCookies(['logInUser']); // 쿠키 정보 가져오기
@@ -41,7 +41,7 @@ const MainNavigation = () => {
                         {cookies.logInUser ? (
                             <>
                                 {/* 로그인의 경우 */}
-                                <TopbarAlarm />
+                                <AlarmModal />
                                 <TopbarDropdown />
                             </>
                         ) : (
