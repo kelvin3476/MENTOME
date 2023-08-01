@@ -112,7 +112,7 @@ const PostDetail = () => {
                                     {post.writer}
                                 </span>
                                 <span className={styles.separator}>·</span>
-                                <span>{formattedDate}</span>
+                                <span>{post.date}</span>
                                 {/* <p>{post.sport}</p>
                                 <p>{post.career}</p> */}
                             </div>
@@ -200,11 +200,11 @@ const PostDetail = () => {
                                                                         styles.date
                                                                     }
                                                                 >
-                                                                    <textarea>
+                                                                    <span>
                                                                         {
                                                                             comments.commentDate
                                                                         }
-                                                                    </textarea>
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>
