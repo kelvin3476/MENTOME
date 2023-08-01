@@ -73,19 +73,42 @@ const PostDetail = () => {
                 const uploadedComment = response.data;
                 setComments([...comments, uploadedComment]);
                 setNewCommentContent('');
+
+                // 댓글 업로드 후에 댓글 리스트를 다시 가져와서 업데이트
+                const commentsApiUrl = `/api/content/getcontentcomments/${postId}`;
+                axios
+                    .get(commentsApiUrl)
+                    .then((commentsResponse) => {
+                        setComments(commentsResponse.data); // 댓글 데이터를 업데이트합니다.
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching comments:', error);
+                    });
             })
             .catch((error) => {
                 console.error('댓글 업로드 오류:', error);
             });
 
-        event.target.reset(); // 폼 초기화
+        setNewCommentContent('');
     };
 
-    const formattedDate = new Date(post.date).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-    });
+    const PostingFormattedDate = new Date(post.date).toLocaleDateString(
+        'ko-KR',
+        {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+        },
+    );
+
+    const handleTextareaKeyDown = (event) => {
+        // 엔터키(키 코드 13)를 눌렀을 때 handleCommentSubmit 함수를 호출합니다.
+        if (event.keyCode === 13) {
+            handleCommentSubmit(event);
+        }
+    };
 
     return (
         <Container>
@@ -112,7 +135,7 @@ const PostDetail = () => {
                                     {post.writer}
                                 </span>
                                 <span className={styles.separator}>·</span>
-                                <span>{post.date}</span>
+                                <span>{PostingFormattedDate}</span>
                                 {/* <p>{post.sport}</p>
                                 <p>{post.career}</p> */}
                             </div>
@@ -133,27 +156,34 @@ const PostDetail = () => {
                             <h4>{comments.length}개의 댓글</h4>
                             <div>
                                 <div>
-                                    <textarea
-                                        placeholder='댓글을 작성하세요'
-                                        name='commentContent'
-                                        value={newCommentContent}
-                                        className={styles.comment__textarea}
-                                        onChange={(e) =>
-                                            setNewCommentContent(e.target.value)
-                                        }
-                                        style={{ height: 69.3333 }}
-                                    ></textarea>
-                                    {/* button-wrapper */}
-                                    <div className={styles.buttons_wrapper}>
-                                        <button
-                                            color='teal'
-                                            className={styles.comment__button}
-                                            type='submit'
-                                            onClick={handleCommentSubmit}
-                                        >
-                                            댓글 작성
-                                        </button>
-                                    </div>
+                                    <form onSubmit={handleCommentSubmit}>
+                                        <textarea
+                                            placeholder='댓글을 작성하세요'
+                                            name='commentContent'
+                                            value={newCommentContent}
+                                            className={styles.comment__textarea}
+                                            onChange={(e) =>
+                                                setNewCommentContent(
+                                                    e.target.value,
+                                                )
+                                            }
+                                            style={{ height: 69.3333 }}
+                                            onKeyDown={handleTextareaKeyDown} // 엔터키 이벤트 핸들러 추가
+                                        ></textarea>
+                                        {/* button-wrapper */}
+                                        <div className={styles.buttons_wrapper}>
+                                            <button
+                                                color='teal'
+                                                className={
+                                                    styles.comment__button
+                                                }
+                                                type='submit'
+                                                onClick={handleCommentSubmit}
+                                            >
+                                                댓글 작성
+                                            </button>
+                                        </div>
+                                    </form>
                                     {/* 댓글 남긴거 */}
                                     <div className={styles.comment__margin_top}>
                                         {/* 댓글 */}
@@ -201,9 +231,18 @@ const PostDetail = () => {
                                                                     }
                                                                 >
                                                                     <span>
-                                                                        {
-                                                                            comments.commentDate
-                                                                        }
+                                                                        {new Date(
+                                                                            comments.commentDate,
+                                                                        ).toLocaleDateString(
+                                                                            'ko-KR',
+                                                                            {
+                                                                                year: 'numeric',
+                                                                                month: '2-digit',
+                                                                                day: '2-digit',
+                                                                                hour: '2-digit',
+                                                                                minute: '2-digit',
+                                                                            },
+                                                                        )}
                                                                     </span>
                                                                 </div>
                                                             </div>
