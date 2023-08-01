@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import styles from './PostDetail.module.css';
+import ReplyButton from '../../UI/Button/ReplyButton/ReplyButton';
 
 const PostDetail = () => {
     // const [post, setPost] = useState([]); // 댓글을 저장할 배열 상태
@@ -265,40 +266,7 @@ const PostDetail = () => {
                                                     </div>
                                                     {/* True or False - True 답글 달기 - 
                                             False 숨기기 댓글 작성하기 텍스트 박스 */}
-                                                    <div
-                                                        className={
-                                                            styles.comment__comment_top
-                                                        }
-                                                    >
-                                                        <div
-                                                            className={
-                                                                styles.comment__comment_answer
-                                                            }
-                                                        >
-                                                            {/* svg */}
-                                                            <svg
-                                                                width='12'
-                                                                height='12'
-                                                                fill='none'
-                                                                viewBox='0 0 12 12'
-                                                            >
-                                                                <path
-                                                                    fill='currentColor'
-                                                                    d='M5.5 2.5h1v3h3v1h-3v3h-1v-3h-3v-1h3v-3z'
-                                                                ></path>
-                                                                <path
-                                                                    fill='currentColor'
-                                                                    fill-rule='evenodd'
-                                                                    d='M1 0a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 1H1v10h10V1z'
-                                                                    clip-rule='evenodd'
-                                                                ></path>
-                                                            </svg>
-                                                            <span>
-                                                                답글 달기
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    {/* 댓글 작성자 정보나 시간 등을 추가하여 표시할 수 있습니다. */}
+                                                    <ReplyButton />
                                                 </div>
                                             </>
                                         ))}

@@ -1,10 +1,10 @@
 // 페이지
 // import NoticeDetailComponent from '../components/Post/NoticeDetailComponent';
 
-import AlarmModal from '../Components/UI/Modal/Alarm/AlarmModal';
+import PostDetail from '../Components/Post/PostDetail/PostDetail';
 
 function Post() {
-    return <AlarmModal />;
+    return <PostDetail />;
 }
 
 export default Post;
