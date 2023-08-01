@@ -40,9 +40,13 @@ toggleDrawCanvasButton.addEventListener('click', () => {
     if (drawCanvas.style.display === 'none') {
         // Show the draw canvas
         drawCanvas.style.display = 'block';
+        // 캔버스 토글 상태 동기화
+        socket.emit('toggle_drawCanvas', { state: 'block', roomName });
     } else {
         // Hide the draw canvas
         drawCanvas.style.display = 'none';
+        // 캔버스 토글 상태 동기화
+        socket.emit('toggle_drawCanvas', { state: 'none', roomName });
     }
 });
 
@@ -89,6 +93,10 @@ window.onload = () => {
         clearCanvas();
     });
 
+    // 캔버스 토글 상태 동기화
+    socket.on('toggle_drawCanvas', (data) => {
+        drawCanvas.style.display = data.state;
+    });
 };
 
 /* 변경된 선 굵기 값을 적용 받게 하는 함수 */
