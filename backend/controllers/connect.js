@@ -29,9 +29,10 @@ exports.connectManagement = io => {
 };
 
 const getRoomName = () => {
-    const currentUser = req.get('Cookie');
-    if (currentUser) {
-        User.findOne({ userId: currentUser.split('=')[1] })
+    const getCookies = req.get('Cookie');
+    const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    if (cookies.logInUser) {
+        User.findOne({ userId: cookies.logInUser })
             .then(user => {
                 console.log(user.notice);
             });
