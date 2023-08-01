@@ -26,88 +26,41 @@ const ReplyButton = ({ id, username, date, replyContent }) => {
                     <div className={styles.Reply__comment_group}>
                         <div className={styles.Reply__comment_margin_top}></div>
                         <div>
-                            <div
-                                className={
-                                    styles.Reply__comment_padding_top_down
-                                }
-                            >
-                                <div
-                                    className={
-                                        styles.Reply__comment_profile_head
-                                    }
-                                >
-                                    <div
-                                        className={
-                                            styles.Reply__comment_profile
-                                        }
-                                    >
+                            <div className={styles.Reply__comment_padding_top_down}>
+                                <div className={styles.Reply__comment_profile_head}>
+                                    <div className={styles.Reply__comment_profile}>
                                         {/* a태그 생략 */}
                                         <img
                                             src='https://velog.velcdn.com/images/1yoouoo/profile/27630138-254c-45cd-99a6-b9adeadbffc9/image.avif'
                                             alt='comment-user-thumbnail'
                                         ></img>
-                                        <div
-                                            className={
-                                                styles.Reply__comment_info
-                                            }
-                                        >
-                                            <div
-                                                className={
-                                                    styles.Reply__comment_username
-                                                }
-                                            >
+                                        <div className={styles.Reply__comment_info}>
+                                            <div className={styles.Reply__comment_username}>
                                                 {/* eslint-disable-next-line */}
                                                 <a>{username}</a>
                                             </div>
-                                            <div
-                                                className={
-                                                    styles.Reply__comment_date
-                                                }
-                                            >
-                                                {date}
-                                            </div>
+                                            <div className={styles.Reply__comment_date}>{date}</div>
                                         </div>
                                     </div>
-                                    <div
-                                        className={
-                                            styles.Reply__comment_actions
-                                        }
-                                    >
+                                    <div className={styles.Reply__comment_actions}>
                                         <span>삭제</span>
                                     </div>
                                 </div>
-                                <div
-                                    className={
-                                        styles.Reply__comment_detail_head
-                                    }
-                                >
-                                    <div
-                                        className={
-                                            styles.Reply__comment_detail_body
-                                        }
-                                    >
+                                <div className={styles.Reply__comment_detail_head}>
+                                    <div className={styles.Reply__comment_detail_body}>
                                         <p>{replyContent}</p>
                                     </div>
                                 </div>
-                                <div
-                                    className={
-                                        styles.Reply__comment_detail_line
-                                    }
-                                ></div>
+                                <div className={styles.Reply__comment_detail_line}></div>
                                 {!showReplyReplyBox ? (
                                     <button
                                         onClick={toggleReplyReplyBox}
-                                        className={
-                                            styles.Reply__comment_Reply_button
-                                        }
+                                        className={styles.Reply__comment_Reply_button}
                                     >
                                         답글 작성하기
                                     </button>
                                 ) : (
-                                    <CommentTextarea
-                                        id={id}
-                                        onClick={toggleReplyReplyBox}
-                                    />
+                                    <CommentTextarea id={id} onClick={toggleReplyReplyBox} />
                                 )}
                             </div>
                         </div>
