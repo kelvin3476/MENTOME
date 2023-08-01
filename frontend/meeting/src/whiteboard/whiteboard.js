@@ -8,12 +8,12 @@ let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
 
-function drawLine(x1, y1, x2, y2) {
+function drawLine(x1, y1, x2, y2, colorValue = color.value, linewidthValue = linewidth.value) {
     const canvas = document.getElementById('drawcanvas');
     const canvasCtx = canvas.getContext('2d');
     canvasCtx.beginPath();
-    canvasCtx.strokeStyle = color.value;
-    canvasCtx.lineWidth = linewidth.value;
+    canvasCtx.strokeStyle = colorValue;
+    canvasCtx.lineWidth = linewidthValue;
     canvasCtx.moveTo(x1, y1);
     canvasCtx.lineTo(x2, y2);
     canvasCtx.stroke();
@@ -22,7 +22,7 @@ function drawLine(x1, y1, x2, y2) {
 
 function drawAndEmit(x1, y1, x2, y2, roomName) {
     drawLine(x1, y1, x2, y2);
-    socket.emit('drawing', { x1, y1, x2, y2, roomName });
+    socket.emit('drawing', { x1, y1, x2, y2, color: color.value, linewidth: linewidth.value, roomName });
 }
 
 // 지우개
@@ -78,7 +78,7 @@ window.onload = () => {
 
     // In the client-side code, after the Socket.IO connection is established
     socket.on('drawing', (data) => {
-        drawLine(data.x1, data.y1, data.x2, data.y2);
+        drawLine(data.x1, data.y1, data.x2, data.y2, data.color, data.linewidth);
     });
 
 
@@ -93,7 +93,7 @@ window.onload = () => {
         clearCanvas();
     });
 
-    // 캔버스 토글 상태 동기화
+    // 캔버스 토글 상태 동기
     socket.on('toggle_drawCanvas', (data) => {
         drawCanvas.style.display = data.state;
     });
@@ -101,13 +101,12 @@ window.onload = () => {
 
 /* 변경된 선 굵기 값을 적용 받게 하는 함수 */
 function handleChangeWidth(event) {
-    canvasCtx.linewidth = event.target.value;
+    linewidth.value = event.target.value;
 }
 
 /* 변경된 색상 값을 적용 받게 하는 함수 */
 function handleChangeColor(event) {
-    canvasCtx.strokeStyle = event.target.value; // 선 색상 변경
-    canvasCtx.fillStyle = event.target.value; // 채우기 색상 변경
+    color.value = event.target.value; // 여기를 수정
 }
 
 linewidth.addEventListener("change", handleChangeWidth);
