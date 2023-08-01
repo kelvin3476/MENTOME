@@ -15,18 +15,34 @@ const PostDetail = () => {
     });
     // const [comments, setComments] = useState([]); // 댓글을 저장할 배열 상태
     const [comments, setComments] = useState([
-        // {
-        //     _id: '64c407a19d751848e2bc8fd2',
-        //     commentContent: '저요저요!',
-        //     commentWriter: '런린이',
-        //     commentDate: '2023.07.26',
-        // },
-        // {
-        //     _id: '64c407a19d751848e2bc8fd3',
-        //     commentContent: '저요저요!',
-        //     commentWriter: '런린이',
-        //     commentDate: '2023.07.26',
-        // },
+        {
+            _id: '64c407a19d751848e2bc8fd2',
+            commentContent: '저요저요!',
+            commentWriter: '런린이',
+            commentDate: '2023.07.26',
+            commentReplies: [
+                // 대댓글
+                {
+                    replyContent: '대댓글 Test!', // 대댓글 내용
+                    replyWriter: '런린이', // 대댓글 작성자
+                    replyDate: '2023.07.26', // 대댓글 작성 시간
+                },
+            ],
+        },
+        {
+            _id: '64c407a19d751848e2bc8fd3',
+            commentContent: '저요저요!',
+            commentWriter: '런린이',
+            commentDate: '2023.07.26',
+            commentReplies: [
+                // 대댓글
+                {
+                    replyContent: '대댓글 Test!', // 대댓글 내용
+                    replyWriter: '런린이', // 대댓글 작성자
+                    replyDate: '2023.07.26', // 대댓글 작성 시간
+                },
+            ],
+        },
     ]);
     const [newCommentContent, setNewCommentContent] = useState('');
 
@@ -266,6 +282,14 @@ const PostDetail = () => {
                                                     </div>
                                                     {/* True or False - True 답글 달기 - 
                                             False 숨기기 댓글 작성하기 텍스트 박스 */}
+                                                    {/*  commentReplies: [
+                // 대댓글
+                {
+                    replyContent: '대댓글 Test!', // 대댓글 내용
+                    replyWriter: '런린이', // 대댓글 작성자
+                    replyDate: '2023.07.26', // 대댓글 작성 시간
+                },
+            ], */}
                                                     <ReplyButton />
                                                 </div>
                                             </>

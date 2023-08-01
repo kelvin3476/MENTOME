@@ -19,7 +19,7 @@ const CommentTextarea = ({ onClick }) => {
             const response = await axios.post(
                 `/api/content/uploadcommentreply/${postId}`,
                 {
-                    content: comment,
+                    replyContent: comment,
                     // You can include other properties for the comment reply here if needed
                 },
             );
