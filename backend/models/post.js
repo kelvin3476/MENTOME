@@ -36,7 +36,7 @@ const postSchema = new Schema({
             commentContent: { type: String, required: true },
             commentWriter: { type: String, required: true },
             commentDate: { type: Date, required: true },
-            commentReply: [
+            commentReplies: [
                 {
                     replyContent: { type: String, required: true },
                     replyWriter: { type: String, required: true },
