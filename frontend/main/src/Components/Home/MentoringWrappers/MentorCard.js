@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import PostCard from '../../UI/Card/PostCard';
 import axios from 'axios';
-import styles from './MentorCard.css';
+import styles from './MentorCard.module.css';
 
 const MentorCard = () => {
     const [data, setData] = useState([]);

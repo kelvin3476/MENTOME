@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import PostCard from '../../UI/Card/PostCard';
 import axios from 'axios';
-import styles from './MenteeCard.css';
+import styles from './MenteeCard.module.css';
 
 const MenteeCard = () => {
     const [data, setData] = useState([]);
