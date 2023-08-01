@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './CommentTextarea.module.css';
 
-const CommentTextarea = ({ onClick }) => {
+const CommentTextarea = ({ onClick, id }) => {
     const [comment, setComment] = useState('');
 
     const handleCommentChange = (event) => {
@@ -17,7 +17,7 @@ const CommentTextarea = ({ onClick }) => {
         try {
             // Send the comment data to the server
             const response = await axios.post(
-                `/api/content/uploadcommentreply/${postId}`,
+                `/api/content/uploadcommentreply/${postId}/${id}`,
                 {
                     replyContent: comment,
                     // You can include other properties for the comment reply here if needed

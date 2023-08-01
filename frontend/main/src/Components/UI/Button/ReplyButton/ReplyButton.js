@@ -4,7 +4,7 @@ import MinusReplyButton from '../MinusReply/MinusReplyButton';
 import PlusReplyButton from '../PlusReply/PlusReplyButton';
 import styles from './ReplyButton.module.css';
 
-const ReplyButton = () => {
+const ReplyButton = ({ id }) => {
     const [showReplyBox, setShowReplyBox] = useState(false); // State variable for showing/hiding reply box
     const [showReplyReplyBox, setShowReplyReplyBox] = useState(false); // State variable for showing/hiding reply box
 
@@ -105,6 +105,7 @@ const ReplyButton = () => {
                                     </button>
                                 ) : (
                                     <CommentTextarea
+                                        id={id}
                                         onClick={toggleReplyReplyBox}
                                     />
                                 )}

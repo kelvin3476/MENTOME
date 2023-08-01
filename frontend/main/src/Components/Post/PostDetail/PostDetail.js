@@ -290,7 +290,9 @@ const PostDetail = () => {
                     replyDate: '2023.07.26', // 대댓글 작성 시간
                 },
             ], */}
-                                                    <ReplyButton />
+                                                    <ReplyButton
+                                                        id={comments._id}
+                                                    />
                                                 </div>
                                             </>
                                         ))}
