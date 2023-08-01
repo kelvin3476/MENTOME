@@ -5,16 +5,21 @@ import PostCard from '../../../UI/Card/PostCard';
 import axios from 'axios';
 import styles from './MentoringWrapper.module.css';
 
-const MentoringWrappers = () => {
+const MainMenteeCard = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         axios
-            .get('/api/content/getallcontents')
+            .get('/api/content/getmenteecontents')
             .then((response) => {
                 console.log(response.data);
-                // setData(response.data.slice(response.data.length - 4, response.data.length));
-                setData(response.data);
+                setData(
+                    response.data.slice(
+                        response.data.length - 4,
+                        response.data.length,
+                    ),
+                );
+                // setData(response.data);
             })
             .catch((error) => {
                 console.error('Error data:', error);
@@ -46,4 +51,4 @@ const MentoringWrappers = () => {
     );
 };
 
-export default MentoringWrappers;
+export default MainMenteeCard;
