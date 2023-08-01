@@ -109,6 +109,13 @@ const PostDetail = () => {
         day: '2-digit',
     });
 
+    const handleTextareaKeyDown = (event) => {
+        // 엔터키(키 코드 13)를 눌렀을 때 handleCommentSubmit 함수를 호출합니다.
+        if (event.keyCode === 13) {
+            handleCommentSubmit(event);
+        }
+    };
+
     return (
         <Container>
             <div>
@@ -167,6 +174,7 @@ const PostDetail = () => {
                                                 )
                                             }
                                             style={{ height: 69.3333 }}
+                                            onKeyDown={handleTextareaKeyDown} // 엔터키 이벤트 핸들러 추가
                                         ></textarea>
                                         {/* button-wrapper */}
                                         <div className={styles.buttons_wrapper}>
