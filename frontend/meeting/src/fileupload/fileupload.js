@@ -10,6 +10,11 @@ const selectedFileInput2 = document.getElementById('selectedFile2');
 fileUploadForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
+    // 만약 스켈레톤이 활성화되어 있다면 제거
+    if (skeletonEnabled) {
+        addSkeletonToVideo();
+    }
+
     // Get the selected file
     const selectedFile = selectedFileInput.files[0];
     console.log(selectedFile.name);
@@ -46,6 +51,11 @@ fileUploadForm.addEventListener('submit', (event) => {
 
 fileUploadForm2.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    // 만약 스켈레톤이 활성화되어 있다면 제거
+    if (skeletonEnabled2) {
+        addSkeletonToVideo2();
+    }
 
     // Get the selected file
     const selectedFile = selectedFileInput2.files[0];
@@ -85,6 +95,11 @@ socket.on('new_file', (url) => {
     fileDisplayElement.src = url;
     // Show the video player
     fileDisplayElement.style.display = 'block';
+
+    // 만약 스켈레톤이 활성화되어 있다면 제거
+    if (skeletonEnabled) {
+        addSkeletonToVideo();
+    }
 });
 
 // 파일2 업로드
@@ -93,4 +108,9 @@ socket.on('new_file2', (url) => {
     fileDisplayElement2.src = url;
     // Show the video player
     fileDisplayElement2.style.display = 'block';
+
+    // 만약 스켈레톤이 활성화되어 있다면 제거
+    if (skeletonEnabled2) {
+        addSkeletonToVideo2();
+    }
 });
