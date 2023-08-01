@@ -8,7 +8,7 @@ router.post('/api/content/uploadpost', contentController.uploadPost);
 
 router.post('/api/content/uploadcomment/:_id', contentController.uploadComment);
 
-router.post('/api/content/uploadcommentreply/:_id', contentController.uploadCommentReply);
+router.post('/api/content/uploadcommentreply/:_postid/:_id', contentController.uploadCommentReply);
 
 router.get('/api/content/getallcontents', contentController.getAllContents);
 

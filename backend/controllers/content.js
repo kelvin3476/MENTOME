@@ -66,10 +66,11 @@ exports.uploadCommentReply = (req, res) => {
         newCommentReplies.replyContent = req.body.replyContent;
         newCommentReplies.replyWriter = cookies.logInUser;
         newCommentReplies.replyDate = Date();
-        Post.findOne({ _id: req.params._id })
+        Post.findOne({ _id: req.params._postid })
             .then(post => {
-                post.comments.newCommentReplies.push(newCommentReplies);
-                Post.findOneAndUpdate({ _id: req.params._id }, post)
+                const commentIndex = post.comments.findIndex(comment => comment._id.toString() === req.params._id);
+                post.comments[commentIndex].commentReplies.push(newCommentReplies);
+                Post.findOneAndUpdate({ _id: req.params._postid }, post)
                     .then(post => {
                         res.json({ 
                             uploadCommentSuccess: true,
@@ -119,7 +120,6 @@ exports.getContentDetail = (req, res) => {
     Post.findOne({ _id: req.params._id })
         .then(post => {
             res.json(post);
-            console.log(post);
             console.log('Get a Content Detail Success!');
         });
 };
@@ -130,7 +130,6 @@ exports.getContentComments = (req, res) => {
         .then(post => {
             if (post.comments) {
                 res.json(post.comments);
-                console.log(post.comments)
                 console.log('Get Content Comments Success!');
             }
         });
