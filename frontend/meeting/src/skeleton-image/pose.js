@@ -5,11 +5,13 @@ const canvas = document.getElementById('canvas');
 const canvasCtx5 = canvas.getContext('2d');
 const video = document.getElementById('fileDisplay');
 let skeletonEnabled = false;
+let animationFrameId;
 //추가 
 let recentV1Time = 0;
 let recentV2Time = 0;
 let video1SkeletonCoordinates = [];
 let video2SkeletonCoordinates = [];
+
 
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({
@@ -18,51 +20,41 @@ const pose = new Pose({
     },
 });
 
-function canPlayEventHandler() {
-    console.log('onloadstarted');
-    window.skeletonApplied = true;
-
-    // Set the canvas size to the video size
-    canvas.width = videoPlayer.videoWidth;
-    canvas.height = videoPlayer.videoHeight;
-
-    const updatePose = async () => {
-        try {
-            // pass the video element
-            await pose.send({ image: videoPlayer });
-        } catch (error) {
-            console.error('Error in pose.send:', error);
-        }
-        // call the next frame
-        requestAnimationFrame(updatePose);
-    };
-    // start the loop
-    updatePose();
-    videoPlayer.removeEventListener('canplay', canPlayEventHandler);
-}
-
 async function addSkeletonToVideo() {
     skeletonEnabled = !skeletonEnabled; // 버튼 클릭시 토글
     if (skeletonEnabled) {
         // 스켈레톤 활성화시 pose 설정
         addSkeletonButton.textContent = 'Remove Skeleton'; // Add the line to change the button text
+
+        // Set the canvas size to the video size
+        canvas.width = videoPlayer.videoWidth;
+        canvas.height = videoPlayer.videoHeight;
+
         pose.setOptions({
             modelComplexity: 1,
             smoothLandmarks: true,
             minDetectionConfidence: 0.5,
             minTrackingConfidence: 0.5,
         });
-
         pose.onResults(onResultsPose);
 
-        // 비디오 플레이어가 로드되면 포즈를 감지합니다.
-        videoPlayer.addEventListener('canplay', canPlayEventHandler);
+        const updatePose = async () => {
+            try {
+                // pass the video element
+                await pose.send({ image: videoPlayer });
+            } catch (error) {
+                console.error('Error in pose.send:', error);
+            }
+            // call the next frame
+            animationFrameId = requestAnimationFrame(updatePose);
+        };
+        // start the loop
+        updatePose();
     } else {
         addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
-        videoPlayer.removeEventListener('canplay', canPlayEventHandler);
-
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cancelAnimationFrame(animationFrameId);
     }
 }
 
@@ -134,6 +126,7 @@ const canvas2 = document.getElementById('canvas2');
 const canvasCtx6 = canvas2.getContext('2d');
 const video2 = document.getElementById('fileDisplay2');
 let skeletonEnabled2 = false;
+let animationFrameId2;
 
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose2 = new Pose({
@@ -142,51 +135,42 @@ const pose2 = new Pose({
     },
 });
 
-function canPlayEventHandler2() {
-    console.log('onloadstarted');
-    window.skeletonApplied2 = true;
-
-    // Set the canvas size to the video size
-    canvas2.width = video2.videoWidth;
-    canvas2.height = video2.videoHeight;
-
-    const updatePose2 = async () => {
-        try {
-            // pass the video element
-            await pose2.send({ image: video2 });
-        } catch (error) {
-            console.error('Error in pose.send:', error);
-        }
-        // call the next frame
-        requestAnimationFrame(updatePose2);
-    };
-    // start the loop
-    updatePose2();
-    video2.removeEventListener('canplay', canPlayEventHandler2);
-}
 
 async function addSkeletonToVideo2() {
     skeletonEnabled2 = !skeletonEnabled2; // 버튼 클릭시 토글
     if (skeletonEnabled2) {
         // 스켈레톤 활성화시 pose 설정
         addSkeletonButton2.textContent = 'Remove Skeleton'; // Add the line to change the button text
+
+        // Set the canvas size to the video size
+        canvas2.width = videoPlayer2.videoWidth;
+        canvas2.height = videoPlayer2.videoHeight;
+
         pose2.setOptions({
             modelComplexity: 1,
             smoothLandmarks: true,
             minDetectionConfidence: 0.5,
             minTrackingConfidence: 0.5,
         });
-
         pose2.onResults(onResultsPose2);
 
-        // 비디오 플레이어가 로드되면 포즈를 감지합니다.
-        video2.addEventListener('canplay', canPlayEventHandler2);
+        const updatePose2 = async () => {
+            try {
+                // pass the video element
+                await pose2.send({ image: videoPlayer2 });
+            } catch (error) {
+                console.error('Error in pose2.send:', error);
+            }
+            // call the next frame
+            animationFrameId2 = requestAnimationFrame(updatePose2);
+        };
+        // start the loop
+        updatePose2();
     } else {
         addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back
-        video2.removeEventListener('canplay', canPlayEventHandler2);
-
-        const ctx = canvas2.getContext('2d');
-        ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+        const ctx2 = canvas2.getContext('2d');
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+        cancelAnimationFrame(animationFrameId2);
     }
 }
 

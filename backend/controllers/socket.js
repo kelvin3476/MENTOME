@@ -181,5 +181,11 @@ exports.socketManagement = io => {
         socket.on("clear_canvas", (roomName) => {
             socket.to(roomName).emit("clear_canvas");
         });
+
+        // 캔버스 토글 상태 동기화
+        socket.on("toggle_drawCanvas", (data) => {
+            // Broadcast the drawCanvas state to other clients in the same room
+            socket.to(data.roomName).emit("toggle_drawCanvas", { state: data.state });
+        });
     });
 };
