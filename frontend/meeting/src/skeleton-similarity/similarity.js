@@ -17,7 +17,7 @@ function extractSkeletonCoordinates(results,bodyPart) {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
             const confidence = results.poseLandmarks[index].visibility;
-            skeletonCoordinates.push({x, y,confidence});
+            skeletonCoordinates.push({ x, y, confidence });
         });
     }
 
@@ -42,7 +42,7 @@ function extractSkeletonCoordinates2(results,bodyPart) {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
             const confidence = results.poseLandmarks[index].visibility;
-            skeletonCoordinates2.push({x, y,confidence});
+            skeletonCoordinates2.push({ x, y, confidence });
         });
     }
 
@@ -82,21 +82,17 @@ function convertPoseToVector(pose) {
         vectorPoseConfidences.push(point.confidence);
     });
 
-    return [
-        vectorPoseXY,
-        vectorPoseConfidences,
-        [translateX / scaler, translateY / scaler, scaler]
-    ];
+    return [vectorPoseXY, vectorPoseConfidences, [translateX / scaler, translateY / scaler, scaler]];
 }
 
 // 함수: scaleAndTranslate
 // 2차원 포즈 벡터를 스케일링하고 변환하는 작업 -> 정규화하는 데 사용가능 
 function scaleAndTranslate(vectorPoseXY, transformValues) {
-    var transX = transformValues[0], transY = transformValues[1], scaler = transformValues[2];
+    var transX = transformValues[0],
+        transY = transformValues[1],
+        scaler = transformValues[2];
     return vectorPoseXY.map(function (position, index) {
-        return (index % 2 === 0 ?
-            position / scaler - transX :
-            position / scaler - transY);
+        return index % 2 === 0 ? position / scaler - transX : position / scaler - transY;
     });
 }
 
@@ -152,23 +148,26 @@ function calculateSimilarity() {
     // console.log("Video 2 Skeleton Coordinates:", video2SkeletonCoordinates);
 
     if (video1SkeletonCoordinates.length > 0 && video2SkeletonCoordinates.length > 0) {
-        
 
         const maxUpperBodySimilarity = 3;
         const maxFullBodySimilarity = 2.5;
         const maxLowerBodySimilarity = 2.5;
 
+
         const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
         const uppersimilarity = poseSimilarity(video1upperBodySkeletonCoordinates, video2upperBodySkeletonCoordinates);
         const lowersimilarity = poseSimilarity(video1lowerBodySkeletonCoordinates, video2lowerBodySkeletonCoordinates);
+
 
         // console.log( "상체" + uppersimilarity);
         // console.log("하체" + lowersimilarity);
         // console.log("전체" + similarity);
 
+
         const fullBodySimilarityPercentage = normalizeAndCalculatePercentage(similarity,maxFullBodySimilarity);
         const upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity,maxUpperBodySimilarity);
         const lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity,maxLowerBodySimilarity);
+
 
         console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage);
         console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage);
@@ -178,6 +177,7 @@ function calculateSimilarity() {
         console.log("스켈레톤 이미지가 없습니다");
     }
 }
+
 
 const measureSimilarityButton = document.getElementById('measureSimilarity');
 measureSimilarityButton.addEventListener('click', calculateSimilarity);

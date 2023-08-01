@@ -8,12 +8,12 @@ function Mentor() {
         <>
             <Header />
             <Container>
-                <Row>
-                    <div className={styles.margin}>
-                        <h1 className={styles.font__mentee}>멘토게시판</h1>
+                <div className={styles.margin}>
+                    <h1 className={styles.font__mentee}>멘토게시판</h1>
+                    <Row>
                         <MentorCard />
-                    </div>
-                </Row>
+                    </Row>
+                </div>
             </Container>
         </>
     );
