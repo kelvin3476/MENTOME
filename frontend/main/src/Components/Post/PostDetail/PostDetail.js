@@ -35,10 +35,14 @@ const PostDetail = () => {
 
     useEffect(() => {
         // 게시물 데이터를 가져올 API 엔드포인트의 URL
-        const postApiUrl = `/api/content/getcontentdetail/${pathname.split('/')[2]}`; // 실제 API URL로 교체해주세요
+        const postApiUrl = `/api/content/getcontentdetail/${
+            pathname.split('/')[2]
+        }`; // 실제 API URL로 교체해주세요
 
         // 댓글 데이터를 가져올 API 엔드포인트의 URL
-        const commentsApiUrl = `/api/content/getcontentcomments/${pathname.split('/')[2]}`; // 실제 API URL로 교체해주세요
+        const commentsApiUrl = `/api/content/getcontentcomments/${
+            pathname.split('/')[2]
+        }`; // 실제 API URL로 교체해주세요
 
         // Promise.all을 사용하여 게시물 데이터와 댓글 데이터를 한번에 가져옵니다
         Promise.all([axios.get(postApiUrl), axios.get(commentsApiUrl)])
@@ -54,21 +58,24 @@ const PostDetail = () => {
 
     const handleCommentSubmit = (event) => {
         event.preventDefault();
-        const newCommentContent = event.target.elements.commentContent.value;
+        const newComment = {
+            commentContent: newCommentContent,
+            // 댓글 작성자 등 추가정보를 적절히 설정할 것.
+        };
 
-        // 서버에 댓글을 생성하는 API 엔드포인트의 URL (실제 서버에 맞게 변경해야 함)
-        const createCommentApiUrl = 'api/content/uploadcomment';
+        const postId = pathname.split('/')[2];
+        const uploadCommentApiUrl = `/api/content/uploadcomment/${postId}`;
 
         axios
-            .post(createCommentApiUrl, { content: newCommentContent })
+            .post(uploadCommentApiUrl, newComment)
             .then((response) => {
                 // 댓글 생성 성공 시 서버에서 저장된 댓글 데이터를 받아와서 배열에 추가
-                const newComment = response.data;
-                setComments([...comments, newComment]);
+                const uploadedComment = response.data;
+                setComments([...comments, uploadedComment]);
                 setNewCommentContent('');
             })
             .catch((error) => {
-                console.error('Error creating comment:', error);
+                console.error('댓글 업로드 오류:', error);
             });
 
         event.target.reset(); // 폼 초기화
@@ -101,7 +108,9 @@ const PostDetail = () => {
                         {/* Name / separate / date */}
                         <div className={styles.profile_bar}>
                             <div className={styles.profile_bar__info}>
-                                <span className={styles.username}>{post.writer}</span>
+                                <span className={styles.username}>
+                                    {post.writer}
+                                </span>
                                 <span className={styles.separator}>·</span>
                                 <span>{formattedDate}</span>
                                 {/* <p>{post.sport}</p>
@@ -111,7 +120,11 @@ const PostDetail = () => {
                         <div className={styles.line}></div>
                         {/* 내용(Content) */}
                         <div className={styles.body__head}>
-                            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: post.content,
+                                }}
+                            />
                         </div>
                         {/* 여백 div */}
                         <div></div>
@@ -121,19 +134,21 @@ const PostDetail = () => {
                             <div>
                                 <div>
                                     <textarea
-                                        placeholder="댓글을 작성하세요"
-                                        name="commentContent"
+                                        placeholder='댓글을 작성하세요'
+                                        name='commentContent'
                                         value={newCommentContent}
                                         className={styles.comment__textarea}
-                                        onChange={(e) => setNewCommentContent(e.target.value)}
+                                        onChange={(e) =>
+                                            setNewCommentContent(e.target.value)
+                                        }
                                         style={{ height: 69.3333 }}
                                     ></textarea>
                                     {/* button-wrapper */}
                                     <div className={styles.buttons_wrapper}>
                                         <button
-                                            color="teal"
+                                            color='teal'
                                             className={styles.comment__button}
-                                            type="submit"
+                                            type='submit'
                                             onClick={handleCommentSubmit}
                                         >
                                             댓글 작성
@@ -144,27 +159,66 @@ const PostDetail = () => {
                                         {/* 댓글 */}
                                         {comments.map((comments) => (
                                             <>
-                                                <div className={styles.comment_top}>
-                                                    <div className={styles.comment_top}>
-                                                        <div className={styles.profile}>
+                                                <div
+                                                    className={
+                                                        styles.comment_top
+                                                    }
+                                                >
+                                                    <div
+                                                        className={
+                                                            styles.comment_top
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                styles.profile
+                                                            }
+                                                        >
                                                             <img
-                                                                src="https://velog.velcdn.com/images/1yoouoo/profile/27630138-254c-45cd-99a6-b9adeadbffc9/image.avif"
-                                                                alt="comment-user-thumbnail"
+                                                                src='https://velog.velcdn.com/images/1yoouoo/profile/27630138-254c-45cd-99a6-b9adeadbffc9/image.avif'
+                                                                alt='comment-user-thumbnail'
                                                             ></img>
-                                                            <div className={styles.comment_Info}>
-                                                                <div className={styles.comment__username}>
+                                                            <div
+                                                                className={
+                                                                    styles.comment_Info
+                                                                }
+                                                            >
+                                                                <div
+                                                                    className={
+                                                                        styles.comment__username
+                                                                    }
+                                                                >
                                                                     {/* // eslint-disable-next-line */}
-                                                                    <p>{comments.commentWriter}</p>
+                                                                    <p>
+                                                                        {
+                                                                            comments.commentWriter
+                                                                        }
+                                                                    </p>
                                                                 </div>
-                                                                <div className={styles.date}>
-                                                                    <textarea>{comments.commentDate}</textarea>
+                                                                <div
+                                                                    className={
+                                                                        styles.date
+                                                                    }
+                                                                >
+                                                                    <textarea>
+                                                                        {
+                                                                            comments.commentDate
+                                                                        }
+                                                                    </textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className={styles.comment__Content_top} key={comments._id}>
+                                                    <div
+                                                        className={
+                                                            styles.comment__Content_top
+                                                        }
+                                                        key={comments._id}
+                                                    >
                                                         <div
-                                                            className={styles.comment__Content_top}
+                                                            className={
+                                                                styles.comment__Content_top
+                                                            }
                                                             dangerouslySetInnerHTML={{
                                                                 __html: comments.commentContent,
                                                             }}
@@ -172,22 +226,37 @@ const PostDetail = () => {
                                                     </div>
                                                     {/* True or False - True 답글 달기 - 
                                             False 숨기기 댓글 작성하기 텍스트 박스 */}
-                                                    <div className={styles.comment__comment_top}>
-                                                        <div className={styles.comment__comment_answer}>
+                                                    <div
+                                                        className={
+                                                            styles.comment__comment_top
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={
+                                                                styles.comment__comment_answer
+                                                            }
+                                                        >
                                                             {/* svg */}
-                                                            <svg width="12" height="12" fill="none" viewBox="0 0 12 12">
+                                                            <svg
+                                                                width='12'
+                                                                height='12'
+                                                                fill='none'
+                                                                viewBox='0 0 12 12'
+                                                            >
                                                                 <path
-                                                                    fill="currentColor"
-                                                                    d="M5.5 2.5h1v3h3v1h-3v3h-1v-3h-3v-1h3v-3z"
+                                                                    fill='currentColor'
+                                                                    d='M5.5 2.5h1v3h3v1h-3v3h-1v-3h-3v-1h3v-3z'
                                                                 ></path>
                                                                 <path
-                                                                    fill="currentColor"
-                                                                    fill-rule="evenodd"
-                                                                    d="M1 0a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 1H1v10h10V1z"
-                                                                    clip-rule="evenodd"
+                                                                    fill='currentColor'
+                                                                    fill-rule='evenodd'
+                                                                    d='M1 0a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm10 1H1v10h10V1z'
+                                                                    clip-rule='evenodd'
                                                                 ></path>
                                                             </svg>
-                                                            <span>답글 달기</span>
+                                                            <span>
+                                                                답글 달기
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     {/* 댓글 작성자 정보나 시간 등을 추가하여 표시할 수 있습니다. */}
