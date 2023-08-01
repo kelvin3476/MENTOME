@@ -19,15 +19,15 @@ const AlarmModal = () => {
 
     return (
         <div className={styles.header_member__block}>
-            <Button
-                variant="light"
+            <button
+                variant='light'
                 onClick={isModalOpen ? handleCloseModal : handleOpenModal}
             >
                 <Bell />
-            </Button>
+            </button>
             {isModalOpen && (
                 <div
-                    data-layer="newsfeed"
+                    data-layer='newsfeed'
                     className={styles.layer_header_member}
                 >
                     <div className={styles.newfeed_container}>
@@ -39,7 +39,7 @@ const AlarmModal = () => {
                                 알림이 오지 않을 시 새로고침을 해 보세요!
                             </p>
                             <button
-                                type="button"
+                                type='button'
                                 className={styles.newsfeed_close_button}
                                 onClick={handleCloseModal}
                             >
