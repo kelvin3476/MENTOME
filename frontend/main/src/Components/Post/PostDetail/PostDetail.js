@@ -15,34 +15,34 @@ const PostDetail = () => {
     });
     // const [comments, setComments] = useState([]); // 댓글을 저장할 배열 상태
     const [comments, setComments] = useState([
-        {
-            _id: '64c407a19d751848e2bc8fd2',
-            commentContent: '저요저요!',
-            commentWriter: '런린이',
-            commentDate: '2023.07.26',
-            commentReplies: [
-                // 대댓글
-                {
-                    replyContent: '대댓글 Test!', // 대댓글 내용
-                    replyWriter: '런린이', // 대댓글 작성자
-                    replyDate: '2023.07.26', // 대댓글 작성 시간
-                },
-            ],
-        },
-        {
-            _id: '64c407a19d751848e2bc8fd3',
-            commentContent: '저요저요!',
-            commentWriter: '런린이',
-            commentDate: '2023.07.26',
-            commentReplies: [
-                // 대댓글
-                {
-                    replyContent: '대댓글 Test!', // 대댓글 내용
-                    replyWriter: '런린이', // 대댓글 작성자
-                    replyDate: '2023.07.26', // 대댓글 작성 시간
-                },
-            ],
-        },
+        // {
+        //     _id: '64c407a19d751848e2bc8fd2',
+        //     commentContent: '저요저요!',
+        //     commentWriter: '런린이',
+        //     commentDate: '2023.07.26',
+        //     commentReplies: [
+        //         // 대댓글
+        //         {
+        //             replyContent: '대댓글 Test!', // 대댓글 내용
+        //             replyWriter: '런린이', // 대댓글 작성자
+        //             replyDate: '2023.07.26', // 대댓글 작성 시간
+        //         },
+        //     ],
+        // },
+        // {
+        //     _id: '64c407a19d751848e2bc8fd3',
+        //     commentContent: '저요저요!',
+        //     commentWriter: '런린이',
+        //     commentDate: '2023.07.26',
+        //     commentReplies: [
+        //         // 대댓글
+        //         {
+        //             replyContent: '대댓글 Test!', // 대댓글 내용
+        //             replyWriter: '런린이', // 대댓글 작성자
+        //             replyDate: '2023.07.26', // 대댓글 작성 시간
+        //         },
+        //     ],
+        // },
     ]);
     const [newCommentContent, setNewCommentContent] = useState('');
 
@@ -52,14 +52,10 @@ const PostDetail = () => {
 
     useEffect(() => {
         // 게시물 데이터를 가져올 API 엔드포인트의 URL
-        const postApiUrl = `/api/content/getcontentdetail/${
-            pathname.split('/')[2]
-        }`; // 실제 API URL로 교체해주세요
+        const postApiUrl = `/api/content/getcontentdetail/${pathname.split('/')[2]}`; // 실제 API URL로 교체해주세요
 
         // 댓글 데이터를 가져올 API 엔드포인트의 URL
-        const commentsApiUrl = `/api/content/getcontentcomments/${
-            pathname.split('/')[2]
-        }`; // 실제 API URL로 교체해주세요
+        const commentsApiUrl = `/api/content/getcontentcomments/${pathname.split('/')[2]}`; // 실제 API URL로 교체해주세요
 
         // Promise.all을 사용하여 게시물 데이터와 댓글 데이터를 한번에 가져옵니다
         Promise.all([axios.get(postApiUrl), axios.get(commentsApiUrl)])
@@ -109,16 +105,13 @@ const PostDetail = () => {
         setNewCommentContent('');
     };
 
-    const PostingFormattedDate = new Date(post.date).toLocaleDateString(
-        'ko-KR',
-        {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-        },
-    );
+    const PostingFormattedDate = new Date(post.date).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
 
     const handleTextareaKeyDown = (event) => {
         // 엔터키(키 코드 13)를 눌렀을 때 handleCommentSubmit 함수를 호출합니다.
@@ -148,9 +141,7 @@ const PostDetail = () => {
                         {/* Name / separate / date */}
                         <div className={styles.profile_bar}>
                             <div className={styles.profile_bar__info}>
-                                <span className={styles.username}>
-                                    {post.writer}
-                                </span>
+                                <span className={styles.username}>{post.writer}</span>
                                 <span className={styles.separator}>·</span>
                                 <span>{PostingFormattedDate}</span>
                                 {/* <p>{post.sport}</p>
@@ -179,11 +170,7 @@ const PostDetail = () => {
                                             name='commentContent'
                                             value={newCommentContent}
                                             className={styles.comment__textarea}
-                                            onChange={(e) =>
-                                                setNewCommentContent(
-                                                    e.target.value,
-                                                )
-                                            }
+                                            onChange={(e) => setNewCommentContent(e.target.value)}
                                             style={{ height: 69.3333 }}
                                             onKeyDown={handleTextareaKeyDown} // 엔터키 이벤트 핸들러 추가
                                         ></textarea>
@@ -191,9 +178,7 @@ const PostDetail = () => {
                                         <div className={styles.buttons_wrapper}>
                                             <button
                                                 color='teal'
-                                                className={
-                                                    styles.comment__button
-                                                }
+                                                className={styles.comment__button}
                                                 type='submit'
                                                 onClick={handleCommentSubmit}
                                             >
@@ -206,75 +191,37 @@ const PostDetail = () => {
                                         {/* 댓글 */}
                                         {comments.map((comments) => (
                                             <>
-                                                <div
-                                                    className={
-                                                        styles.comment_top
-                                                    }
-                                                >
-                                                    <div
-                                                        className={
-                                                            styles.comment_top
-                                                        }
-                                                    >
-                                                        <div
-                                                            className={
-                                                                styles.profile
-                                                            }
-                                                        >
+                                                <div className={styles.comment_top}>
+                                                    <div className={styles.comment_top}>
+                                                        <div className={styles.profile}>
                                                             <img
                                                                 src='https://velog.velcdn.com/images/1yoouoo/profile/27630138-254c-45cd-99a6-b9adeadbffc9/image.avif'
                                                                 alt='comment-user-thumbnail'
                                                             ></img>
-                                                            <div
-                                                                className={
-                                                                    styles.comment_Info
-                                                                }
-                                                            >
-                                                                <div
-                                                                    className={
-                                                                        styles.comment__username
-                                                                    }
-                                                                >
+                                                            <div className={styles.comment_Info}>
+                                                                <div className={styles.comment__username}>
                                                                     {/* // eslint-disable-next-line */}
-                                                                    <p>
-                                                                        {
-                                                                            comments.commentWriter
-                                                                        }
-                                                                    </p>
+                                                                    <p>{comments.commentWriter}</p>
                                                                 </div>
-                                                                <div
-                                                                    className={
-                                                                        styles.date
-                                                                    }
-                                                                >
+                                                                <div className={styles.date}>
                                                                     <span>
                                                                         {new Date(
                                                                             comments.commentDate,
-                                                                        ).toLocaleDateString(
-                                                                            'ko-KR',
-                                                                            {
-                                                                                year: 'numeric',
-                                                                                month: '2-digit',
-                                                                                day: '2-digit',
-                                                                                hour: '2-digit',
-                                                                                minute: '2-digit',
-                                                                            },
-                                                                        )}
+                                                                        ).toLocaleDateString('ko-KR', {
+                                                                            year: 'numeric',
+                                                                            month: '2-digit',
+                                                                            day: '2-digit',
+                                                                            hour: '2-digit',
+                                                                            minute: '2-digit',
+                                                                        })}
                                                                     </span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        className={
-                                                            styles.comment__Content_top
-                                                        }
-                                                        key={comments._id}
-                                                    >
+                                                    <div className={styles.comment__Content_top} key={comments._id}>
                                                         <div
-                                                            className={
-                                                                styles.comment__Content_top
-                                                            }
+                                                            className={styles.comment__Content_top}
                                                             dangerouslySetInnerHTML={{
                                                                 __html: comments.commentContent,
                                                             }}
@@ -288,24 +235,16 @@ const PostDetail = () => {
                     replyContent: '대댓글 Test!', // 대댓글 내용
                     replyWriter: '런린이', // 대댓글 작성자
                     replyDate: '2023.07.26', // 대댓글 작성 시간
-                },
+                }
             ], */}
-                                                    {comments.commentReplies.map(
-                                                        (reply) => (
-                                                            <ReplyButton
-                                                                key={reply._id}
-                                                                username={
-                                                                    reply.replyWriter
-                                                                }
-                                                                date={
-                                                                    reply.replyDate
-                                                                }
-                                                                replyContent={
-                                                                    reply.replyContent
-                                                                }
-                                                            />
-                                                        ),
-                                                    )}
+                                                    {comments.commentReplies.map((reply) => (
+                                                        <ReplyButton
+                                                            id={comments._id}
+                                                            username={reply.replyWriter}
+                                                            date={reply.replyDate}
+                                                            replyContent={reply.replyContent}
+                                                        />
+                                                    ))}
                                                 </div>
                                             </>
                                         ))}
