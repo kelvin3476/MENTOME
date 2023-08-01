@@ -290,9 +290,22 @@ const PostDetail = () => {
                     replyDate: '2023.07.26', // 대댓글 작성 시간
                 },
             ], */}
-                                                    <ReplyButton
-                                                        id={comments._id}
-                                                    />
+                                                    {comments.commentReplies.map(
+                                                        (reply) => (
+                                                            <ReplyButton
+                                                                key={reply._id}
+                                                                username={
+                                                                    reply.replyWriter
+                                                                }
+                                                                date={
+                                                                    reply.replyDate
+                                                                }
+                                                                replyContent={
+                                                                    reply.replyContent
+                                                                }
+                                                            />
+                                                        ),
+                                                    )}
                                                 </div>
                                             </>
                                         ))}

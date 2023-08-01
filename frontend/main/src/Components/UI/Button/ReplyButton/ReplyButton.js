@@ -4,7 +4,7 @@ import MinusReplyButton from '../MinusReply/MinusReplyButton';
 import PlusReplyButton from '../PlusReply/PlusReplyButton';
 import styles from './ReplyButton.module.css';
 
-const ReplyButton = ({ id }) => {
+const ReplyButton = ({ id, username, date, replyContent }) => {
     const [showReplyBox, setShowReplyBox] = useState(false); // State variable for showing/hiding reply box
     const [showReplyReplyBox, setShowReplyReplyBox] = useState(false); // State variable for showing/hiding reply box
 
@@ -57,14 +57,14 @@ const ReplyButton = ({ id }) => {
                                                 }
                                             >
                                                 {/* eslint-disable-next-line */}
-                                                <a>UserName</a>
+                                                <a>{username}</a>
                                             </div>
                                             <div
                                                 className={
                                                     styles.Reply__comment_date
                                                 }
                                             >
-                                                Date
+                                                {date}
                                             </div>
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@ const ReplyButton = ({ id }) => {
                                             styles.Reply__comment_detail_body
                                         }
                                     >
-                                        <p>Comment Detail</p>
+                                        <p>{replyContent}</p>
                                     </div>
                                 </div>
                                 <div
