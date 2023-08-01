@@ -128,8 +128,10 @@ exports.getContentDetail = (req, res) => {
 exports.getContentComments = (req, res) => {
     Post.findOne({ _id: req.params._id })
         .then(post => {
-            res.json(post.comments);
-            console.log(post.comments)
-            console.log('Get Content Comments Success!');
+            if (post.comments) {
+                res.json(post.comments);
+                console.log(post.comments)
+                console.log('Get Content Comments Success!');
+            }
         });
 };
