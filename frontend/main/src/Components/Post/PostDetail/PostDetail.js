@@ -98,16 +98,10 @@ const PostDetail = () => {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
         },
     );
-
-    const CommentFormattedDate = new Date(
-        comments.commentDate,
-    ).toLocaleDateString('ko-KR', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-    });
 
     const handleTextareaKeyDown = (event) => {
         // 엔터키(키 코드 13)를 눌렀을 때 handleCommentSubmit 함수를 호출합니다.
@@ -237,9 +231,18 @@ const PostDetail = () => {
                                                                     }
                                                                 >
                                                                     <span>
-                                                                        {
-                                                                            CommentFormattedDate
-                                                                        }
+                                                                        {new Date(
+                                                                            comments.commentDate,
+                                                                        ).toLocaleDateString(
+                                                                            'ko-KR',
+                                                                            {
+                                                                                year: 'numeric',
+                                                                                month: '2-digit',
+                                                                                day: '2-digit',
+                                                                                hour: '2-digit',
+                                                                                minute: '2-digit',
+                                                                            },
+                                                                        )}
                                                                     </span>
                                                                 </div>
                                                             </div>
