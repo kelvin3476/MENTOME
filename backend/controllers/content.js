@@ -57,6 +57,36 @@ exports.uploadComment = (req, res) => {
     }
 };
 
+// Upload Comment Reply
+exports.uploadCommentReply = (req, res) => {
+    const getCookies = req.get('Cookie');
+    const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    if (cookies.logInUser) {
+        let newCommentReplies = {};
+        newCommentReplies.replyContent = req.body.replyContent;
+        newCommentReplies.replyWriter = cookies.logInUser;
+        newCommentReplies.replyDate = Date();
+        Post.findOne({ _id: req.params._id })
+            .then(post => {
+                post.comments.newCommentReplies.push(newCommentReplies);
+                Post.findOneAndUpdate({ _id: req.params._id }, post)
+                    .then(post => {
+                        res.json({ 
+                            uploadCommentSuccess: true,
+                            message: "대댓글 업로드 성공"
+                        });
+                        console.log('Upload Comment Reply Success!');
+                    });
+            });
+    } else {
+        res.json({ 
+            uploadCommentSuccess: false,
+            message: "로그인 후 시도하세요."
+        });
+        console.log('Upload Comment Fail! (NOT LOG IN)');
+    }
+};
+
 // Get all Contents and Return
 exports.getAllContents = (req, res) => {
     Post.find()
