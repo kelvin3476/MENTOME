@@ -36,6 +36,7 @@ exports.uploadComment = (req, res) => {
         newComment.commentContent = req.body.commentContent;
         newComment.commentWriter = cookies.logInUser;
         newComment.commentDate = Date();
+        newComment.commentReplies = [];
         Post.findOne({ _id: req.params._id })
             .then(post => {
                 post.comments.push(newComment);
