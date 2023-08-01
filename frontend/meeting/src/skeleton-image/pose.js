@@ -10,6 +10,12 @@ let recentV1Time = 0;
 let recentV2Time = 0;
 let video1SkeletonCoordinates = [];
 let video2SkeletonCoordinates = [];
+// 상하체 추가
+let video1upperBodySkeletonCoordinates=[];
+let video1lowerBodySkeletonCoordinates=[];
+let video2upperBodySkeletonCoordinates = [];
+let video2lowerBodySkeletonCoordinates =  [];
+
 
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({
@@ -111,10 +117,15 @@ function onResultsPose(results) {
         );
         canvasCtx5.restore();
         // 유사도 좌표 받아오기 pose1
-        if (skeletonEnabled && video.currentTime !== recentV1Time) {
-            const skeletonCoordinates = extractSkeletonCoordinates(results);
-            video1SkeletonCoordinates = skeletonCoordinates;
-            recentV1Time = video.currentTime
+       // 상체 하체 추가
+       if (skeletonEnabled && video.currentTime !== recentV1Time) {
+        const skeletonCoordinates = extractSkeletonCoordinates(results);
+        const upperBodySkeletonCoordinates = extractSkeletonCoordinates(results,'upperBody');
+        const lowerBodySkeletonCoordinates = extractSkeletonCoordinates(results,'lowerBody');
+        video1SkeletonCoordinates = skeletonCoordinates;
+        video1upperBodySkeletonCoordinates = upperBodySkeletonCoordinates;
+        video1lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates;
+        recentV1Time = video.currentTime
         }
     } else {
         addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
@@ -230,9 +241,14 @@ function onResultsPose2(results) {
         );
         canvasCtx6.restore();
         // 유사도 측정좌표 pose2
+        // 상체 하체 추가 2
         if (skeletonEnabled && video2.currentTime !== recentV2Time) {
             const skeletonCoordinates2 = extractSkeletonCoordinates2(results);
+            const upperBodySkeletonCoordinates2 = extractSkeletonCoordinates2(results, 'upperBody');
+            const lowerBodySkeletonCoordinates2 = extractSkeletonCoordinates2(results, 'lowerBody');
             video2SkeletonCoordinates = skeletonCoordinates2;
+            video2upperBodySkeletonCoordinates = upperBodySkeletonCoordinates2;
+            video2lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates2;
             recentV2Time = video2.currentTime
         }
     } else {
