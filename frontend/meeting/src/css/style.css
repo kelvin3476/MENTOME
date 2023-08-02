@@ -265,12 +265,12 @@ main {
     -webkit-backdrop-filter: blur(48px);
     backdrop-filter: blur(48px);
     background: rgba(0, 0, 0, 0.8);
-    right: 20px;
+    right: 0px;
     top: 50%;
     transform: translateY(-50%);
     color: hsla(0, 0%, 100%, 0.5);
     font-size: 12px;
-    height: 90vh;
+    height: 80vh;
     bottom: 36vh;
     /* height: 52px; */
     position: fixed;
@@ -278,7 +278,7 @@ main {
     transition: transform 0.2s ease-out;
     transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
     flex-shrink: 0;
-    width: 180px;
+    width: 80px;
     z-index: 2000;
     display: flex;
     flex-direction: column;
@@ -294,13 +294,13 @@ main {
 .foot__inner {
     display: flex !important;
     flex-wrap: nowrap;
-    width: 170px;
+    width: 70%;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .custom-select {
-    width: 150px;
+    width: 50px;
 }
 
 .footer-button__wrapper {
@@ -340,12 +340,18 @@ main {
     width: 43px;
     height: 43px;
     background: url(../../img/brush.svg);
+    background-repeat: no-repeat;
 }
 
 #clearCanvasButton {
     width: 43px;
     height: 43px;
     background: url(../../img/eraser.svg);
+    background-repeat: no-repeat;
+}
+
+#line-width {
+    width: 90%;
 }
 
 #video-container {
@@ -413,21 +419,20 @@ main {
 #mute {
     border: #000;
     background: url(../../img/mute.png);
+    background-repeat: no-repeat;
     width: 38px;
     height: 41px;
     flex-shrink: 0;
-    margin-left: 35px;
-    margin-right: 15px;
 }
 
 #camera {
     border: #000;
     background: url(../../img/camera.png);
     background-repeat: no-repeat;
-    width: 26px;
-    height: 28px;
+    width: 38px;
+    height: 41px;
     flex-shrink: 0;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 #exit {
@@ -437,7 +442,7 @@ main {
     width: 50px;
     height: 50px;
     flex-shrink: 0;
-    margin-left: 60px;
+    margin-left: 5px;
 }
 
 /* .parent-container { */
@@ -535,7 +540,7 @@ main {
     line-height: 40px;
 }
 
-/* 드랍다운 버튼 스타일 */
+/* 동영상 업로드 드랍다운 버튼 스타일 */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -543,16 +548,50 @@ main {
 
 .dropbtn {
     background: url(../../img/upload.svg);
+    background-repeat: no-repeat;
     width: 43px;
     height: 43px;
     cursor: pointer;
     margin-bottom: 10px;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+/* 스켈레톤 이미지 드랍다운 버튼 스타일 */
+.dropdown-skeleton {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn-skeleton {
+    background: url(../../img/skeleton.svg);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#measureSimilarity {
+    background: url(../../img/similarity.svg);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* 입팩트 드랍다운 버튼 스타일 */
+.dropdown-impact {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn-impact {
+    background: url(../../img/impact.svg);
+    background-repeat: no-repeat;
+    width: 65px;
+    height: 68px;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .video-container {
@@ -563,14 +602,6 @@ body {
 
     position: relative;
     display: inline-block;
-}
-
-.dropbtn {
-    background: url(../../img/upload.svg);
-    width: 43px;
-    height: 43px;
-    cursor: pointer;
-    margin-bottom: 10px;
 }
 
 /* 다시 */

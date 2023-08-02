@@ -185,9 +185,16 @@ document.getElementById('impactTimeReset2').addEventListener('click', function()
     calImpact2();
 });
 
-document.getElementById('testbutton').addEventListener('click', function() {
-    console.log(timeline1);
-    console.log(timeline2);
-    console.log(impactTimes1);
-    console.log(impactTimes2);
-});
+// document.getElementById('testbutton').addEventListener('click', function() {
+//     console.log(timeline1);
+//     console.log(timeline2);
+//     console.log(impactTimes1);
+//     console.log(impactTimes2);
+// });
+
+// 임팩트 드랍다운 버튼
+
+function toggleDropdownImpact() {
+    const dropdownContent = document.getElementById('dropdownContent-impact');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+}
