@@ -270,7 +270,7 @@ main {
     transform: translateY(-50%);
     color: hsla(0, 0%, 100%, 0.5);
     font-size: 12px;
-    height: 65vh;
+    height: 90vh;
     bottom: 36vh;
     /* height: 52px; */
     position: fixed;
