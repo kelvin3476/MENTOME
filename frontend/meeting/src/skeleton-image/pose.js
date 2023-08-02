@@ -17,6 +17,10 @@ let video1lowerBodySkeletonCoordinates=[];
 let video2upperBodySkeletonCoordinates = [];
 let video2lowerBodySkeletonCoordinates =  [];
 
+
+let similpos1 = [];
+let similpos2 = [];
+
 let flag1 = 0;
 let flag2 = 0;
 
@@ -125,6 +129,8 @@ function onResultsPose(results) {
         video1upperBodySkeletonCoordinates = upperBodySkeletonCoordinates;
         video1lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates;
         recentV1Time = video.currentTime
+
+        similpos1 = getPosition1(results);
         // console.log(video1SkeletonCoordinates);
         // console.log(video1upperBodySkeletonCoordinates);
         // console.log(video1lowerBodySkeletonCoordinates);
@@ -249,7 +255,10 @@ function onResultsPose2(results) {
             video2upperBodySkeletonCoordinates = upperBodySkeletonCoordinates2;
             video2lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates2;
             recentV2Time = video2.currentTime
+
+            similpos2 = getPosition2(results);
             // console.log(video2upperBodySkeletonCoordinates);
+
         }
     } else {
         addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back
