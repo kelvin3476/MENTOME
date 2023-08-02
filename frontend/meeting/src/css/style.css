@@ -270,7 +270,7 @@ main {
     transform: translateY(-50%);
     color: hsla(0, 0%, 100%, 0.5);
     font-size: 12px;
-    height: 94vh;
+    height: 90vh;
     bottom: 36vh;
     /* height: 52px; */
     position: fixed;
@@ -289,10 +289,6 @@ main {
     /* Align items to the right */
     border: 0.1px solid #000;
     background: #e6e6e6;
-}
-
-#footer-info {
-    display: none;
 }
 
 .foot__inner {
