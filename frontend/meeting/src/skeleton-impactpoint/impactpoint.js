@@ -130,3 +130,85 @@ function resetImpactTime() {
 
 // 리셋 버튼에 클릭 이벤트 리스너 추가
 document.getElementById('impactTimeReset').addEventListener('click', resetImpactTime);
+
+// 추가 작업
+let timeline1 = [];
+let timeline2 = [];
+let impactTimes = [];
+
+function videoPauser() {
+    if (video.currentTime > 0.09) {
+        requestAnimationFrame(videoPauser);
+    } else {
+        video.pause();
+    }
+}
+
+function getPosition(results) {
+    const landmark = [];
+    let indices = [0,1,2,3,4,5,6,7,8,9,10];
+
+    if (results && results.poseLandmarks) {
+        indices.forEach((index) => {
+            const x = results.poseLandmarks[index].x;
+            const y = results.poseLandmarks[index].y;
+            landmark.push([x, y]);
+        });
+    }
+
+    return landmark;
+}
+
+function timelinePusher() {
+    if (video.currentTime != 0) {
+        let positionInfo = [];
+        positionInfo.videoTime = video.currentTime;
+        positionInfo.positions = temp1;
+        timeline1.push(positionInfo);
+    }
+
+    if (!video.paused) {
+        requestAnimationFrame(timelinePusher);
+    } else {
+        console.log(timeline1);
+    }
+    
+}
+
+function getImpact() {
+    
+}
+
+function calImpact() {
+    timeline1 = [];
+    timeline2 = [];
+    impactTimes = [];
+
+    video.pause();
+    video.currentTime = 0.1;
+    video.play();
+    videoPauser();
+
+    timelinePusher();
+    getImpact();
+}
+
+document.getElementById('impactTime1').addEventListener('click', function() {
+
+});
+
+document.getElementById('impactTime2').addEventListener('click', function() {
+
+});
+
+document.getElementById('impactTime3').addEventListener('click', function() {
+
+});
+
+document.getElementById('impactTimeReset2').addEventListener('click', function() {
+    calImpact();
+});
+
+document.getElementById('testbutton').addEventListener('click', function() {
+    console.log(timeline1[1].positions[0]);
+});

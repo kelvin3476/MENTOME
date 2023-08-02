@@ -17,7 +17,7 @@ let video1lowerBodySkeletonCoordinates=[];
 let video2upperBodySkeletonCoordinates = [];
 let video2lowerBodySkeletonCoordinates =  [];
 
-
+let temp1 = [];
 
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({
@@ -118,6 +118,8 @@ function onResultsPose(results) {
         video1upperBodySkeletonCoordinates = upperBodySkeletonCoordinates;
         video1lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates;
         recentV1Time = video.currentTime
+
+        temp1 = getPosition(results);
         }
     } else {
         addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
