@@ -1,7 +1,6 @@
 <!--home.html-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,41 +28,59 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <!-- 채팅 완료 -->
-            <div id="room">
-                <h3></h3>
-                <input id="ToggleChat" type="button" value="Chat" onclick="handleToggleChat()">
-                <div id="chat-info">
-                    <p id="info"></p>
-                    <div id="SendMessage-Container">
-                        <form id="msg">
-                            <input id="SendMessage" required type="text" />
-                            <button id="Send-Btn"></button>
+                <!-- 채팅 완료 -->
+                <div id="room">
+                    <h3></h3>
+                    <input id="ToggleChat" type="button" value="Chat" onclick="handleToggleChat()" />
+                    <div id="chat-info">
+                        <p id="info"></p>
+                        <div id="SendMessage-Container">
+                            <form id="msg">
+                                <input id="SendMessage" required type="text" />
+                                <button id="Send-Btn"></button>
+                            </form>
+                        </div>
+                        <form id="name">
+                            <input placeholder="nickname" required type="text" />
+                            <button>Save</button>
                         </form>
                     </div>
-                    <form id="name">
-                        <input placeholder="nickname" required type="text" />
-                        <button>Save</button>
-                    </form>
                 </div>
-            </div>
-            <!-- 비디오 업로드 -->
-            <div id="uploadedFile">
-                <canvas id="canvas" width="30%" height="30%" style="position: absolute; max-width: 60%"></canvas>
-                <video id="fileDisplay" controls loop style="max-width: 60%" crossorigin="anonymous"></video>
-            </div>
-            <div id="uploadedFile2">
-                <canvas id="canvas2" width="30%" height="30%" style="position: absolute; max-width: 60%"></canvas>
-                <video id="fileDisplay2" controls loop style="max-width: 60%" crossorigin="anonymous"></video>
-            </div>
+                <!-- 비디오 업로드 -->
+                <!-- 비디오 업로드 -->
+                <div id="uploadedFile" class="video-container">
+                    <div class="video-wrapper">
+                        <video id="fileDisplay" controls loop crossorigin="anonymous"></video>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="canvas" width="100%" height="100%"></canvas>
+                    </div>
+                    <div class="resizer"></div>
+                </div>
+                <div id="uploadedFile2" class="video-container2">
+                    <div class="video-wrapper2">
+                        <video id="fileDisplay2" controls loop crossorigin="anonymous"></video>
+                    </div>
+                    <div class="canvas-wrapper2">
+                        <canvas id="canvas2" width="100%" height="100%"></canvas>
+                    </div>
+                    <div class="resizer2"></div>
+                </div>
 
-            <!-- 그림판 완료 -->
-            <canvas id="drawcanvas" class="canvas" width="3000" height="3000" controls style="display: none"></canvas>
-            <div id="call">
-                <div id="myStream">
-                    <video id="myFace" autoplay playsinline></video>
-                    <video id="peerFace" autoplay playsinline></video>
+                <!-- 그림판 완료 -->
+                <canvas
+                    id="drawcanvas"
+                    class="canvas"
+                    width="3000"
+                    height="3000"
+                    controls
+                    style="display: none"
+                ></canvas>
+                <div id="call">
+                    <div id="myStream">
+                        <video id="myFace" autoplay playsinline></video>
+                        <video id="peerFace" autoplay playsinline></video>
+                    </div>
                 </div>
             </div>
         </main>
@@ -101,88 +118,81 @@
                                 </div>
                             </div>
                             <!-- 유사도 측정버튼 -->
-                            <div>
-                                <button id="addSkeletonButton">Add Skeleton</button>
-                                <p>
-                                    <button id="addSkeletonButton2">Add Skeleton2</button>
-                                </p>
-                                <p>
+                                <div>
+                                    <button id="addSkeletonButton">Add Skeleton</button>
+                                    <p>
+                                        <button id="addSkeletonButton2">Add Skeleton2</button>
+                                    </p>
+
                                     <button id="measureSimilarity">MeasureSimilarity</button>
-                                <div class="alert hide">
-                                    <span class="msg">
-                                        유사도 전체 분석 비율: <span class="full-body-similarity"></span>%<br>
-                                        상체: <span class="upper-body-similarity"></span>%<br>
-                                        하체: <span class="lower-body-similarity"></span>%
-                                    </span>
-                                    <div class="close-btn">
-                                        <span class="fas fa-times"></span>
+                                    <div class="alert hide">
+                                        <span class="msg">
+                                            유사도 전체 분석 비율: <span class="full-body-similarity"></span>%<br />
+                                            상체: <span class="upper-body-similarity"></span>%<br />
+                                            하체: <span class="lower-body-similarity"></span>%
+                                        </span>
+                                        <div class="close-btn">
+                                            <span class="fas fa-times"></span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div id="controls">
+                                    <select id="cameras" class="custom-select"></select>
+                                    <p>
+                                        <button id="mute"></button>
+                                        <button id="camera" class="camera-btn"></button>
+                                    </p>
+                                </div>
+                                <button id="exit"></button>
+                                <p>
+                                    <button id="impactTime1">Impact Time 1</button>
                                 </p>
                                 <p>
-                                    <button id="impactTime">Impact Time</button>
+                                    <button id="impactTime2">Impact Time 2</button>
                                 </p>
                                 <p>
-                                    <button id="impactTimeReset">Impact Time Reset</button>
+                                    <button id="impactTime3">Impact Time 3</button>
+                                </p>
+                                <p>
+                                    <button id="impactTimeReset2">Impact Time Reset 2</button>
+                                </p>
+                                <p>
+                                    <button id="testbutton">testbutton</button>
                                 </p>
                             </div>
-                            <div id="controls">
-                                <select id="cameras" class="custom-select"></select>
-                                <P>
-                                    <button id="mute"></button>
-                                    <button id="camera" class="camera-btn"></button>
-                                </P>
-                            </div>
-                            <button id="exit"></button>
-                            </p>
-                            <p>
-                                <button id="impactTime">Impact Time</button>
-                            </p>
-                            <p>
-                                <button id="impactTimeReset">Impact Time Reset</button>
-                            </p>
-                            <p>
-                                <button id="impactTime1">Impact Time 1</button>
-                            </p>
-                            <p>
-                                <button id="impactTime2">Impact Time 2</button>
-                            </p>
-                            <p>
-                                <button id="impactTime3">Impact Time 3</button>
-                            </p>
-                            <p>
-                                <button id="impactTimeReset2">Impact Time Reset 2</button>
-                            </p>
-                            <p>
-                                <button id="testbutton">testbutton</button>
-                            </p>
                         </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
+            </div>
         </div>
-    </div>
 
-    <!-- 자바스크립트 -->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js" crossorigin="anonymous"></script>
-    <script src="./src/footer/footer.js"></script>
-    <script src="./src/video/videochat.js"></script>
-    <script src="./src/chat/chat.js"></script>
-    <script src="./src/skeleton-image/pose.js"></script>
-    <script src="./src/skeleton-impactpoint/impactpoint.js"></script>
-    <script src="./src/video/videosync.js"></script>
-    <script src="./src/fileupload/fileupload.js"></script>
-    <script src="./src/whiteboard/whiteboard.js"></script>
-    <script src="./src/skeleton-similarity/similarity.js"></script>
-</body>
-
+        <!-- 자바스크립트 -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js" crossorigin="anonymous"></script>
+        <script src="./src/footer/footer.js"></script>
+        <script src="./src/video/videochat.js"></script>
+        <script src="./src/chat/chat.js"></script>
+        <script src="./src/skeleton-image/pose.js"></script>
+        <script src="./src/skeleton-impactpoint/impactpoint.js"></script>
+        <script src="./src/video/videosync.js"></script>
+        <script src="./src/fileupload/fileupload.js"></script>
+        <script src="./src/whiteboard/whiteboard.js"></script>
+        <script src="./src/skeleton-similarity/similarity.js"></script>
+        <script src="./src/action/action.js"></script>
+        <script src="./src/action/action2.js"></script>
+    </body>
 </html>
 
 <!-- 추가해야하는 것들 -->
