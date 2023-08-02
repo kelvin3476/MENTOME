@@ -270,7 +270,7 @@ main {
     transform: translateY(-50%);
     color: hsla(0, 0%, 100%, 0.5);
     font-size: 12px;
-    height: 75vh;
+    height: 94vh;
     bottom: 36vh;
     /* height: 52px; */
     position: fixed;
@@ -341,9 +341,19 @@ main {
 }
 
 #toggleDrawCanvasButton {
-    width: 50px;
-    height: 50px;
-    background: url(../../img/whiteboard.png);
+    width: 43px;
+    height: 43px;
+    background: url(../../img/brush.svg);
+}
+
+#clearCanvasButton {
+    width: 43px;
+    height: 43px;
+    background: url(../../img/eraser.svg);
+}
+
+#video-container {
+    position: relative;
 }
 
 #uploadedFile {
@@ -529,6 +539,20 @@ main {
     line-height: 40px;
 }
 
+/* 드랍다운 버튼 스타일 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background: url(../../img/upload.svg);
+    width: 43px;
+    height: 43px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+=======
 body {
     margin: 0;
     padding: 0;
