@@ -183,9 +183,6 @@ function calculateSimilarity() {
         console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage, "%");
         console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage, "%");
         console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage, "%");
-
-
-
         
 
     } else {
