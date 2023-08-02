@@ -180,7 +180,7 @@ function calculateSimilarity() {
         console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage, "%");
 
 
-        $.getScript("similarity.js", function() {
+        $.getScript("similarity.js?_=" + Date.now(), function() {
             // 파일이 로드되고 난 후 실행될 코드
             $(document).ready(function () {
                 $('#measureSimilarity').click(function () {
