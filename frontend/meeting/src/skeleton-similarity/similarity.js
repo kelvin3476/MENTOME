@@ -142,6 +142,11 @@ function normalizeAndCalculatePercentage(similarity, minPossibleDist, maxPossibl
     return similarityPercentage.toFixed(1);
 }
 
+let upperBodySimilarityPercentage = '';
+let lowerBodySimilarityPercentage = '';
+let fullBodySimilarityPercentage = '';
+
+
 function calculateSimilarity() {
     // console.log("Video 1 Skeleton Coordinates:", video1SkeletonCoordinates);
     // console.log("Video 2 Skeleton Coordinates:", video2SkeletonCoordinates);
@@ -152,7 +157,7 @@ function calculateSimilarity() {
         // const minFullBodySimilarity = 0.25;
 
         const maxUpperBodySimilarity = 2;
-        const minUpperBodySimilarity = 0.25;
+        const minUpperBodySimilarity = 0.265;
 
         const maxLowerBodySimilarity = 2;
         const minLowerBodySimilarity = 0;
@@ -163,54 +168,57 @@ function calculateSimilarity() {
         const lowersimilarity = poseSimilarity(video1lowerBodySkeletonCoordinates, video2lowerBodySkeletonCoordinates);
 
         // console.log("전체" + similarity);
-        console.log("상체" + uppersimilarity);
-        console.log("하체" + lowersimilarity);
+        // console.log("상체" + uppersimilarity);
+        // console.log("하체" + lowersimilarity);
 
 
 
 
         // const fullBodySimilarityPercentage = normalizeAndCalculatePercentage(similarity,minFullBodySimilarity,maxFullBodySimilarity);
 
-        const upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity, minUpperBodySimilarity, maxUpperBodySimilarity);
-        const lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity, minLowerBodySimilarity, maxLowerBodySimilarity);
-        const fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(1));
+        upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity, minUpperBodySimilarity, maxUpperBodySimilarity);
+        lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity, minLowerBodySimilarity, maxLowerBodySimilarity);
+        fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(1));
 
         console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage, "%");
         console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage, "%");
         console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage, "%");
 
 
-        $.getScript("similarity.js", function() {
-            // 파일이 로드되고 난 후 실행될 코드
-            $(document).ready(function () {
-                $('#measureSimilarity').click(function () {
-                    $('.full-body-similarity').text(fullBodySimilarityPercentage);
-                    $('.upper-body-similarity').text(upperBodySimilarityPercentage);
-                    $('.lower-body-similarity').text(lowerBodySimilarityPercentage);
-        
-                    $('.alert').addClass("show");
-                    $('.alert').removeClass("hide");
-                    $('.alert').addClass("showAlert");
-        
-                    setTimeout(function () {
-                        $('.alert').removeClass("show");
-                        $('.alert').addClass("hide");
-                    }, 3000);
-                });
-        
-                $('.close-btn').click(function () {
-                    $('.alert').removeClass("show");
-                    $('.alert').addClass("hide");
-                });
-            });
-        });
 
-        } else {
+        
 
-            console.log("스켈레톤 이미지가 없습니다");
-        }
+    } else {
+        console.log("스켈레톤 이미지가 없습니다");
+    }
 }
 
 
     const measureSimilarityButton = document.getElementById('measureSimilarity');
-    measureSimilarityButton.addEventListener('click', calculateSimilarity);
+   
+
+    $.getScript("similarity.js?_=" + Date.now(), function() {
+        measureSimilarityButton.addEventListener('click', calculateSimilarity);
+        // 파일이 로드되고 난 후 실행될 코드
+        $(document).ready(function () {
+            $('#measureSimilarity').click(function () {
+                $('.full-body-similarity').text(fullBodySimilarityPercentage);
+                $('.upper-body-similarity').text(upperBodySimilarityPercentage);
+                $('.lower-body-similarity').text(lowerBodySimilarityPercentage);
+    
+                $('.alert').addClass("show");
+                $('.alert').removeClass("hide");
+                $('.alert').addClass("showAlert");
+    
+                setTimeout(function () {
+                    $('.alert').removeClass("show");
+                    $('.alert').addClass("hide");
+                }, 3000);
+            });
+    
+            $('.close-btn').click(function () {
+                $('.alert').removeClass("show");
+                $('.alert').addClass("hide");
+            });
+        });
+    });
