@@ -261,3 +261,10 @@ function onResultsPose2(results) {
         ctx.clearRect(0, 0, canvas2.width, canvas2.height);
     }
 }
+
+// 스켈레톤 이미지 드랍다운 버튼
+
+function toggleDropdownSkeleton() {
+    const dropdownContent = document.getElementById('dropdownContent-skeleton');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+}
