@@ -114,3 +114,10 @@ socket.on('new_file2', (url) => {
         addSkeletonToVideo2();
     }
 });
+
+// 파일 업로드 드랍다운 버튼
+
+function toggleDropdown() {
+    const dropdownContent = document.getElementById('dropdownContent');
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+  }
