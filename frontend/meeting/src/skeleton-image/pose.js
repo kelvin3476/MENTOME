@@ -17,8 +17,12 @@ let video1lowerBodySkeletonCoordinates=[];
 let video2upperBodySkeletonCoordinates = [];
 let video2lowerBodySkeletonCoordinates =  [];
 
+
 let similpos1 = [];
 let similpos2 = [];
+
+let flag1 = 0;
+let flag2 = 0;
 
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({
@@ -110,17 +114,26 @@ function onResultsPose(results) {
         );
         canvasCtx5.restore();
         // 유사도 좌표 받아오기 pose1
+
+        if (video.currentTime === recentV1Time && flag1 < 30) {
+            flag1 += 1;
+        } else if (video.currentTime !== recentV1Time ) {
+            flag1 = 0;
+        }
        // 상체 하체 추가
-       if (skeletonEnabled && video.currentTime !== recentV1Time) {
-        const skeletonCoordinates = extractSkeletonCoordinates(results);
+       if (skeletonEnabled && flag1 < 30) {
+        // const skeletonCoordinates = extractSkeletonCoordinates(results);
         const upperBodySkeletonCoordinates = extractSkeletonCoordinates(results,'upperBody');
         const lowerBodySkeletonCoordinates = extractSkeletonCoordinates(results,'lowerBody');
-        video1SkeletonCoordinates = skeletonCoordinates;
+        // video1SkeletonCoordinates = skeletonCoordinates;
         video1upperBodySkeletonCoordinates = upperBodySkeletonCoordinates;
         video1lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates;
         recentV1Time = video.currentTime
 
         similpos1 = getPosition1(results);
+        // console.log(video1SkeletonCoordinates);
+        // console.log(video1upperBodySkeletonCoordinates);
+        // console.log(video1lowerBodySkeletonCoordinates);
         }
     } else {
         addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
@@ -228,17 +241,24 @@ function onResultsPose2(results) {
         );
         canvasCtx6.restore();
         // 유사도 측정좌표 pose2
+        if (video2.currentTime === recentV2Time && flag2 < 30) {
+            flag2 += 1;
+        } else if (video2.currentTime !== recentV2Time ) {
+            flag2 = 0;
+        }
         // 상체 하체 추가 2
-        if (skeletonEnabled && video2.currentTime !== recentV2Time) {
-            const skeletonCoordinates2 = extractSkeletonCoordinates2(results);
+        if (skeletonEnabled && flag2 < 30) {
+            // const skeletonCoordinates2 = extractSkeletonCoordinates2(results);
             const upperBodySkeletonCoordinates2 = extractSkeletonCoordinates2(results, 'upperBody');
             const lowerBodySkeletonCoordinates2 = extractSkeletonCoordinates2(results, 'lowerBody');
-            video2SkeletonCoordinates = skeletonCoordinates2;
+            // video2SkeletonCoordinates = skeletonCoordinates2;
             video2upperBodySkeletonCoordinates = upperBodySkeletonCoordinates2;
             video2lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates2;
             recentV2Time = video2.currentTime
 
             similpos2 = getPosition2(results);
+            // console.log(video2upperBodySkeletonCoordinates);
+
         }
     } else {
         addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back

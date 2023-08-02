@@ -1,16 +1,16 @@
 // pose1의 기준점 좌표를 받아오는 함수
 // x,y,신뢰도
-function extractSkeletonCoordinates(results,bodyPart) {
+function extractSkeletonCoordinates(results, bodyPart) {
     const skeletonCoordinates = [];
     let indices;
-    if (bodyPart === 'upperBody'){
-        indices = [0,11,12,13,14,15,16,23,24];
-    } else if (bodyPart === 'lowerBody'){
-        indices = [23,24,25,26,27,28,29,30];
-    } else{
-        indices = [0,11,12,13,14,15,16,23,24,25,26,27,28,29,30];
+    if (bodyPart === 'upperBody') {
+        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24];
+    } else if (bodyPart === 'lowerBody') {
+        indices = [23, 24, 25, 26, 27, 28, 29, 30];
+    } else {
+        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28, 29, 30];
     }
-    
+
 
     if (results && results.poseLandmarks) {
         indices.forEach((index) => {
@@ -26,15 +26,15 @@ function extractSkeletonCoordinates(results,bodyPart) {
 
 // pose2의 기준점 좌표를 받아오는 함수
 // x,y,신뢰도
-function extractSkeletonCoordinates2(results,bodyPart) {
+function extractSkeletonCoordinates2(results, bodyPart) {
     const skeletonCoordinates2 = [];
     let indices;
-    if (bodyPart === 'upperBody'){
-        indices = [0,11,12,13,14,15,16,23,24];
-    } else if (bodyPart === 'lowerBody'){
-        indices = [23,24,25,26,27,28,29,30];
-    } else{
-        indices = [0,11,12,13,14,15,16,23,24,25,26,27,28,29,30];
+    if (bodyPart === 'upperBody') {
+        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24];
+    } else if (bodyPart === 'lowerBody') {
+        indices = [23, 24, 25, 26, 27, 28, 29, 30];
+    } else {
+        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28, 29, 30];
     }
 
     if (results && results.poseLandmarks) {
@@ -133,51 +133,84 @@ function poseSimilarity(pose1, pose2) {
 }
 
 
-function normalizeAndCalculatePercentage(similarity, maxPossibleDist) {
-    var minPossibleDist = 0;
-   
-    similarity = Math.max(minPossibleDist, Math.min(similarity,maxPossibleDist));
+function normalizeAndCalculatePercentage(similarity, minPossibleDist, maxPossibleDist) {
+
+    similarity = Math.max(minPossibleDist, Math.min(similarity, maxPossibleDist));
     var similarityNormalized = (similarity - minPossibleDist) / (maxPossibleDist - minPossibleDist); // 유사도 정규화
-    
+
     var similarityPercentage = (1 - similarityNormalized) * 100;
-    return similarityPercentage.toFixed(1) + "%";
+    return similarityPercentage.toFixed(1);
 }
 
 function calculateSimilarity() {
     // console.log("Video 1 Skeleton Coordinates:", video1SkeletonCoordinates);
     // console.log("Video 2 Skeleton Coordinates:", video2SkeletonCoordinates);
 
-    if (video1SkeletonCoordinates.length > 0 && video2SkeletonCoordinates.length > 0) {
+    if (video1upperBodySkeletonCoordinates.length > 0 && video2upperBodySkeletonCoordinates.length > 0) {
 
-        const maxUpperBodySimilarity = 3;
-        const maxFullBodySimilarity = 2.5;
-        const maxLowerBodySimilarity = 2.5;
+        // const maxFullBodySimilarity = 2;
+        // const minFullBodySimilarity = 0.25;
+
+        const maxUpperBodySimilarity = 2;
+        const minUpperBodySimilarity = 0.25;
+
+        const maxLowerBodySimilarity = 2;
+        const minLowerBodySimilarity = 0;
 
 
-        const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
+        // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
         const uppersimilarity = poseSimilarity(video1upperBodySkeletonCoordinates, video2upperBodySkeletonCoordinates);
         const lowersimilarity = poseSimilarity(video1lowerBodySkeletonCoordinates, video2lowerBodySkeletonCoordinates);
 
-
-        // console.log( "상체" + uppersimilarity);
-        // console.log("하체" + lowersimilarity);
         // console.log("전체" + similarity);
+        console.log("상체" + uppersimilarity);
+        console.log("하체" + lowersimilarity);
 
 
-        const fullBodySimilarityPercentage = normalizeAndCalculatePercentage(similarity,maxFullBodySimilarity);
-        const upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity,maxUpperBodySimilarity);
-        const lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity,maxLowerBodySimilarity);
 
 
-        console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage);
-        console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage);
-        console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage);
+        // const fullBodySimilarityPercentage = normalizeAndCalculatePercentage(similarity,minFullBodySimilarity,maxFullBodySimilarity);
 
-    } else {
-        console.log("스켈레톤 이미지가 없습니다");
-    }
+        const upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity, minUpperBodySimilarity, maxUpperBodySimilarity);
+        const lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity, minLowerBodySimilarity, maxLowerBodySimilarity);
+        const fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(1));
+
+        console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage, "%");
+        console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage, "%");
+        console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage, "%");
+
+
+        $.getScript("similarity.js", function() {
+            // 파일이 로드되고 난 후 실행될 코드
+            $(document).ready(function () {
+                $('#measureSimilarity').click(function () {
+                    $('.full-body-similarity').text(fullBodySimilarityPercentage);
+                    $('.upper-body-similarity').text(upperBodySimilarityPercentage);
+                    $('.lower-body-similarity').text(lowerBodySimilarityPercentage);
+        
+                    $('.alert').addClass("show");
+                    $('.alert').removeClass("hide");
+                    $('.alert').addClass("showAlert");
+        
+                    setTimeout(function () {
+                        $('.alert').removeClass("show");
+                        $('.alert').addClass("hide");
+                    }, 3000);
+                });
+        
+                $('.close-btn').click(function () {
+                    $('.alert').removeClass("show");
+                    $('.alert').addClass("hide");
+                });
+            });
+        });
+
+        } else {
+
+            console.log("스켈레톤 이미지가 없습니다");
+        }
 }
 
 
-const measureSimilarityButton = document.getElementById('measureSimilarity');
-measureSimilarityButton.addEventListener('click', calculateSimilarity);
+    const measureSimilarityButton = document.getElementById('measureSimilarity');
+    measureSimilarityButton.addEventListener('click', calculateSimilarity);
