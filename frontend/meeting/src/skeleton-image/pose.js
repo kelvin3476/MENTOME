@@ -139,6 +139,14 @@ function onResultsPose(results) {
     if (skeletonEnabled && !calculated) {
         calculateImpactPoint(results);
     }
+
+    // knee angle
+    if (skeletonEnabled) {
+        displayAngle(results, canvasCtx5);
+    }
+
+
+
 }
 
 const addSkeletonButton2 = document.getElementById('addSkeletonButton2');
@@ -261,5 +269,84 @@ function onResultsPose2(results) {
     if (skeletonEnabled2 && !calculated2) {
         calculateImpactPoint2(results);
     }
-
 }
+
+
+
+let showAngle = false;
+const angleButton = document.getElementById('angle');
+
+function toggleAngle() {
+    showAngle = !showAngle;
+}
+
+function displayAngle(results, ctx) {
+    if (!showAngle) return;
+
+    const leftHip = results.poseLandmarks[23];
+    const leftKnee = results.poseLandmarks[25];
+    const leftAnkle = results.poseLandmarks[27];
+
+    const leftKneeAngle = calculateKneeAngle(leftHip, leftKnee, leftAnkle);
+
+    renderAngle(ctx, leftKneeAngle, leftHip, leftKnee, leftAnkle);
+}
+
+angleButton.addEventListener('click', toggleAngle);
+
+function calculateKneeAngle(hip, knee, ankle) {
+    const vectorA = { x: knee.x - hip.x, y: knee.y - hip.y };
+    const vectorB = { x: knee.x - ankle.x, y: knee.y - ankle.y };
+
+    const dotProduct = vectorA.x * vectorB.x + vectorA.y * vectorB.y;
+    const magnitudeA = Math.sqrt(vectorA.x * vectorA.x + vectorA.y * vectorA.y);
+    const magnitudeB = Math.sqrt(vectorB.x * vectorB.x + vectorB.y * vectorB.y);
+    const cosineTheta = dotProduct / (magnitudeA * magnitudeB);
+    const angleInRadians = Math.acos(cosineTheta);
+    const angleInDegrees = angleInRadians * (180 / Math.PI);
+
+    return angleInDegrees > 180 ? 360 - angleInDegrees : angleInDegrees;
+}
+
+function renderAngle(ctx, angle, hip, knee, ankle) {
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "red";
+
+    const vectorA = { x: knee.x - hip.x, y: knee.y - hip.y };
+    const vectorB = { x: knee.x - ankle.x, y: knee.y - ankle.y };
+    const crossProduct = vectorA.x * vectorB.y - vectorA.y * vectorB.x;
+
+    let startAngle = Math.atan2(hip.y - knee.y, hip.x - knee.x);
+    let endAngle = Math.atan2(ankle.y - knee.y, ankle.x - knee.x);
+
+    const radius = 20;
+
+    const centerX = knee.x * canvas.width;
+    const centerY = knee.y * canvas.height;
+
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    // 외적의 부호에 따라 호를 그리는 방향을 결정
+    const counterclockwise = crossProduct > 0;
+    if (counterclockwise) {
+        const temp = startAngle;
+        startAngle = endAngle;
+        endAngle = temp;
+    }
+
+    ctx.arc(centerX, centerY, radius, startAngle, endAngle, counterclockwise);
+    ctx.stroke();
+
+    const textX = centerX + Math.cos((startAngle + endAngle) / 2) * (radius + 10);
+    const textY = centerY + Math.sin((startAngle + endAngle) / 2) * (radius + 10);
+    ctx.fillText(angle.toFixed(0) + "°", textX, textY);
+}
+
+
+
+
+
+
+
