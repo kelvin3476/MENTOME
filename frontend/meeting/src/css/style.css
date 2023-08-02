@@ -270,7 +270,7 @@ main {
     transform: translateY(-50%);
     color: hsla(0, 0%, 100%, 0.5);
     font-size: 12px;
-    height: 90vh;
+    height: 75vh;
     bottom: 36vh;
     /* height: 52px; */
     position: fixed;
@@ -447,7 +447,7 @@ main {
     min-width: 420px;
     position: absolute;
     right: 0;
-    top: -170px;
+    top: -60px;
     border-radius: 4px;
     border-left: 8px solid #000;
     overflow: hidden;
