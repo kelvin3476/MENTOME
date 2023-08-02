@@ -8,6 +8,8 @@
     <title>멘토미</title>
     <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css" /> -->
     <link rel="stylesheet" href="./src/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <style>
         /* canvas 선 추가 */
@@ -101,9 +103,18 @@
                             <p>
                                 <button id="addSkeletonButton2">Add Skeleton2</button>
                             </p>
-                            // 유사도 측정버튼
                             <p>
                                 <button id="measureSimilarity">MeasureSimilarity</button>
+                                <div class="alert hide">
+                                    <span class="msg">
+                                        유사도 전체 분석 비율: <span class="full-body-similarity"></span>%<br>
+                                        상체: <span class="upper-body-similarity"></span>%<br>
+                                        하체: <span class="lower-body-similarity"></span>%
+                                    </span>
+                                    <div class="close-btn">
+                                        <span class="fas fa-times"></span>
+                                    </div>
+                                </div>
                             </p>
                             <p>
                                 <button id="impactTime">Impact Time</button>
