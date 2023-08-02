@@ -140,11 +140,6 @@ function onResultsPose(results) {
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-
-    // impactpoint 구현
-    if (skeletonEnabled && !calculated) {
-        calculateImpactPoint(results);
-    }
 }
 
 const addSkeletonButton2 = document.getElementById('addSkeletonButton2');
@@ -265,10 +260,4 @@ function onResultsPose2(results) {
         const ctx = canvas2.getContext('2d');
         ctx.clearRect(0, 0, canvas2.width, canvas2.height);
     }
-
-    // impactpoint 구현
-    if (skeletonEnabled2 && !calculated2) {
-        calculateImpactPoint2(results);
-    }
-
 }
