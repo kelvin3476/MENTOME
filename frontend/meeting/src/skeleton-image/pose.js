@@ -33,6 +33,7 @@ const pose = new Pose({
 
 async function addSkeletonToVideo() {
     skeletonEnabled = !skeletonEnabled; // 버튼 클릭시 토글
+    socket.emit('toggleSkeleton', skeletonEnabled); // skeleton 사용자간 동기화
     if (skeletonEnabled) {
         // 스켈레톤 활성화시 pose 설정
         addSkeletonButton.textContent = 'Remove Skeleton'; // Add the line to change the button text
@@ -160,6 +161,7 @@ const pose2 = new Pose({
 
 async function addSkeletonToVideo2() {
     skeletonEnabled2 = !skeletonEnabled2; // 버튼 클릭시 토글
+    socket.emit('toggleSkeleton2', skeletonEnabled2); // skeleton2 사용자간 동기화
     if (skeletonEnabled2) {
         // 스켈레톤 활성화시 pose 설정
         addSkeletonButton2.textContent = 'Remove Skeleton'; // Add the line to change the button text
@@ -263,8 +265,22 @@ function onResultsPose2(results) {
 }
 
 // 스켈레톤 이미지 드랍다운 버튼
-
 function toggleDropdownSkeleton() {
     const dropdownContent = document.getElementById('dropdownContent-skeleton');
     dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
 }
+
+
+// skeleton 사용자간 동기화
+socket.on('toggleSkeleton', (enabled) => {
+    if (enabled !== skeletonEnabled) {
+        addSkeletonToVideo(); // 로컬에서 스켈레톤 상태 토글
+    }
+});
+
+// skeleton2 사용자간 동기화
+socket.on('toggleSkeleton2', (enabled) => {
+    if (enabled !== skeletonEnabled2) {
+        addSkeletonToVideo2(); // 로컬에서 스켈레톤 상태 토글
+    }
+});

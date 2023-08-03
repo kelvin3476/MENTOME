@@ -192,5 +192,35 @@ exports.socketManagement = io => {
         socket.on("similarity_results", (results, roomName) => {
             socket.to(roomName).emit("new_similarity_results", results);
         });
+
+        // skeleton 사용자간 동기화
+        socket.on('toggleSkeleton', (enabled) => {
+            // 이 이벤트를 보낸 클라이언트를 제외한 다른 클라이언트에게 브로드캐스팅
+            socket.broadcast.emit('toggleSkeleton', enabled);
+        });
+
+        // skeleton2 사용자간 동기화
+        socket.on('toggleSkeleton2', (enabled) => {
+            // 이 이벤트를 보낸 클라이언트를 제외한 다른 클라이언트에게 브로드캐스팅
+            socket.broadcast.emit('toggleSkeleton2', enabled);
+        });
+
+        // 동영상1 리사이즈, 드래그 동기화
+        socket.on("resize_video_container", (data, roomName) => {
+            socket.to(roomName).emit("resize_video_container", data);
+        });
+        socket.on("drag_video_container", (data, roomName) => {
+            socket.to(roomName).emit("drag_video_container", data);
+        });
+
+        // 동영상2 리사이즈, 드래그 동기화
+        socket.on("resize_video_container2", (data, roomName) => {
+            socket.to(roomName).emit("resize_video_container2", data);
+        });
+        socket.on("drag_video_container2", (data, roomName) => {
+            socket.to(roomName).emit("drag_video_container2", data);
+        });
+
+
     });
 };
