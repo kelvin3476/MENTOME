@@ -211,6 +211,14 @@ function calculateSimilarity() {
                     $('.alert').removeClass("show");
                     $('.alert').addClass("hide");
                 }, 3000);
+
+                // 내보내기 - 김현수 추가
+                const results = {
+                    fullBodySimilarityPercentage: fullBodySimilarityPercentage,
+                    upperBodySimilarityPercentage: upperBodySimilarityPercentage,
+                    lowerBodySimilarityPercentage: lowerBodySimilarityPercentage
+                };
+                socket.emit("similarity_results", results, roomName);
             });
     
             $('.close-btn').click(function () {
@@ -218,4 +226,25 @@ function calculateSimilarity() {
                 $('.alert').addClass("hide");
             });
         });
+    });
+
+    // 메시지 내보내기
+    socket.on("new_similarity_results", (results) => {
+        const full = results.fullBodySimilarityPercentage;
+        const upper = results.upperBodySimilarityPercentage;
+        const lower = results.lowerBodySimilarityPercentage;
+
+        console.log(full, '1');
+        $('.full-body-similarity').text(full);
+        $('.upper-body-similarity').text(upper);
+        $('.lower-body-similarity').text(lower);
+
+        $('.alert').addClass("show");
+        $('.alert').removeClass("hide");
+        $('.alert').addClass("showAlert");
+
+        setTimeout(function () {
+            $('.alert').removeClass("show");
+            $('.alert').addClass("hide");
+        }, 3000);
     });
