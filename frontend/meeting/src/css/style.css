@@ -640,7 +640,17 @@ main {
     height: 100%;
 }
 
-canvas {
+.canvas-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow interactions to pass through the video to the underlying elements */
+    object-fit: contain; /* This will maintain the aspect ratio and fit the canvas inside the container */
+}
+
+.canvas-wrapper2 canvas {
     position: absolute;
     top: 0;
     left: 0;
@@ -687,5 +697,5 @@ video {
     position: absolute;
     border: 2px solid black;
     /* Add a border to the drawcanvas */
-    z-index: 3;
+    z-index: 500;
 }
