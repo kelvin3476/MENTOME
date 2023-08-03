@@ -173,7 +173,7 @@ exports.socketManagement = io => {
         });
     
         // 캔버스 동기화
-        socket.on("drawing", (data) => {
+        socket.on("drawing", (data) => {화
             // Broadcast the drawing data to other clients in the same room
             socket.to(data.roomName).emit("drawing", data);
         });
@@ -192,5 +192,18 @@ exports.socketManagement = io => {
         socket.on("similarity_results", (results, roomName) => {
             socket.to(roomName).emit("new_similarity_results", results);
         });
+
+        // skeleton 사용자간 동기화
+        socket.on('toggleSkeleton', (enabled) => {
+            // 이 이벤트를 보낸 클라이언트를 제외한 다른 클라이언트에게 브로드캐스팅
+            socket.broadcast.emit('toggleSkeleton', enabled);
+        });
+
+        // skeleton2 사용자간 동기화
+        socket.on('toggleSkeleton2', (enabled) => {
+            // 이 이벤트를 보낸 클라이언트를 제외한 다른 클라이언트에게 브로드캐스팅
+            socket.broadcast.emit('toggleSkeleton2', enabled);
+        });
+
     });
 };
