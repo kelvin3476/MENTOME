@@ -187,5 +187,10 @@ exports.socketManagement = io => {
             // Broadcast the drawCanvas state to other clients in the same room
             socket.to(data.roomName).emit("toggle_drawCanvas", { state: data.state });
         });
+
+        // 유사도 계산 내보내기
+        socket.on("similarity_results", (results, roomName) => {
+            socket.to(roomName).emit("new_similarity_results", results);
+        });
     });
 };
