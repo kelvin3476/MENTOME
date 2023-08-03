@@ -188,7 +188,7 @@ footer {
     height: 360px; /* Initial height */
     border: 1px solid #000000;
     pointer-events: none; /* Allow interactions to pass through the video to the underlying elements */
-    position: relative;
+    position: absolute;
 }
 
 .video-container2 {
@@ -196,7 +196,7 @@ footer {
     height: 360px; /* Initial height */
     border: 1px solid #000000;
     pointer-events: none; /* Allow interactions to pass through the video to the underlying elements */
-    position: relative;
+    position: absolute;
 }
 
 .canvas-wrapper,
