@@ -1,12 +1,12 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastContainer } from 'react-toastify';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { Container } from 'react-bootstrap';
+import { Container, Dropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import styles from './PostDetail.module.css';
 import ReplyButton from '../../UI/Button/ReplyButton/ReplyButton';
+
 
 const PostDetail = () => {
     // const [post, setPost] = useState([]); // 댓글을 저장할 배열 상태
@@ -222,11 +222,12 @@ const PostDetail = () => {
                                                             <div className={styles.comment_Info}>
                                                                 <div className={styles.comment__username}>
                                                                     {/* // eslint-disable-next-line */}
+                                                                    {/* 부트스트랩의 드롭다운 컴포넌트를 사용합니다 */}
                                                                     <Dropdown>
-                                                                        <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
-                                                                            <p>{comments.commentWriter}</p>
+                                                                        <Dropdown.Toggle className={styles.dropdown_toggle} variant="Secondary" id="dropdown-basic">
+                                                                            {comments.commentWriter}
                                                                         </Dropdown.Toggle>
-
+                                                                        
                                                                         <Dropdown.Menu>
                                                                             <Dropdown.Item onClick={notify}>멘토링 초대</Dropdown.Item>
                                                                         </Dropdown.Menu>

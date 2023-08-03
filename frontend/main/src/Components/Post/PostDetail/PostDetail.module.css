@@ -269,3 +269,9 @@
 }
 
 /* post body */
+
+/* Custom Dropdown */
+
+.dropdown_toggle::after {
+    display: none;
+}
