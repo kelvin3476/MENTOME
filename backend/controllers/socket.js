@@ -205,5 +205,22 @@ exports.socketManagement = io => {
             socket.broadcast.emit('toggleSkeleton2', enabled);
         });
 
+        // 동영상1 리사이즈, 드래그 동기화
+        socket.on("resize_video_container", (data, roomName) => {
+            socket.to(roomName).emit("resize_video_container", data);
+        });
+        socket.on("drag_video_container", (data, roomName) => {
+            socket.to(roomName).emit("drag_video_container", data);
+        });
+
+        // 동영상2 리사이즈, 드래그 동기화
+        socket.on("resize_video_container2", (data, roomName) => {
+            socket.to(roomName).emit("resize_video_container2", data);
+        });
+        socket.on("drag_video_container2", (data, roomName) => {
+            socket.to(roomName).emit("drag_video_container2", data);
+        });
+
+
     });
 };
