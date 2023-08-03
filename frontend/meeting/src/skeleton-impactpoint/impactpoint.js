@@ -94,7 +94,7 @@ function getImpact2() {
 //[0, 13, 14, 15, 16, 23]
 
 function timelinePusher1() {
-    if (video.currentTime != 0) {
+    if (video.currentTime > 0.1) {
         let positionInfo = [];
         positionInfo.videoTime = video.currentTime;
         positionInfo.positions = similpos1;
@@ -110,7 +110,7 @@ function timelinePusher1() {
 }
 
 function timelinePusher2() {
-    if (video2.currentTime != 0) {
+    if (video2.currentTime > 0.1) {
         let positionInfo = [];
         positionInfo.videoTime = video2.currentTime;
         positionInfo.positions = similpos2;
