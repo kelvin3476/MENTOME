@@ -173,7 +173,7 @@ exports.socketManagement = io => {
         });
     
         // 캔버스 동기화
-        socket.on("drawing", (data) => {화
+        socket.on("drawing", (data) => {
             // Broadcast the drawing data to other clients in the same room
             socket.to(data.roomName).emit("drawing", data);
         });
