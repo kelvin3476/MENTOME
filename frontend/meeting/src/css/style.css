@@ -594,32 +594,20 @@ main {
     margin-bottom: 10px;
 }
 
-.video-container {
-    width: 640px; /* Initial width */
-    height: 360px; /* Initial height */
-    border: 1px solid #000000;
-    pointer-events: none; /* Allow interactions to pass through the video to the underlying elements */
-
-    position: relative;
-    display: inline-block;
-}
-
 /* 다시 */
 
 .video-container {
     width: 640px; /* Initial width */
     height: 360px; /* Initial height */
-    border: 1px solid #000000;
     pointer-events: none; /* Allow interactions to pass through the video to the underlying elements */
-    position: relative;
+    position: absolute;
 }
 
 .video-container2 {
     width: 640px; /* Initial width */
     height: 360px; /* Initial height */
-    border: 1px solid #000000;
     pointer-events: none; /* Allow interactions to pass through the video to the underlying elements */
-    position: relative;
+    position: absolute;
 }
 
 .canvas-wrapper,
