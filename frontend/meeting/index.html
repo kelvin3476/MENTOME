@@ -7,17 +7,13 @@
         <title>멘토미</title>
         <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css" /> -->
         <link rel="stylesheet" href="./src/css/style.css" />
+        <link rel="stylesheet" href="./src/css/font.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <style>
-            .buttonactive.clicked {
-                border: 1px solid red;
-            }
-        </style>
     </head>
 
     <body>
@@ -39,19 +35,21 @@
                 <!-- 채팅 완료 -->
                 <div id="room">
                     <h3></h3>
-                    <input id="ToggleChat" type="button" value="Chat" onclick="handleToggleChat()" />
-                    <div id="chat-info">
-                        <p id="info"></p>
-                        <div id="SendMessage-Container">
-                            <form id="msg">
-                                <input id="SendMessage" required type="text" />
-                                <button id="Send-Btn"></button>
+                    <div class="chat">
+                        <input id="ToggleChat" type="button" value="Chat" onclick="handleToggleChat()" />
+                        <div id="chat-info">
+                            <p id="info"></p>
+                            <div id="SendMessage-Container">
+                                <form id="msg">
+                                    <input id="SendMessage" required type="text" />
+                                    <button id="Send-Btn"></button>
+                                </form>
+                            </div>
+                            <form id="name">
+                                <input placeholder="nickname" required type="text" />
+                                <button>Save</button>
                             </form>
                         </div>
-                        <form id="name">
-                            <input placeholder="nickname" required type="text" />
-                            <button>Save</button>
-                        </form>
                     </div>
                 </div>
                 <!-- 비디오 업로드 -->
@@ -91,102 +89,54 @@
                 </div>
             </main>
             <!-- Toolbar -->
-            <div id="footer-info">
-                <div class="footer">
-                    <div class="foot__inner">
-                        <div id="control" style="display: flex">
-                            <div>
-                                <p>
-                                    <button
-                                        id="toggleDrawCanvasButton"
-                                        class="buttonactive"
-                                        onclick="changeColor()"
-                                    ></button>
-                                </p>
-                                <p>
-                                    <button id="clearCanvasButton"></button>
-                                </p>
-                                <p>
-                                    <input id="color" type="color" />
-                                </p>
-                                <p>
-                                    <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
-                                </p>
-                                <!-- 파일 업로드 -->
-                                <div class="dropdown">
-                                    <button class="dropbtn" onclick="toggleDropdown()"></button>
-                                    <div id="dropdownContent" class="dropdown-content" style="display: none">
-                                        <!-- 파일 업로드 1 -->
-                                        <form id="fileUpload" style="display: none">
-                                            <input type="file" id="selectedFile" required />
-                                            <button type="submit">Upload</button>
-                                        </form>
-                                        <!-- 파일 업로드 2 -->
-                                        <form id="fileUpload2" style="display: none">
-                                            <input type="file" id="selectedFile2" required />
-                                            <button type="submit">Upload2</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <!-- 파일 업로드 -->
-                                <!-- 스켈레톤 이미지 씌우기 -->
-                                <div class="dropdown-skeleton">
-                                    <button class="dropbtn-skeleton" onclick="toggleDropdownSkeleton()"></button>
-                                    <div id="dropdownContent-skeleton" class="dropdown-content" style="display: none">
-                                        <div>
-                                            <button id="addSkeletonButton">Add Skeleton</button>
-                                            <button id="addSkeletonButton2">Add Skeleton2</button>
-                                        </div>
-                                    </div>
-                                    <!-- 스켈레톤 이미지 씌우기 -->
-                                    <!-- 유사도 측정버튼 -->
-                                    <button id="measureSimilarity"></button>
-                                    <div class="alert hide">
-                                        <span class="msg">
-                                            유사도 전체 분석 비율: <span class="full-body-similarity"></span>%<br />
-                                            상체: <span class="upper-body-similarity"></span>%<br />
-                                            하체: <span class="lower-body-similarity"></span>%
-                                        </span>
-                                        <div class="close-btn">
-                                            <span class="fas fa-times"></span>
-                                        </div>
-                                    </div>
-                                    <!-- 유사도 측정버튼 -->
-                                </div>
-                                <!-- 카메라 유틸 버튼 -->
-                                <div id="controls">
-                                    <p>
-                                        <select id="cameras" class="custom-select"></select>
-                                    </p>
-                                    <p>
-                                        <button id="mute"></button>
-                                    </p>
-                                    <p>
-                                        <button id="camera" class="camera-btn"></button>
-                                    </p>
-                                </div>
-                                <!-- 카메라 유틸 버튼 -->
-                                <!-- 방 나가기 버튼 -->
-                                <p>
-                                    <button id="exit"></button>
-                                </p>
-                                <!-- 방 나가기 버튼 -->
-                                <!-- 임팩트 버튼 -->
-                                <div class="dropdown-impact">
-                                    <button class="dropbtn-impact" onclick="toggleDropdownImpact()"></button>
-                                    <div id="dropdownContent-impact" class="dropdown-content" style="display: none">
-                                        <button id="impactTime1">Impact Time 1</button>
-                                        <button id="impactTime2">Impact Time 2</button>
-                                        <button id="impactTime3">Impact Time 3</button>
-                                        <button id="impactTimeReset2">Impact Time Reset</button>
-                                        <button id="testbutton">testbutton</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <footer>
+                <button id="toggleDrawCanvasButton" class="buttonactive" onclick="changeColor()">그리기</button>
+                <button id="clearCanvasButton">지우기</button>
+                <input id="color" type="color" />
+                <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
+                <!-- 파일 업로드 -->
+                <!-- 파일 업로드 1 -->
+                <form id="fileUpload" style="display: none">
+                    <input type="file" id="selectedFile" required />
+                    <button type="submit">Upload</button>
+                </form>
+                <!-- 파일 업로드 2 -->
+                <form id="fileUpload2" style="display: none">
+                    <input type="file" id="selectedFile2" required />
+                    <button type="submit">Upload2</button>
+                </form>
+                <!-- 파일 업로드 -->
+                <!-- 스켈레톤 이미지 씌우기 -->
+                <button id="addSkeletonButton">Add Skeleton</button>
+                <button id="addSkeletonButton2">Add Skeleton2</button>
+
+                <!-- 스켈레톤 이미지 씌우기 -->
+                <!-- 유사도 측정버튼 -->
+                <button id="measureSimilarity">similarity</button>
+                <span class="msg">
+                    유사도 전체 분석 비율: <span class="full-body-similarity"></span>%<br />
+                    상체: <span class="upper-body-similarity"></span>%<br />
+                    하체: <span class="lower-body-similarity"></span>%
+                </span>
+
+                <span class="fas fa-times">close</span>
+                <div id="controls">
+                    <select id="cameras" class="custom-select">
+                        camera
+                    </select>
+
+                    <button id="mute">mute</button>
+
+                    <button id="camera" class="camera-btn">camera</button>
                 </div>
-            </div>
+                <button id="exit">exit</button>
+
+                <button class="dropbtn-impact" onclick="toggleDropdownImpact()">impact 모음</button>
+                <button id="impactTime1">Impact Time 1</button>
+                <button id="impactTime2">Impact Time 2</button>
+                <button id="impactTime3">Impact Time 3</button>
+                <button id="impactTimeReset2">Impact Time Reset</button>
+            </footer>
 
             <!-- 자바스크립트 -->
             <script src="/socket.io/socket.io.js"></script>
@@ -213,17 +163,6 @@
             <script src="./src/skeleton-similarity/similarity.js"></script>
             <script src="./src/action/action.js"></script>
             <script src="./src/action/action2.js"></script>
-            <script>
-                // JavaScript로 버튼이 클릭되었을 때 스타일을 변경하는 함수
-                function changeColor() {
-                    var button = document.querySelector('.buttonactive');
-                    if (button.classList.contains('clicked')) {
-                        button.classList.remove('clicked'); // 'clicked' 클래스 제거
-                    } else {
-                        button.classList.add('clicked'); // 'clicked' 클래스 추가
-                    }
-                }
-            </script>
 
             <!-- 추가해야하는 것들 -->
         </div>
