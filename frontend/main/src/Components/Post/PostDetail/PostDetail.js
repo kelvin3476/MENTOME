@@ -1,3 +1,6 @@
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { Container } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -120,6 +123,24 @@ const PostDetail = () => {
         }
     };
 
+    const notify = (event) => {
+        event.preventDefault();
+
+        toast.success('멘토링 초대가 완료되었습니다.', {
+            position: 'top-center',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+            onClose: () => {
+                window.location.href = '/'
+            },
+        });
+    };
+
     return (
         <Container>
             <div>
@@ -201,7 +222,26 @@ const PostDetail = () => {
                                                             <div className={styles.comment_Info}>
                                                                 <div className={styles.comment__username}>
                                                                     {/* // eslint-disable-next-line */}
-                                                                    <p>{comments.commentWriter}</p>
+                                                                    <Dropdown>
+                                                                        <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
+                                                                            <p>{comments.commentWriter}</p>
+                                                                        </Dropdown.Toggle>
+
+                                                                        <Dropdown.Menu>
+                                                                            <Dropdown.Item onClick={notify}>멘토링 초대</Dropdown.Item>
+                                                                        </Dropdown.Menu>
+                                                                    </Dropdown>
+                                                                    <ToastContainer
+                                                                        position='top-center'
+                                                                        autoClose={2000}
+                                                                        hideProgressBar={false}
+                                                                        newestOnTop={false}
+                                                                        closeOnClick
+                                                                        rtl={false}
+                                                                        pauseOnFocusLoss
+                                                                        draggable
+                                                                        pauseOnHover
+                                                                        theme='light' />
                                                                 </div>
                                                                 <div className={styles.date}>
                                                                     <span>
