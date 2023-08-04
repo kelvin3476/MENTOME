@@ -56,12 +56,8 @@ function showRoom() {
     });
 }
 
-function handleRoomSubmit(event) {
-    event.preventDefault();
-    const input = form.querySelector('input');
-    socket.emit('enter_room', input.value, showRoom);
-    roomName = input.value;
-    input.value = '';
+function handleRoomSubmit() {
+    socket.emit('enter_room', roomName, showRoom);
 }
 
 form.addEventListener('submit', handleRoomSubmit);
