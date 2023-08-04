@@ -9,7 +9,7 @@ import TopbarDropdown from './Dropdowns/TopbarDropdowns';
 import { useCookies } from 'react-cookie';
 import AlarmModal from '../Modal/Alarm/AlarmModal';
 
-const MainNavigation = () => {
+const MainNavigation = ({ id }) => {
     const [cookies] = useCookies(['logInUser']); // 쿠키 정보 가져오기
 
     return (
@@ -46,7 +46,7 @@ const MainNavigation = () => {
                                     </Link>
                                 </Nav.Link>
                                 <div className={styles.mid}>
-                                    <AlarmModal />
+                                    <AlarmModal id={id}/>
                                 </div>
                                 <TopbarDropdown />
                             </>

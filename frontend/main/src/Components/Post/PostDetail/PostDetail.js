@@ -8,7 +8,7 @@ import styles from './PostDetail.module.css';
 import ReplyButton from '../../UI/Button/ReplyButton/ReplyButton';
 
 
-const PostDetail = () => {
+const PostDetail = ( {id} ) => {
     // const [post, setPost] = useState([]); // 댓글을 저장할 배열 상태
     const [post, setPost] = useState({
         // title: '더미 제목',
@@ -123,23 +123,38 @@ const PostDetail = () => {
         }
     };
 
-    const notify = (event) => {
-        event.preventDefault();
+    // const notify = (event) => {
+    //     event.preventDefault();
 
-        toast.success('멘토링 초대가 완료되었습니다.', {
-            position: 'top-center',
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-            onClose: () => {
-                window.location.href = '/'
-            },
-        });
-    };
+    // };
+
+    const invitationHandler = (userid) => {
+        
+        const invitationApiUrl = `/api/notice/addinvitenotice/${userid}`;
+
+        axios
+            .post(invitationApiUrl)
+            .then((response) => {
+                console.log(invitation);
+                const invitation = response.data;
+                toast.success('멘토링 초대가 완료되었습니다.', {
+                    position: 'top-center',
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                    onClose: () => {
+                        window.location.reload();
+                    },
+                })            
+            })
+            .catch ((error) => {
+                console.error('invitation is not done', error);
+            });
+    }
 
     return (
         <Container>
@@ -229,7 +244,7 @@ const PostDetail = () => {
                                                                         </Dropdown.Toggle>
                                                                         
                                                                         <Dropdown.Menu>
-                                                                            <Dropdown.Item onClick={notify}>멘토링 초대</Dropdown.Item>
+                                                                            <Dropdown.Item onClick={() => invitationHandler(comments.commentWriter)}>멘토링 초대</Dropdown.Item>
                                                                         </Dropdown.Menu>
                                                                     </Dropdown>
                                                                     <ToastContainer

@@ -4,7 +4,9 @@ import styles from './AlarmModal.module.css';
 // import { Button } from 'react-bootstrap';
 import { Bell } from 'react-bootstrap-icons';
 import { useState, useEffect, useRef } from 'react';
-const AlarmModal = () => {
+
+
+const AlarmModal = ({ id }) => {
     const [isModalOpen, setModalOpen] = useState(false);
     const outside = useRef();
 
@@ -102,7 +104,7 @@ const AlarmModal = () => {
                                                         styles.newsfeed_item_infobox__title
                                                     }
                                                 >
-                                                    Id님으로 부터 멘토링 신청이
+                                                    {id}님으로 부터 멘토링 신청이
                                                     도착했어요!
                                                 </h3>
                                                 <p
