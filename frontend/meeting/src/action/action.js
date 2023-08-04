@@ -18,11 +18,35 @@ function initResize(e) {
 
 function resize(e) {
     if (!isResizing) return;
-    videoContainer.style.width = e.clientX - videoContainer.offsetLeft + 'px';
-    videoContainer.style.height = e.clientY - videoContainer.offsetTop + 'px';
-    // 동영상1 리사이즈, 드래그 동기화
-    socket.emit("resize_video_container", { width: videoContainer.style.width, height: videoContainer.style.height }, roomName);
+    const videoElement = document.getElementById('fileDisplay');
+    const canvasElement = document.getElementById('canvas');
+    const aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
+
+    const newWidth = e.clientX - videoContainer.offsetLeft;
+    const newHeight = newWidth / aspectRatio;
+
+    // Apply styles to the video container, video, and canvas
+    videoContainer.style.width = newWidth + 'px';
+    videoContainer.style.height = newHeight + 'px';
+    videoElement.style.width = newWidth + 'px';
+    videoElement.style.height = newHeight + 'px';
+    canvasElement.style.width = newWidth + 'px';
+    canvasElement.style.height = newHeight + 'px';
+
+    // Create object with all the information
+    const syncData = {
+        width: newWidth + 'px',
+        height: newHeight + 'px',
+        canvasWidth: canvasElement.style.width,
+        canvasHeight: canvasElement.style.height,
+        videoWidth: videoElement.style.width,
+        videoHeight: videoElement.style.height
+    };
+
+    // Emit to synchronize with others
+    socket.emit("resize_video_container", syncData, roomName);
 }
+
 
 function stopResize() {
     isResizing = false;
@@ -61,9 +85,36 @@ function stopDrag() {
 socket.on("resize_video_container", (data) => {
     videoContainer.style.width = data.width;
     videoContainer.style.height = data.height;
+    const canvasElement = document.getElementById('canvas');
+    const videoElement = document.getElementById('fileDisplay');
+    canvasElement.style.width = data.canvasWidth;
+    canvasElement.style.height = data.canvasHeight;
+    videoElement.style.width = data.videoWidth;
+    videoElement.style.height = data.videoHeight;
 });
 
 socket.on("drag_video_container", (data) => {
     videoContainer.style.left = data.left;
     videoContainer.style.top = data.top;
 });
+
+
+
+// video-container 사이즈 같게 하기
+function setVideoSize(videoElement, width) {
+    const aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
+    videoElement.style.width = width || videoElement.offsetWidth + 'px';
+    videoElement.style.height = (videoElement.offsetWidth / aspectRatio) + 'px';
+}
+
+function onVideoMetadataLoaded() {
+    setVideoSize(this);
+}
+
+function onWindowResized() {
+    setVideoSize(document.getElementById('fileDisplay'));
+}
+
+const fileDisplayElement = document.getElementById('fileDisplay');
+fileDisplayElement.addEventListener('loadedmetadata', onVideoMetadataLoaded);
+window.addEventListener('resize', onWindowResized);
