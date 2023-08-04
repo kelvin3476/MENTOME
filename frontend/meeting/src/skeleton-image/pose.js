@@ -131,11 +131,12 @@ function onResultsPose(results) {
         video1lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates;
         recentV1Time = video.currentTime
 
-        similpos1 = getPosition1(results);
         // console.log(video1SkeletonCoordinates);
         // console.log(video1upperBodySkeletonCoordinates);
         // console.log(video1lowerBodySkeletonCoordinates);
         }
+        
+        similpos1 = getPosition1(results);
     } else {
         addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas.getContext('2d');
@@ -253,10 +254,10 @@ function onResultsPose2(results) {
             video2lowerBodySkeletonCoordinates = lowerBodySkeletonCoordinates2;
             recentV2Time = video2.currentTime
 
-            similpos2 = getPosition2(results);
             // console.log(video2upperBodySkeletonCoordinates);
-
         }
+
+        similpos2 = getPosition2(results);
     } else {
         addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas2.getContext('2d');

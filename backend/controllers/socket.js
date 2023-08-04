@@ -221,6 +221,19 @@ exports.socketManagement = io => {
             socket.to(roomName).emit("drag_video_container2", data);
         });
 
+        // 임펙트 동기화
+        socket.on("doImpactReset", (roomName) => {
+            socket.to(roomName).emit("doImpactReset");
+        });
+        socket.on("impact1", (roomName) => {
+            socket.to(roomName).emit("impact1");
+        });
+        socket.on("impact2", (roomName) => {
+            socket.to(roomName).emit("impact2");
+        });
+        socket.on("impact3", (roomName) => {
+            socket.to(roomName).emit("impact3");
+        });
 
     });
 };
