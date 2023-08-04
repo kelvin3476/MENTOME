@@ -156,11 +156,11 @@ function calculateSimilarity() {
         // const maxFullBodySimilarity = 2;
         // const minFullBodySimilarity = 0.25;
 
-        const maxUpperBodySimilarity = 2;
-        const minUpperBodySimilarity = 0.265;
+        const maxUpperBodySimilarity = 2.5;
+        const minUpperBodySimilarity = 0.35;
 
-        const maxLowerBodySimilarity = 2;
-        const minLowerBodySimilarity = 0;
+        const maxLowerBodySimilarity = 2.4;
+        const minLowerBodySimilarity = 0.03;
 
 
         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
