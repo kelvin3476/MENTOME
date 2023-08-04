@@ -39,12 +39,13 @@ exports.addCommentNotice = (req, res) => {
 exports.addInviteNotice = (req, res) => {
     const getCookies = req.get('Cookie');
     const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    const newRoomName = cookies.logInUser + req.params.userId;
     if (cookies.logInUser) {
         let newNotice = {};
         newNotice.noticeType = 'invite';
         newNotice.noticeSender = cookies.logInUser;
         newNotice.noticeDate = Date();
-        newNotice.roomName = '';
+        newNotice.roomName = newRoomName;
         newNotice.roomEnter = 'false';
         User.findOne({ userId: req.params.userId })
             .then(user => {
@@ -52,6 +53,7 @@ exports.addInviteNotice = (req, res) => {
                 User.findByIdAndUpdate({ userId: req.params.userId }, user)
                     .then(user => {
                         res.json({
+                            roomName: newNotice.roomName,
                             addInviteNoticeSuccess: true,
                             message: "초대 알림 추가 성공"
                         });
