@@ -232,6 +232,7 @@ function calImpact2() {
 }
 
 document.getElementById('impactTime1').addEventListener('click', function() {
+    socket.emit("impact1", roomName);
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[0];
@@ -241,6 +242,7 @@ document.getElementById('impactTime1').addEventListener('click', function() {
 });
 
 document.getElementById('impactTime2').addEventListener('click', function() {
+    socket.emit("impact2", roomName);
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[1];
@@ -250,6 +252,7 @@ document.getElementById('impactTime2').addEventListener('click', function() {
 });
 
 document.getElementById('impactTime3').addEventListener('click', function() {
+    socket.emit("impact3", roomName);
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[2];
@@ -259,6 +262,7 @@ document.getElementById('impactTime3').addEventListener('click', function() {
 });
 
 document.getElementById('impactTimeReset').addEventListener('click', function() {
+    socket.emit("doImpactReset", roomName);
     calImpact1();
     calImpact2();
 });
@@ -268,6 +272,38 @@ document.getElementById('testbutton').addEventListener('click', function() {
     console.log(timeline2);
     console.log(impactTimes1);
     console.log(impactTimes2);
+});
+
+socket.on("impact1", () => {
+    video.pause();
+    video2.pause();
+    video.currentTime = impactTimes1[0];
+    video2.currentTime = impactTimes2[0];
+    console.log(impactTimes1[0]);
+    console.log(impactTimes2[0]);
+});
+
+socket.on("impact2", () => {
+    video.pause();
+    video2.pause();
+    video.currentTime = impactTimes1[1];
+    video2.currentTime = impactTimes2[1];
+    console.log(impactTimes1[1]);
+    console.log(impactTimes2[1]);
+});
+
+socket.on("impact3", () => {
+    video.pause();
+    video2.pause();
+    video.currentTime = impactTimes1[2];
+    video2.currentTime = impactTimes2[2];
+    console.log(impactTimes1[2]);
+    console.log(impactTimes2[2]);
+});
+
+socket.on("doImpactReset", () => {
+    calImpact1();
+    calImpact2();
 });
 
 // 임팩트 드랍다운 버튼
