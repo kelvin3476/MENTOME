@@ -67,3 +67,16 @@ exports.addInviteNotice = (req, res) => {
         console.log('Upload Comment Fail! (NOT LOG IN)');
     }
 };
+
+//Get User Notices
+exports.getUserNotices = (req, res) => {
+    const getCookies = req.get('Cookie');
+    const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
+    if (cookies.logInUser) {
+        User.findOne({ userId: cookies.logInUser })
+            .then(user => {
+                res.json(user.notices);
+                console.log("Get User Noitces success")
+            });
+    }
+};

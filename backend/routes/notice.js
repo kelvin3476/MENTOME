@@ -8,4 +8,6 @@ router.post('/api/notice/addcommentnotice/:_id', noticeController.addCommentNoti
 
 router.post('/api/notice/addinvitenotice/:userid', noticeController.addInviteNotice);
 
+router.get('/api/notice/getusernotices', noticeController.getUserNotices);
+
 module.exports = router;
