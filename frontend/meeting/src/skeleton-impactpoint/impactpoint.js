@@ -11,6 +11,7 @@ function videoPauser1() {
         video.playbackRate = 1;
         video.pause();
         waitImpact = true;
+        socket.emit('pause_video', roomName);
     }
 }
 
@@ -21,12 +22,13 @@ function videoPauser2() {
         video2.playbackRate = 1;
         video2.pause();
         waitImpact = true;
+        socket.emit('pause_video2', roomName);
     }
 }
 
 function getPosition1(results) {
     const landmark = [];
-    let indices = [0, 12, 13, 14, 15, 16, 23];
+    let indices = [0, 12, 13, 14, 15, 16, 23, 24];
 
     if (results && results.poseLandmarks) {
         indices.forEach((index) => {
@@ -41,7 +43,7 @@ function getPosition1(results) {
 
 function getPosition2(results) {
     const landmark = [];
-    let indices = [0, 12, 13, 14, 15, 16, 23];
+    let indices = [0, 12, 13, 14, 15, 16, 23, 24];
 
     if (results && results.poseLandmarks) {
         indices.forEach((index) => {
@@ -54,44 +56,118 @@ function getPosition2(results) {
     return landmark;
 }
 
-function getImpact1() {
+// [0, 12, 13, 14, 15, 16, 23, 24]
+function getImpact1(results) {
     let saveFlag1 = true;
+    let checkFlag1 = true;
     let saveFlag2 = true;
-    let saveFlag3 = true;
-    for (let i = 5; i < timeline1.length; i++) {
-        if (saveFlag1 && timeline1[i].positions[5][1] < timeline1[i].positions[0][1]) {
-            impactTimes1.push(timeline1[i].videoTime);
+    let lefthigh = 1;
+    let leftTime;
+    let righthigh = 1;
+    let rightTime;
+
+
+    for (let i = 1; i < timeline1.length; i++) {
+        if (saveFlag1 && timeline1[i].positions[5][1] < timeline1[i].positions[3][1] && timeline1[i].positions[5][1] < lefthigh ) {
+            lefthigh = timeline1[i].positions[5][1];
+            leftTime = timeline1[i].videoTime;
+            checkFlag1 = false;
+        } 
+        
+        if (saveFlag1 && !checkFlag1 && timeline1[i].positions[5][1] > timeline1[i].positions[3][1]) {
+            impactTimes1.push(leftTime);
             saveFlag1 = false;
-        } else if (!saveFlag1 && saveFlag2 && timeline1[i].positions[4][0] > timeline1[i].positions[6][0]) {
+        }
+
+        if (!saveFlag1 && saveFlag2 && timeline1[i].positions[4][0] > timeline1[i].positions[1][0] && timeline1[i].positions[4][0] >= timeline1[i].positions[6][0]) {
             impactTimes1.push(timeline1[i].videoTime);
             saveFlag2 = false;
-        } else if (!saveFlag1 && !saveFlag2 && saveFlag3 && timeline1[i].positions[5][0] < timeline1[i].positions[0][0]) {
-            impactTimes1.push(timeline1[i].videoTime);
-            saveFlag3 = false;
-            break;
+        }
+        
+        if (!saveFlag1 && !saveFlag2 && timeline1[i].positions[5][1] < righthigh && timeline1[i].positions[5][0] >= timeline1[i].positions[0][0]) {
+            righthigh = timeline1[i].positions[5][1];
+            rightTime = timeline1[i].videoTime;
         }
     }
+
+    impactTimes1.push(rightTime);
 }
 
-function getImpact2() {
+function getImpact2(results) {
     let saveFlag1 = true;
+    let checkFlag1 = true;
     let saveFlag2 = true;
-    let saveFlag3 = true;
-    for (let i = 5; i < timeline2.length; i++) {
-        if (saveFlag1 && timeline2[i].positions[5][1] < timeline2[i].positions[0][1]) {
-            impactTimes2.push(timeline2[i].videoTime);
+    let lefthigh = 1;
+    let leftTime;
+    let middleTime;
+    let righthigh = 1;
+    let rightTime;
+
+
+    for (let i = 1; i < timeline2.length; i++) {
+        if (saveFlag1 && timeline2[i].positions[5][1] < timeline2[i].positions[3][1] && timeline2[i].positions[5][1] < lefthigh ) {
+            lefthigh = timeline2[i].positions[5][1];
+            leftTime = timeline2[i].videoTime;
+            checkFlag1 = false;
+        } 
+        
+        if (saveFlag1 && !checkFlag1 && timeline2[i].positions[5][1] > timeline2[i].positions[3][1]) {
+            impactTimes2.push(leftTime);
             saveFlag1 = false;
-        } else if (!saveFlag1 && saveFlag2 && timeline2[i].positions[4][0] > timeline2[i].positions[6][0]) {
+        }
+
+        if (!saveFlag1 && saveFlag2 && timeline2[i].positions[4][0] > timeline2[i].positions[1][0] && timeline2[i].positions[4][0] >= timeline2[i].positions[6][0]) {
             impactTimes2.push(timeline2[i].videoTime);
             saveFlag2 = false;
-        } else if (!saveFlag1 && !saveFlag2 && saveFlag3 && timeline2[i].positions[5][0] < timeline2[i].positions[0][0]) {
-            impactTimes2.push(timeline2[i].videoTime);
-            saveFlag3 = false;
-            break;
+        }
+        
+        if (!saveFlag1 && !saveFlag2 && timeline2[i].positions[5][1] < righthigh && timeline2[i].positions[5][0] >= timeline2[i].positions[0][0]) {
+            righthigh = timeline2[i].positions[5][1];
+            rightTime = timeline2[i].videoTime;
         }
     }
+
+    impactTimes2.push(rightTime);
 }
-//[0, 13, 14, 15, 16, 23]
+
+
+// function getImpact1() {
+//     let saveFlag1 = true;
+//     let saveFlag2 = true;
+//     let saveFlag3 = true;
+//     for (let i = 1; i < timeline1.length; i++) {
+//         if (saveFlag1 && timeline1[i].positions[5][1] < timeline1[i].positions[0][1]) {
+//             impactTimes1.push(timeline1[i].videoTime);
+//             saveFlag1 = false;
+//         } else if (!saveFlag1 && saveFlag2 && timeline1[i].positions[4][0] > timeline1[i].positions[6][0]) {
+//             impactTimes1.push(timeline1[i].videoTime);
+//             saveFlag2 = false;
+//         } else if (!saveFlag1 && !saveFlag2 && saveFlag3 && timeline1[i].positions[5][0] < timeline1[i].positions[0][0]) {
+//             impactTimes1.push(timeline1[i].videoTime);
+//             saveFlag3 = false;
+//             break;
+//         }
+//     }
+// }
+
+// function getImpact2() {
+//     let saveFlag1 = true;
+//     let saveFlag2 = true;
+//     let saveFlag3 = true;
+//     for (let i = 1; i < timeline2.length; i++) {
+//         if (saveFlag1 && timeline2[i].positions[5][1] < timeline2[i].positions[0][1]) {
+//             impactTimes2.push(timeline2[i].videoTime);
+//             saveFlag1 = false;
+//         } else if (!saveFlag1 && saveFlag2 && timeline2[i].positions[4][0] > timeline2[i].positions[6][0]) {
+//             impactTimes2.push(timeline2[i].videoTime);
+//             saveFlag2 = false;
+//         } else if (!saveFlag1 && !saveFlag2 && saveFlag3 && timeline2[i].positions[5][0] < timeline2[i].positions[0][0]) {
+//             impactTimes2.push(timeline2[i].videoTime);
+//             saveFlag3 = false;
+//             break;
+//         }
+//     }
+// }
 
 function timelinePusher1() {
     if (video.currentTime > 0.1) {
@@ -128,6 +204,7 @@ function timelinePusher2() {
 function calImpact1() {
     timeline1 = [];
     impactTimes1 = [];
+    socket.emit('pause_video', roomName);
     waitImpact = false;
 
     video.pause();
@@ -142,6 +219,7 @@ function calImpact1() {
 function calImpact2() {
     timeline2 = [];
     impactTimes2 = [];
+    socket.emit('pause_video2', roomName);
     waitImpact = false;
 
     video2.pause();
@@ -180,7 +258,7 @@ document.getElementById('impactTime3').addEventListener('click', function() {
     console.log(impactTimes2[2]);
 });
 
-document.getElementById('impactTimeReset2').addEventListener('click', function() {
+document.getElementById('impactTimeReset').addEventListener('click', function() {
     calImpact1();
     calImpact2();
 });
