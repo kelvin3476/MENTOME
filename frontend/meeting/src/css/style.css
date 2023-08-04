@@ -278,10 +278,6 @@ video {
 }
 
 /* 동영상 */
-#video-container {
-    position: relative;
-}
-
 #uploadedFile {
     z-index: 500;
 }
