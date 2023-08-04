@@ -22,6 +22,7 @@ exports.addCommentNotice = (req, res) => {
                                         addCommentNoticeSuccess: true,
                                         message: "댓글 알림 추가 성공"
                                     });
+                                    console.log("Add Comment Notice success");
                                 });
                         });
                 }
@@ -51,10 +52,7 @@ exports.addInviteNotice = (req, res) => {
                 user.notices.push(newNotice);
                 User.findOneAndUpdate({ userId: req.params.userid }, user)
                     .then(user => {
-                        res.json({
-                            addInviteNoticeSuccess: true,
-                            message: "초대 알림 추가 성공"
-                        });
+                        console.log("Add Invite Notice success");
                     });
             });
         
@@ -72,6 +70,7 @@ exports.addInviteNotice = (req, res) => {
                             addInviteNoticeSuccess: true,
                             message: "초대 알림 추가 성공"
                         });
+                        console.log("Add Invite Notice success");
                     })
             });
     } else {
@@ -91,7 +90,7 @@ exports.getUserNotices = (req, res) => {
         User.findOne({ userId: cookies.logInUser })
             .then(user => {
                 res.json(user.notices);
-                console.log("Get User Noitces success")
+                console.log("Get User Notices success");
             });
     }
 };

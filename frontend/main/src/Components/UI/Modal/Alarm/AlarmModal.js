@@ -4,9 +4,13 @@ import styles from './AlarmModal.module.css';
 // import { Button } from 'react-bootstrap';
 import { Bell } from 'react-bootstrap-icons';
 import { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
+const AlarmModal = () => {
 
-const AlarmModal = ({ id }) => {
+    const [cookies, setCookie] = useCookies(['roomName']);
+    const [notices, setNotices] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
     const outside = useRef();
 
@@ -26,11 +30,31 @@ const AlarmModal = ({ id }) => {
     };
 
     useEffect(() => {
+        const invitationApiUrl = `/api/notice/getusernotices`;
+
+        axios
+            .get(invitationApiUrl)
+            .then((response) => {
+                console.log('invitation is done', response);
+                setNotices(response.data);
+            })
+            .catch((error) => {
+                console.error('invitation is not done', error);
+            });
+
         window.addEventListener('click', handleClickOutside);
         return () => {
             window.removeEventListener('click', handleClickOutside);
         };
+
     }, []);
+
+    const enterRoomHandler = (notice) => {
+        console.log(notice);
+        setCookie('roomName', notice.roomName);
+        window.location.href = '/meeting';
+    }
+
 
     return (
         <div className={styles.header_member__block}>
@@ -74,50 +98,52 @@ const AlarmModal = ({ id }) => {
                             {/*  */}
                             <div className={styles.newsfeed_list_container}>
                                 <ul>
-                                    <li className={styles.newsfeed_item}>
-                                        {/* a태그 생략 */}
-                                        <div
-                                            className={
-                                                styles.newsfeed_item_read
-                                            }
-                                            style={{ display: 'none' }}
-                                        ></div>
-                                        <div
-                                            className={
-                                                styles.newsfeed_item_container
-                                            }
-                                        >
+                                    {notices.map((notice) => (
+                                        <li className={styles.newsfeed_item} onClick={() => enterRoomHandler(notice)}>
+                                            {/* a태그 생략 */}
                                             <div
                                                 className={
-                                                    styles.newsfeed_item_infobox
+                                                    styles.newsfeed_item_read
+                                                }
+                                                style={{ display: 'none' }}
+                                            ></div>
+                                            <div
+                                                className={
+                                                    styles.newsfeed_item_container
                                                 }
                                             >
-                                                <p
+                                                <div
                                                     className={
-                                                        styles.newsfeed_item_infobox__date
+                                                        styles.newsfeed_item_infobox
                                                     }
                                                 >
-                                                    초대정보 · 1분 전
-                                                </p>
-                                                <h3
-                                                    className={
-                                                        styles.newsfeed_item_infobox__title
-                                                    }
-                                                >
-                                                    {id}님으로 부터 멘토링 신청이
-                                                    도착했어요!
-                                                </h3>
-                                                <p
-                                                    className={
-                                                        styles.newsfeed_item_infobox__message
-                                                    }
-                                                >
-                                                    클릭시 수락이 되어,
-                                                    미팅방으로 입장됩니다. 💻
-                                                </p>
+                                                    <p
+                                                        className={
+                                                            styles.newsfeed_item_infobox__date
+                                                        }
+                                                    >
+                                                        초대정보 · 1분 전
+                                                    </p>
+                                                    <h3
+                                                        className={
+                                                            styles.newsfeed_item_infobox__title
+                                                        }
+                                                    >
+                                                        {notice.noticeSender}님과의 멘토링이
+                                                        활성화 되었습니다.
+                                                    </h3>
+                                                    <p
+                                                        className={
+                                                            styles.newsfeed_item_infobox__message
+                                                        }
+                                                    >
+                                                        클릭시,
+                                                        미팅방으로 입장됩니다. 💻
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>
