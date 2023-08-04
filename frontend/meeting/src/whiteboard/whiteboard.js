@@ -51,6 +51,8 @@ toggleDrawCanvasButton.addEventListener('click', () => {
 });
 
 window.onload = () => {
+    // onload 중복으로 인해 여기에 추가 (방 자동 입장)
+    autoEnterRoom();
     const canvas = document.getElementById('drawcanvas');
     canvas.addEventListener('mousedown', (e) => {
         isDrawing = true;
