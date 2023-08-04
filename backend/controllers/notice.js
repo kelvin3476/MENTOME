@@ -16,7 +16,7 @@ exports.addCommentNotice = (req, res) => {
                     User.findOne({ userId: post.writer })
                         .then(user => {
                             user.notices.push(newNotice);
-                            User.findByIdAndUpdate({ userId: post.writer }, user)
+                            User.findOneAndUpdate({ userId: post.writer }, user)
                                 .then(user => {
                                     res.json({
                                         addCommentNoticeSuccess: true,
@@ -39,25 +39,40 @@ exports.addCommentNotice = (req, res) => {
 exports.addInviteNotice = (req, res) => {
     const getCookies = req.get('Cookie');
     const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
-    const newRoomName = cookies.logInUser + req.params.userId;
+    const newRoomName = cookies.logInUser + req.params.userid;
     if (cookies.logInUser) {
         let newNotice = {};
         newNotice.noticeType = 'invite';
         newNotice.noticeSender = cookies.logInUser;
         newNotice.noticeDate = Date();
         newNotice.roomName = newRoomName;
-        newNotice.roomEnter = 'false';
-        User.findOne({ userId: req.params.userId })
+        User.findOne({ userId: req.params.userid })
             .then(user => {
                 user.notices.push(newNotice);
-                User.findByIdAndUpdate({ userId: req.params.userId }, user)
+                User.findOneAndUpdate({ userId: req.params.userid }, user)
                     .then(user => {
                         res.json({
-                            roomName: newNotice.roomName,
                             addInviteNoticeSuccess: true,
                             message: "초대 알림 추가 성공"
                         });
                     });
+            });
+        
+        let otherNotice = {};
+        otherNotice.noticeType = 'invite';
+        otherNotice.noticeSender = req.params.userid;
+        otherNotice.noticeDate = Date();
+        otherNotice.roomName = newRoomName;
+        User.findOne({ userId: cookies.logInUser })
+            .then(user => {
+                user.notices.push(otherNotice);
+                User.findOneAndUpdate({ userId: cookies.logInUser }, user)
+                    .then(user => {
+                        res.json({
+                            addInviteNoticeSuccess: true,
+                            message: "초대 알림 추가 성공"
+                        });
+                    })
             });
     } else {
         res.json({ 
