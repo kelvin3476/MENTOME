@@ -108,6 +108,11 @@ function setVideoSize2(videoElement, width) {
 
 function onVideoMetadataLoaded2() {
     setVideoSize2(this);
+
+    const videoElement = this;
+    // 동영상 크기를 video-container에 적용
+    videoContainer2.style.width = videoElement.style.width;
+    videoContainer2.style.height = videoElement.style.height;
 }
 
 function onWindowResized2() {

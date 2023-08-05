@@ -39,8 +39,9 @@ async function addSkeletonToVideo() {
         addSkeletonButton.textContent = 'Remove Skeleton'; // Add the line to change the button text
 
         // Set the canvas size to the video size
-        canvas.width = videoPlayer.videoWidth;
-        canvas.height = videoPlayer.videoHeight;
+        const videoRect = video.getBoundingClientRect();
+        canvas.width = videoRect.width;
+        canvas.height = videoRect.height;
 
         pose.setOptions({
             modelComplexity: 1,
@@ -53,7 +54,7 @@ async function addSkeletonToVideo() {
         const updatePose = async () => {
             try {
                 // pass the video element
-                await pose.send({ image: videoPlayer });
+                await pose.send({ image: video });
             } catch (error) {
                 console.error('Error in pose.send:', error);
             }
@@ -168,8 +169,9 @@ async function addSkeletonToVideo2() {
         addSkeletonButton2.textContent = 'Remove Skeleton'; // Add the line to change the button text
 
         // Set the canvas size to the video size
-        canvas2.width = videoPlayer2.videoWidth;
-        canvas2.height = videoPlayer2.videoHeight;
+        const videoRect = video2.getBoundingClientRect();
+        canvas2.width = videoRect.width;
+        canvas2.height = videoRect.height;
 
         pose2.setOptions({
             modelComplexity: 1,
