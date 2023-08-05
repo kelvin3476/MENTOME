@@ -355,7 +355,7 @@ video {
    
 }
 
-.wb_resizer {
+.resizer-webcam {
     width: 20px;
     height: 20px;
     background-color: #fff;

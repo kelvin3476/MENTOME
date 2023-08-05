@@ -1,19 +1,19 @@
 let isResizing_wb = false;
 let myStream_wb = document.querySelector('#myStream');
-let resizer_wb = document.querySelector('.wb_resizer');
+let resizer_wb = document.querySelector('.resizer-webcam');
 
-resizer_wb.addEventListener('mousedown', initResize, false);
+resizer_wb.addEventListener('mousedown', initResize_wb, false);
 
-function initResize(e) {
+function initResize_wb(e) {
     e.preventDefault();
     e.stopPropagation(); // Stop event bubbling
 
     isResizing_wb = true;
-    window.addEventListener('mousemove', resize, false);
-    window.addEventListener('mouseup', stopResize, false);
+    window.addEventListener('mousemove', resize_wb, false);
+    window.addEventListener('mouseup', stopResize_wb, false);
 }
 
-function resize(e) {
+function resize_wb(e) {
     if (!isResizing_wb) return;
 
     const newWidth = e.clientX - myStream_wb.offsetLeft;
@@ -40,10 +40,10 @@ function resize(e) {
     
 }
 
-function stopResize() {
+function stopResize_wb() {
     isResizing_wb = false;
-    window.removeEventListener('mousemove', resize, false);
-    window.removeEventListener('mouseup', stopResize, false);
+    window.removeEventListener('mousemove', resize_wb, false);
+    window.removeEventListener('mouseup', stopResize_wb, false);
 }
 
 
