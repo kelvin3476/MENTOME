@@ -12,6 +12,7 @@ const AlarmModal = () => {
     const [cookies, setCookie] = useCookies(['roomName']);
     const [notices, setNotices] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [numNotifications, setNumNotifications] = useState(0);
     const outside = useRef();
 
     // 모달 열기 이벤트 핸들러
@@ -37,6 +38,7 @@ const AlarmModal = () => {
             .then((response) => {
                 console.log('invitation is done', response);
                 setNotices(response.data);
+                setNumNotifications(response.data.length);
             })
             .catch((error) => {
                 console.error('invitation is not done', error);
@@ -63,6 +65,7 @@ const AlarmModal = () => {
                 onClick={isModalOpen ? handleCloseModal : handleOpenModal}
             >
                 <Bell />
+                {numNotifications > 0 && <span id='badge' className={`${styles.notification_count} ${styles.badge}`}>{numNotifications}</span>}
             </button>
             {isModalOpen && (
                 <>
