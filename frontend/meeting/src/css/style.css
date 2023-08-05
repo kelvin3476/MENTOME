@@ -282,8 +282,9 @@ video {
 /* 동영상 */
 #myFace,
 #peerFace {
-    width: 300px;
-    height: 200px;
+    box-sizing: border-box;
+    width: 352px;
+    height: 198px;
     flex-shrink: 0;
     border-radius: 15px 15px 15px 15px;
     border: 1px solid #000;
@@ -330,4 +331,39 @@ video {
     background: #fff;
     width: 60px;
     height: 60px;
+}
+
+
+#myStream {
+    position: relative;
+    width: 704px;
+    height: 198px;
+    border: 1px solid #000;
+}
+
+
+.webcam-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.webcam-wrapper video {
+    width:50%;
+    height:100%;
+   object-fit: cover;
+   
+}
+
+.wb_resizer {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #000;
+    position: absolute; /* Positioned relative to the #videoContainer element */
+    bottom: 0;
+    right: 0;
+    cursor: se-resize;
+    pointer-events: auto;
+    z-index: 300;
 }

@@ -73,12 +73,16 @@
                     controls
                     style="display: none"
                 ></canvas>
+                <!-- 김현수 수정 2개의 웹캠 리사이즈 -->
                 <div id="call">
                     <div id="myStream">
-                        <video id="myFace" autoplay playsinline></video>
-                        <video id="peerFace" autoplay playsinline></video>
+                        <div class="webcam-wrapper">
+                            <video id="myFace" autoplay playsinline></video>
+                            <video id="peerFace" autoplay playsinline></video>
+                        </div>
+                        <div class="wb_resizer"></div>
                     </div>
-                </div>
+                </div> 
             </main>
             <!-- Toolbar -->
             <footer>
@@ -156,6 +160,7 @@
             <script src="./src/skeleton-similarity/similarity.js"></script>
             <script src="./src/action/action.js"></script>
             <script src="./src/action/action2.js"></script>
+            <script src="./src/action/action_webcam.js"></script>
             <script src="./src/enterroom/enterroom.js"></script>
 
             <!-- 추가해야하는 것들 -->

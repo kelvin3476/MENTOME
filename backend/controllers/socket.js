@@ -235,5 +235,8 @@ exports.socketManagement = io => {
             socket.to(roomName).emit("impact3");
         });
 
+        socket.on('resize_wb',function(webcamData,roomName){
+            socket.to(roomName).emit('resize_wb', webcamData);
+        });
     });
 };
