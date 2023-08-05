@@ -320,8 +320,8 @@ video {
 #myFace,
 #peerFace {
     box-sizing: border-box;
-    width: 320px;
-    height: 180px;
+    width: 352px;
+    height: 198px;
     flex-shrink: 0;
     border-radius: 15px 15px 15px 15px;
     border: 1px solid #000;
@@ -373,19 +373,19 @@ video {
 
 #myStream {
     position: relative;
-    width: 640px;
-    height: 180px;
+    width: 704px;
+    height: 198px;
     border: 1px solid #000;
 }
 
 
-.video-wrapper_wb {
+.webcam-wrapper {
     display: flex;
     width: 100%;
     height: 100%;
 }
 
-.video-wrapper_wb video {
+.webcam-wrapper video {
     width:50%;
     height:100%;
    object-fit: cover;
@@ -402,4 +402,5 @@ video {
     right: 0;
     cursor: se-resize;
     pointer-events: auto;
+    z-index: 300;
 }
