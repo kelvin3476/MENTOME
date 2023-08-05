@@ -67,6 +67,65 @@ button {
     align-items: center;
 }
 
+.notification_count {
+    animation: pulse 1.5s 1;
+}
+
+.notification_count:after {
+    animation: sonar 1.5s 1;
+}
+
+.badge {
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: red; /* You can change the background color as per your design */
+    color: white; /* You can change the text color as per your design */
+    border-radius: 50%;
+    border: 2px solid white; /* You can add a border if needed */
+}
+
+@keyframes sonar {
+    0% {
+        transform: scale(.9);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.4);
+    }
+
+    50% {
+        transform: scale(.9);
+    }
+
+    80% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .header_member__link {
     display: inline-flex;
     padding: 4px;

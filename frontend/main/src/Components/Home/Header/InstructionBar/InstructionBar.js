@@ -1,3 +1,4 @@
+import HeaderRightImg from '../../../Assets/Image/HeaderRightImg';
 import styles from './InstructionBar.module.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -16,7 +17,7 @@ const InstructionBar = () => {
                     <Col xs={2} md={4}>
                         <div className={styles.rightDiv}>
                             <div className={styles.HeaderImg}>
-                                <img src='../../../Assets/Image/MainImg.png' />
+                                <HeaderRightImg />
                             </div>
                         </div>
                     </Col>

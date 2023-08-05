@@ -99,7 +99,6 @@ socket.on("drag_video_container", (data) => {
 });
 
 
-
 // video-container 사이즈 같게 하기
 function setVideoSize(videoElement, width) {
     const aspectRatio = videoElement.videoWidth / videoElement.videoHeight;
@@ -109,6 +108,11 @@ function setVideoSize(videoElement, width) {
 
 function onVideoMetadataLoaded() {
     setVideoSize(this);
+
+    const videoElement = this;
+    // 동영상 크기를 video-container에 적용
+    videoContainer.style.width = videoElement.style.width;
+    videoContainer.style.height = videoElement.style.height;
 }
 
 function onWindowResized() {

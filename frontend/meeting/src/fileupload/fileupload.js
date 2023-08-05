@@ -7,7 +7,7 @@ const fileUploadForm2 = document.getElementById('fileUpload2');
 const selectedFileInput2 = document.getElementById('selectedFile2');
 
 // 파일 업로드
-fileUploadForm.addEventListener('submit', (event) => {
+fileUploadForm.addEventListener('change', (event) => {
     event.preventDefault();
 
     // 만약 스켈레톤이 활성화되어 있다면 제거
@@ -49,7 +49,7 @@ fileUploadForm.addEventListener('submit', (event) => {
     }
 });
 
-fileUploadForm2.addEventListener('submit', (event) => {
+fileUploadForm2.addEventListener('change', (event) => {
     event.preventDefault();
 
     // 만약 스켈레톤이 활성화되어 있다면 제거
