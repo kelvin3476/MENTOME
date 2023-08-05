@@ -6,9 +6,9 @@ function extractSkeletonCoordinates(results, bodyPart) {
     if (bodyPart === 'upperBody') {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24];
     } else if (bodyPart === 'lowerBody') {
-        indices = [23, 24, 25, 26, 27, 28, 29, 30];
+        indices = [23, 24, 25, 26, 27, 28];
     } else {
-        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28, 29, 30];
+        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
 
 
@@ -32,9 +32,9 @@ function extractSkeletonCoordinates2(results, bodyPart) {
     if (bodyPart === 'upperBody') {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24];
     } else if (bodyPart === 'lowerBody') {
-        indices = [23, 24, 25, 26, 27, 28, 29, 30];
+        indices = [23, 24, 25, 26, 27, 28];
     } else {
-        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28, 29, 30];
+        indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
 
     if (results && results.poseLandmarks) {
@@ -156,11 +156,11 @@ function calculateSimilarity() {
         // const maxFullBodySimilarity = 2;
         // const minFullBodySimilarity = 0.25;
 
-        const maxUpperBodySimilarity = 2.5;
-        const minUpperBodySimilarity = 0.35;
+        const maxUpperBodySimilarity = 2.8;
+        const minUpperBodySimilarity = 0.4;
 
-        const maxLowerBodySimilarity = 2.4;
-        const minLowerBodySimilarity = 0.03;
+        const maxLowerBodySimilarity = 2.1;
+        const minLowerBodySimilarity = 0.3;
 
 
         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
