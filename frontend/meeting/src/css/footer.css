@@ -170,6 +170,33 @@
     background-color: #8eb6f7;
 }
 
+.impactTimeReset {
+    position: relative;
+    z-index: 1;
+
+    width: 40px;
+    height: 40px;
+    background-color: var(--hotlane-custom-background-color);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.535);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    fill: #fff;
+}
+
+.impactTimeReset:hover {
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.535);
+}
+
+.impactTimeReset.false {
+    fill: #fff;
+    background-color: #eb5144;
+}
+
 /* 채팅 토글 제목 버튼 */
 /* #ToggleChat {
     border: 1px solid #000;
