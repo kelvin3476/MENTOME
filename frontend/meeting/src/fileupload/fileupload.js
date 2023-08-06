@@ -127,7 +127,7 @@ const uploadedFile2 = document.getElementById('uploadedFile2');
 
 // 파일 업로드 toggle 버튼
 
-selectedFileInput.addEventListener('click', () => {
+fileUploadForm.addEventListener('click', () => {
     if (uploadedFile.style.display === 'none') {
         uploadedFile.style.display = 'block';
     } else {
@@ -137,7 +137,7 @@ selectedFileInput.addEventListener('click', () => {
 
 // 파일 업로드 toggle 버튼2
 
-selectedFileInput2.addEventListener('click', () => {
+fileUploadForm2.addEventListener('click', () => {
     if (uploadedFile2.style.display === 'none') {
         uploadedFile2.style.display = 'block';
     } else {
