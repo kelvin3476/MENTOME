@@ -5,15 +5,15 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>멘토미</title>
-        <!-- <link rel="stylesheet" href="https://unpkg.com/mvp.css" /> -->
         <link rel="stylesheet" href="./src/css/style.css" />
+        <link rel="stylesheet" href="./src/css/footer.css" />
+
         <link rel="stylesheet" href="./src/css/font.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
 
     <body>
@@ -54,12 +54,12 @@
                 </div>
                 <!-- 비디오 업로드 -->
                 <div id="uploadedFile" class="video-container">
-                    <canvas id="canvas" style="position: absolute;" width="100%" height="100%"></canvas>
+                    <canvas id="canvas" style="position: absolute" width="100%" height="100%"></canvas>
                     <video id="fileDisplay" controls loop crossorigin="anonymous"></video>
                     <div class="resizer"></div>
                 </div>
                 <div id="uploadedFile2" class="video-container2">
-                    <canvas id="canvas2" style="position: absolute;" width="100%" height="100%"></canvas>
+                    <canvas id="canvas2" style="position: absolute" width="100%" height="100%"></canvas>
                     <video id="fileDisplay2" controls loop crossorigin="anonymous"></video>
                     <div class="resizer2"></div>
                 </div>
@@ -82,57 +82,299 @@
                         </div>
                         <div class="resizer-webcam"></div>
                     </div>
-                </div> 
+                </div>
+                <!-- 그림판 툴즈 바 -->
+                <!-- 임시보관 : reference : https://paint.sumo.app/?lang=ko -->
+                <div id="canvas-tools-wrapper" style="justify-content: flex-start; opacity: 1">
+                    <!-- guide -->
+                    <div id="canvas-tools-inner-wrapper">
+                        <button id="clearCanvasButton">지우기</button>
+                        <input id="color" type="color" />
+                        <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
+                    </div>
+                </div>
             </main>
             <!-- Toolbar -->
             <footer>
-                <button id="toggleDrawCanvasButton" class="buttonactive" onclick="changeColor()">그리기</button>
-                <button id="clearCanvasButton">지우기</button>
-                <input id="color" type="color" />
-                <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" />
-                <!-- 파일 업로드 -->
-                <!-- 파일 업로드 1 -->
-                <form id="fileUpload" style="display: block">
-                    <input type="file" id="selectedFile" required />
-                    <button type="submit">Upload</button>
-                </form>
-                <!-- 파일 업로드 2 -->
-                <form id="fileUpload2" style="display: block">
-                    <input type="file" id="selectedFile2" required />
-                    <button type="submit">Upload2</button>
-                </form>
-                <!-- 파일 업로드 -->
-                <!-- 스켈레톤 이미지 씌우기 -->
-                <button id="addSkeletonButton">Add Skeleton</button>
-                <button id="addSkeletonButton2">Add Skeleton2</button>
+                <div class="footer-position-head">
+                    <div class="footer-color-head footer-unknown-size footer-layout footer-color-setting">
+                        <!-- 왼쪽 Layout  -->
+                        <div class="footer-left-layout-header">
+                            <button></button>
+                        </div>
+                        <!-- 생략 -->
+                        <!-- 가운데 Layout -->
+                        <div class="footer-mid-layout-header">
+                            <div class="footer-mid-layout-body">
+                                <!-- 마이크 버튼 -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <!-- icon detail -->
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span data-is-tooltip-wrapper="true">
+                                                <button class="mic-button" id="mute" onclick="toggleMic()">
+                                                    <svg focusable="false" width="20" height="20" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"
+                                                        ></path>
+                                                        <path
+                                                            d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"
+                                                        ></path>
+                                                    </svg>
+                                                    <!-- <div class="tooltip">
+                                                                <p>마이크</p>
+                                                            </div> -->
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 카메라 버튼 -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span>
+                                                <button class="camera-button" id="camera" onclick="toggleCamera()">
+                                                    <svg
+                                                        focusable="false"
+                                                        width="20"
+                                                        height="20"
+                                                        viewBox="0 0 24 24"
+                                                        class="Hdh4hc cIGbvc NMm5M"
+                                                    >
+                                                        <path
+                                                            d="M18 10.48V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4.48l4 3.98v-11l-4 3.98zm-2-.79V18H4V6h12v3.69z"
+                                                        ></path>
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <!-- 스켈레톤 이미지 씌우기 -->
-                <!-- 유사도 측정버튼 -->
-                <button id="measureSimilarity">similarity</button>
-                <span class="msg">
-                    유사도 전체 분석 비율: <span class="full-body-similarity"></span>%<br />
-                    상체: <span class="upper-body-similarity"></span>%<br />
-                    하체: <span class="lower-body-similarity"></span>%
-                </span>
-
-                <span class="fas fa-times">close</span>
-                <div id="controls">
-                    <select id="cameras" class="custom-select">
-                        camera
-                    </select>
-
-                    <button id="mute">mute</button>
-
-                    <button id="camera" class="camera-btn">camera</button>
+                                <!-- 그림판 - PEN -->
+                                <!-- <button class="camera-button" id="camera" onclick="toggleCamera()" > -->
+                                <!-- <button id="toggleDrawCanvasButton" class="buttonactive" onclick="changeColor()">그리기</button>
+                                    
+                                     <button id="clearCanvasButton">지우기</button>
+                                     <input id="color" type="color" />
+                                     <input id="line-width" type="range" min="1" max="10" value="5" step="0.5" /> -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span>
+                                                <button
+                                                    id="toggleDrawCanvasButton"
+                                                    class="canvas-pen-button"
+                                                    onclick="toggleCanvasPen()"
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="20"
+                                                        viewBox="0 -960 960 960"
+                                                        width="20"
+                                                    >
+                                                        <g transform="translate(60,0)">
+                                                            <path
+                                                                d="M560-120q-12 0-21-9t-9-21q0-13 9-21.5t21-8.5q59 0 99.5-24t40.5-56q0-23-29.5-45T591-339l47-47q63 19 92.5 52.5T760-260q0 67-61 103.5T560-120ZM240-414q-64-14-92-44t-28-62q0-35 26-63t120-62q66-24 85-39t19-35q0-25-22-43t-68-18q-27 0-46 7t-34 22q-8 8-20.5 9.5T157-748q-11-8-11.5-20t7.5-21q17-22 51-36.5t76-14.5q68 0 109 32.5t41 88.5q0 41-28.5 69.5T290-590q-67 25-88.5 39.5T180-520q0 16 27 30.5t81 27.5l-48 48Zm496-154L608-696l45-45q18-18 40-18t40 18l48 48q18 18 18 40t-18 40l-45 45ZM220-180h42l345-345-42-42-345 345v42Zm-60 60v-128l405-405 128 128-405 405H160Zm405-447 42 42-42-42Z"
+                                                            />
+                                                        </g>
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- upload button -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span>
+                                                <!-- onclick="toggleCanvasPen()" -->
+                                                <button id="upload-dropdown-button" class="toggleUploadbutton">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="24"
+                                                        viewBox="0 -960 960 960"
+                                                        width="24"
+                                                    >
+                                                        <path
+                                                            d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <div id="upload-dropdown-content">
+                                                    <form id="fileUpload" style="display: block">
+                                                        <input type="file" id="selectedFile" required />
+                                                    </form>
+                                                    <!-- 파일 업로드 2 -->
+                                                    <form id="fileUpload2" style="display: block">
+                                                        <input type="file" id="selectedFile2" required />
+                                                    </form>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add skeleton -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span>
+                                                <button id="skeleton-dropdown-button" class="toggleAddSkeletonbutton">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="24"
+                                                        viewBox="0 -960 960 960"
+                                                        width="24"
+                                                    >
+                                                        <path
+                                                            d="M394-80q-16-47-24-92.5t-10-86q-2-40.5-.5-74.5t4.5-58q-1 0 0 0-22-5-50.5-12.5t-61-20.5Q220-437 186-455.5T119-500l50-70q39 35 81.5 55.5t78.5 32q36 11.5 60 15l24 3.5q18 1 28.5 15t7.5 32l-4.5 33.5q-4.5 33.5-5 83.5t7.5 109q8 59 33 111h-86Zm366 0h-80v-423q0-48-25.5-87T586-649L313-772l49-67 257 117q64 29 102.5 88T760-503v423ZM540-201q9 0 17-4t13-10q6 6 14 10t16 4q17 0 28.5-11.5T640-241q0-17-11.5-28.5T600-281v-159q17 0 28.5-11.5T640-480q0-17-11.5-28.5T600-520q-8 0-16 3.5t-14 9.5q-5-6-13-9.5t-17-3.5q-17 0-28.5 11.5T500-480q0 17 11.5 28.5T540-440v159q-17 0-28.5 11.5T500-241q0 17 11.5 28.5T540-201ZM480-80q-25-52-33-111t-7.5-109q.5-50 5-83.5L449-417q3-18-7.5-32T413-464l-24-3.5q-24-3.5-60-15t-78.5-32Q208-535 169-570q39 35 81.5 55.5t78.5 32q36 11.5 60 15l24 3.5q18 1 28.5 15t7.5 32l-4.5 33.5q-4.5 33.5-5 83.5t7.5 109q8 59 33 111Z"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <div id="skeleton-dropdown-content">
+                                                    <button id="addSkeletonButton">Add Skeleton</button>
+                                                    <button id="addSkeletonButton2">Add Skeleton2</button>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Impact -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span>
+                                                <button id="impact-dropdown-button" class="canvas-pen-button">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="24"
+                                                        viewBox="0 -960 960 960"
+                                                        width="24"
+                                                    >
+                                                        <path
+                                                            d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <div id="impact-dropdown-content">
+                                                    <button id="impactTime1">Impact Time 1</button>
+                                                    <button id="impactTime2">Impact Time 2</button>
+                                                    <button id="impactTime3">Impact Time 3</button>
+                                                    <button id="impactTimeReset">Impact Time Reset</button>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Similarity -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span>
+                                                <button id="measureSimilarity" class="canvas-pen-button">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="24"
+                                                        viewBox="0 -960 960 960"
+                                                        width="24"
+                                                    >
+                                                        <path
+                                                            d="M400-720q-33 0-56.5-23.5T320-800q0-33 23.5-56.5T400-880q33 0 56.5 23.5T480-800q0 33-23.5 56.5T400-720Zm260 480q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM864-80 756-188q-22 14-46 21t-50 7q-75 0-127.5-52.5T480-340q0-75 52.5-127.5T660-520q75 0 127.5 52.5T840-340q0 26-7 50t-21 46l108 108-56 56Zm-424 0v-121q15 24 35.5 44t44.5 36v41h-80Zm-160 0v-520q-61-5-121-14.5T40-640l20-80q84 23 168.5 31.5T400-680q87 0 171.5-8.5T740-720l20 80q-59 16-119 25.5T520-600v41q-54 35-87 92.5T400-340v10q0 5 1 10h-41v240h-80Z"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Exit -->
+                                <div class="footer-mid-layout-button-header">
+                                    <div class="footer-mid-layout-button-body">
+                                        <div class="footer-mid-layout-button-detail">
+                                            <span>
+                                                <button class="exit-button">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="24"
+                                                        viewBox="0 -960 960 960"
+                                                        width="24"
+                                                    >
+                                                        <path
+                                                            d="m136-304-92-90q-12-12-12-28t12-28q88-95 203-142.5T480-640q118 0 232.5 47.5T916-450q12 12 12 28t-12 28l-92 90q-11 11-25.5 12t-26.5-8l-116-88q-8-6-12-14t-4-18v-114q-38-12-78-19t-82-7q-42 0-82 7t-78 19v114q0 10-4 18t-12 14l-116 88q-12 9-26.5 8T136-304Zm104-198q-29 15-56 34.5T128-424l40 40 72-56v-62Zm480 2v60l72 56 40-38q-29-26-56-45t-56-33Zm-480-2Zm480 2Z"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- div -->
+                            </div>
+                        </div>
+                        <!-- right -->
+                        <div class="footer-right-layout-header">
+                            <div class="footer-right-layout-body">
+                                <div class="footer-right-chat-button-head">
+                                    <button
+                                        class="VfPpkd-Bz112c-LgbsSe yHy1rc eT1oJ JsuyRc boDUxc"
+                                        data-disable-idom="true"
+                                        aria-label="모든 사용자와 채팅"
+                                        style="
+                                            --mdc-ripple-fg-size: 28px;
+                                            --mdc-ripple-fg-scale: 1.7142857142857142;
+                                            --mdc-ripple-left: 10px;
+                                            --mdc-ripple-top: 10px;
+                                        "
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            height="24"
+                                            viewBox="0 -960 960 960"
+                                            width="24"
+                                            color="#000"
+                                        >
+                                            <path
+                                                d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <!-- <div id="room">
+                                        <h3></h3>
+                                        <div class="chat">
+                                            <div id="chat-info">
+                                                <p id="info"></p>
+                                                <div id="SendMessage-Container">
+                                                    <form id="msg">
+                                                        <input id="SendMessage" required type="text" />
+                                                        <button id="Send-Btn"></button>
+                                                    </form>
+                                                </div>
+                                                <form id="name">
+                                                    <input placeholder="nickname" required type="text" />
+                                                    <button>Save</button>
+                                                </form>
+                                            </div>
+                                            <button id="ToggleChat" onclick="handleToggleChat()">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    height="20"
+                                                    viewBox="0 -960 960 960"
+                                                    width="20"
+                                                >
+                                                    <path
+                                                        d="M240-384h336v-72H240v72Zm0-132h480v-72H240v72Zm0-132h480v-72H240v72ZM96-96v-696q0-29.7 21.15-50.85Q138.3-864 168-864h624q29.7 0 50.85 21.15Q864-821.7 864-792v480q0 29.7-21.15 50.85Q821.7-240 792-240H240L96-96Zm114-216h582v-480H168v522l42-42Zm-42 0v-480 480Z"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button id="exit">exit</button>
-
-                <button class="dropbtn-impact" onclick="toggleDropdownImpact()">impact 모음</button>
-                <button id="impactTime1">Impact Time 1</button>
-                <button id="impactTime2">Impact Time 2</button>
-                <button id="impactTime3">Impact Time 3</button>
-                <button id="impactTimeReset">Impact Time Reset</button>
-                <button id="testbutton">log skeleton</button>
             </footer>
 
             <!-- 자바스크립트 -->
@@ -162,6 +404,8 @@
             <script src="./src/action/action2.js"></script>
             <script src="./src/action/action_webcam.js"></script>
             <script src="./src/enterroom/enterroom.js"></script>
+            <script src="./src/toolbar/toolbar.js"></script>
+            <script src="./src/toolbar/SkeletonButton.js"></script>
 
             <!-- 추가해야하는 것들 -->
         </div>
