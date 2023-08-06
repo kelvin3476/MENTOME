@@ -137,16 +137,16 @@ const PostDetail = () => {
             .then((response) => {
                 toast.success('멘토링 초대가 완료되었습니다.', {
                     position: 'top-center',
-                    // autoClose: 2000,
+                    autoClose: 1000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
                     theme: 'light',
-                    // onClose: () => {
-                    //     window.location.reload();
-                    // },
+                    onClose: () => {
+                        // window.location.reload();
+                    },
                 })
             })
             .catch((error) => {
@@ -247,7 +247,7 @@ const PostDetail = () => {
                                                                     </Dropdown>
                                                                     <ToastContainer
                                                                         position='top-center'
-                                                                        autoClose={2000}
+                                                                        autoClose={1000}
                                                                         hideProgressBar={false}
                                                                         newestOnTop={false}
                                                                         closeOnClick
