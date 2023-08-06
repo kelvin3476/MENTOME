@@ -123,11 +123,6 @@ const PostDetail = () => {
         }
     };
 
-    // const notify = (event) => {
-    //     event.preventDefault();
-
-    // };
-
     const invitationHandler = (userid) => {
 
         const invitationApiUrl = `/api/notice/addinvitenotice/${userid}`;
@@ -144,9 +139,6 @@ const PostDetail = () => {
                     draggable: true,
                     progress: undefined,
                     theme: 'light',
-                    onClose: () => {
-                        // window.location.reload();
-                    },
                 })
             })
             .catch((error) => {

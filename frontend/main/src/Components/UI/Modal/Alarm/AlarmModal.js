@@ -56,9 +56,6 @@ const AlarmModal = () => {
                             draggable: true,
                             progress: undefined,
                             theme: 'light',
-                            onClose: () => {
-                                // window.location.reload();
-                            }
                         });
                     }
                     setNoticeCount(response.data.length);
@@ -98,6 +95,7 @@ const AlarmModal = () => {
                 {numNotifications > 0 && <span id='badge' className={`${styles.notification_count} ${styles.badge}`}>{numNotifications}</span>}
             </button>
             <ToastContainer
+                className={styles.toastify}
                 position='top-center'
                 autoClose={1000}
                 hideProgressBar={false}
