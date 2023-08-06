@@ -387,7 +387,7 @@ video {
 
 #call {
     top: 0px;
-    position: absolute;
+    /* position: absolute; */
     z-index: 500;
 }
 
