@@ -40,7 +40,7 @@ exports.addCommentNotice = (req, res) => {
 exports.addInviteNotice = (req, res) => {
     const getCookies = req.get('Cookie');
     const cookies = Object.fromEntries(getCookies.split('; ').map(cookie => cookie.split('=')));
-    const newRoomName = cookies.logInUser + req.params.userid;
+    const newRoomName = cookies.logInUser + '-' +req.params.userid;
     if (cookies.logInUser) {
         let newNotice = {};
         newNotice.noticeType = 'invite';

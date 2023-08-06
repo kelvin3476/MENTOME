@@ -6,6 +6,8 @@ import { Bell } from 'react-bootstrap-icons';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 const AlarmModal = () => {
 
@@ -13,7 +15,10 @@ const AlarmModal = () => {
     const [notices, setNotices] = useState([]);
     const [isModalOpen, setModalOpen] = useState(false);
     const [numNotifications, setNumNotifications] = useState(0);
+    const [noticeCount, setNoticeCount] = useState(0);
+    const [firstCount, setfirstCount] = useState(0);
     const outside = useRef();
+    const [logInUser] = useCookies(['logInUser']);
 
     // 모달 열기 이벤트 핸들러
     const handleOpenModal = () => {
@@ -31,29 +36,54 @@ const AlarmModal = () => {
     };
 
     useEffect(() => {
-        const invitationApiUrl = `/api/notice/getusernotices`;
-
-        axios
-            .get(invitationApiUrl)
-            .then((response) => {
-                console.log('invitation is done', response);
-                setNotices(response.data);
-                setNumNotifications(response.data.length);
-            })
-            .catch((error) => {
-                console.error('invitation is not done', error);
-            });
-
+        const fetchNotices = () => {
+            const invitationApiUrl = `/api/notice/getusernotices`;
+    
+            axios
+                .get(invitationApiUrl)
+                .then((response) => {
+                    console.log('invitation is done', response);
+                    setNotices(response.data);
+                    setNumNotifications(response.data.length);
+    
+                    if (noticeCount < response.data.length && firstCount == 1 && logInUser.logInUser !== response.data[response.data.length - 1].roomName.split('-')[0]) {
+                        toast.success('새로운 알림이 있습니다.', {
+                            position: 'top-center',
+                            autoClose: 1000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: 'light',
+                            onClose: () => {
+                                // window.location.reload();
+                            }
+                        });
+                    }
+                    setNoticeCount(response.data.length);
+                    setfirstCount(1);
+                })
+                .catch((error) => {
+                    console.error('invitation is not done', error);
+                });
+        };
+    
+        fetchNotices(); // Fetch initially
+    
+        const intervalId = setInterval(fetchNotices, 2000); // Fetch every 2 seconds
+    
         window.addEventListener('click', handleClickOutside);
         return () => {
+            clearInterval(intervalId); // Clear the interval on component unmount
             window.removeEventListener('click', handleClickOutside);
         };
 
-    }, []);
+    }, [noticeCount, firstCount]);
 
     const enterRoomHandler = (notice) => {
         console.log(notice);
-        setCookie('roomName', notice.roomName);
+        setCookie('roomName', notice.roomName, { path: '/' });
         window.location.href = '/meeting';
     }
 
@@ -67,6 +97,18 @@ const AlarmModal = () => {
                 <Bell />
                 {numNotifications > 0 && <span id='badge' className={`${styles.notification_count} ${styles.badge}`}>{numNotifications}</span>}
             </button>
+            <ToastContainer
+                position='top-center'
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light' 
+            />
             {isModalOpen && (
                 <>
                     <div
