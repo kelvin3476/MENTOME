@@ -36,26 +36,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- 채팅 완료 -->
-                <!-- <div id="room">
-                    <h3></h3>
-                    <div class="chat">
-                        <input id="ToggleChat" type="button" value="Chat" onclick="handleToggleChat()" />
-                        <div id="chat-info">
-                            <p id="info"></p>
-                            <div id="SendMessage-Container">
-                                <form id="msg">
-                                    <input id="SendMessage" required type="text" />
-                                    <button id="Send-Btn"></button>
-                                </form>
-                            </div>
-                            <form id="name">
-                                <input placeholder="nickname" required type="text" />
-                                <button>Save</button>
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
+                <!-- 유사도 -->
+                <div class="alert" id="similarityAlert">
+                    유사도 전체 분석 비율: <span class="full-body-similarity"></span>% | 상체:
+                    <span class="upper-body-similarity"></span>% | 하체: <span class="lower-body-similarity"></span>%
+                </div>
                 <!-- 비디오 업로드 -->
                 <div id="uploadedFile" class="video-container" style="display: none">
                     <canvas id="canvas" style="position: absolute" width="100%" height="100%"></canvas>
@@ -315,7 +300,11 @@
                                     <div class="footer-mid-layout-button-body">
                                         <div class="footer-mid-layout-button-detail">
                                             <span>
-                                                <button id="measureSimilarity" class="canvas-pen-button">
+                                                <button
+                                                    id="measureSimilarity"
+                                                    class="canvas-pen-button"
+                                                    onclick="showAlert()"
+                                                >
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         height="24"
@@ -418,7 +407,22 @@
             <script src="./src/enterroom/enterroom.js"></script>
 
             <!-- 추가해야하는 것들 -->
-            <script></script>
+            <script>
+                function showAlert() {
+                    // 예시 값을 설정합니다.
+                    document.querySelector('.full-body-similarity').textContent = '85';
+                    document.querySelector('.upper-body-similarity').textContent = '80';
+                    document.querySelector('.lower-body-similarity').textContent = '90';
+
+                    // 알림창을 하단 바 위로 이동 (하단 바의 높이를 4rem으로 설정)
+                    document.getElementById('similarityAlert').style.bottom = '6rem';
+
+                    // 3초 후에 알림창을 다시 화면 밖으로 이동
+                    setTimeout(() => {
+                        document.getElementById('similarityAlert').style.bottom = '-100px';
+                    }, 3000);
+                }
+            </script>
         </div>
     </body>
 </html>
