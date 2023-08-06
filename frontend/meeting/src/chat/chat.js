@@ -1,5 +1,6 @@
 const form = welcome.querySelector('form');
 const room = document.getElementById('room');
+const userName = document.cookie.split('; ').find(row => row.startsWith('logInUser=')).split('=')[1];
 
 room.hidden = true;
 
@@ -15,7 +16,7 @@ function handleMessageSubmit(event) {
     const input = room.querySelector('#msg input');
     const value = input.value;
     socket.emit('new_message', input.value, roomName, () => {
-        addMessage(`You: ${value}`);
+        addMessage(`${userName}: ${value}`);
     });
     input.value = '';
 }

@@ -50,7 +50,11 @@ exports.socketManagement = io => {
         });
     
         // Handle nickname and messages
-        socket["nickname"] = "Anon";
+        // socket["nickname"] = "Anon";
+        socket["nickname"] = socket.handshake.headers.cookie
+                .split("; ")
+                .find((row) => row.startsWith("logInUser="))
+                .split("=")[1];
         socket.onAny((event) => {
             // console.log(io.sockets.adapter);
             // console.log(`socket Event: ${event}`);
