@@ -121,3 +121,26 @@ function toggleDropdown() {
     const dropdownContent = document.getElementById('dropdownContent');
     dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
 }
+
+const uploadedFile = document.getElementById('uploadedFile');
+const uploadedFile2 = document.getElementById('uploadedFile2');
+
+// 파일 업로드 toggle 버튼
+
+fileUploadForm.addEventListener('click', () => {
+    if (uploadedFile.style.display === 'none') {
+        uploadedFile.style.display = 'block';
+    } else {
+        uploadedFile.style.display = 'none';
+    }
+});
+
+// 파일 업로드 toggle 버튼2
+
+fileUploadForm2.addEventListener('click', () => {
+    if (uploadedFile2.style.display === 'none') {
+        uploadedFile2.style.display = 'block';
+    } else {
+        uploadedFile2.style.display = 'none';
+    }
+});
