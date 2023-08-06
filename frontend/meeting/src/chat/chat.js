@@ -40,7 +40,7 @@ function showRoom() {
     welcome.hidden = true;
     room.hidden = false;
     const h3 = room.querySelector('h3');
-    h3.innerText = `${roomName}`;
+    // h3.innerText = `${roomName}`;
     const msgForm = room.querySelector('#msg');
     const nameForm = room.querySelector('#name');
     msgForm.addEventListener('submit', handleMessageSubmit);
@@ -66,7 +66,7 @@ form.addEventListener('submit', handleRoomSubmit);
 socket.on('welcome', (user, newCount) => {
     const h3 = room.querySelector('h3');
     // h3.innerText = `Room ${roomName} (${newCount})`;
-    h3.innerText = `Room ${roomName}`;
+    // h3.innerText = `Room ${roomName}`;
     // addMessage(`${user} arrived!`);
 });
 
