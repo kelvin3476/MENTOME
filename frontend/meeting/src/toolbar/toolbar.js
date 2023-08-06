@@ -113,3 +113,13 @@ function toggleCanvasPen() {
 
     CanvasPenIcon.outerHTML = CanvasPenButton.classList.contains('false') ? falseIcon : trueIcon;
 }
+
+function toggleCanvasButton() {
+    socket.emit('toggleCanvasToServer', roomName);
+    toggleCanvasPen();
+}
+
+socket.on('toggleCanvasToClient', () => {
+    console.log("respone");
+    toggleCanvasPen();
+});
