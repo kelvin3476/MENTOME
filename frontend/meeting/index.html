@@ -174,24 +174,29 @@
                                     <div class="footer-mid-layout-button-body">
                                         <!-- icon detail -->
                                         <div class="footer-mid-layout-button-detail">
-                                            <span data-is-tooltip-wrapper="true">
-                                                <button class="mic-button" id="mute" onclick="toggleMic()">
-                                                    <svg focusable="false" width="20" height="20" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"
-                                                        ></path>
-                                                        <path
-                                                            d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"
-                                                        ></path>
-                                                    </svg>
-                                                    <!-- <div class="tooltip">
-                                                                <p>마이크</p>
-                                                            </div> -->
-                                                </button>
-                                            </span>
+                                            <button
+                                                class="mic-button"
+                                                id="mute"
+                                                onclick="toggleMic()"
+                                                data-tooltip="tooltip-mic"
+                                            >
+                                                <svg focusable="false" width="20" height="20" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"
+                                                    ></path>
+                                                    <path
+                                                        d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"
+                                                    ></path>
+                                                </svg>
+                                                <span class="tooltiptext">마이크</span>
+                                                <!-- <div class="tooltip">
+                                                            <p>마이크</p>
+                                                        </div> -->
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- 카메라 버튼 -->
                                 <div class="footer-mid-layout-button-header">
                                     <div class="footer-mid-layout-button-body">
@@ -209,6 +214,7 @@
                                                             d="M18 10.48V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4.48l4 3.98v-11l-4 3.98zm-2-.79V18H4V6h12v3.69z"
                                                         ></path>
                                                     </svg>
+                                                    <span class="tooltiptext">카메라</span>
                                                 </button>
                                             </span>
                                         </div>
@@ -243,6 +249,7 @@
                                                             />
                                                         </g>
                                                     </svg>
+                                                    <span class="tooltiptext">그림판</span>
                                                 </button>
                                             </span>
                                         </div>
@@ -265,6 +272,7 @@
                                                             d="M394-80q-16-47-24-92.5t-10-86q-2-40.5-.5-74.5t4.5-58q-1 0 0 0-22-5-50.5-12.5t-61-20.5Q220-437 186-455.5T119-500l50-70q39 35 81.5 55.5t78.5 32q36 11.5 60 15l24 3.5q18 1 28.5 15t7.5 32l-4.5 33.5q-4.5 33.5-5 83.5t7.5 109q8 59 33 111h-86Zm366 0h-80v-423q0-48-25.5-87T586-649L313-772l49-67 257 117q64 29 102.5 88T760-503v423ZM540-201q9 0 17-4t13-10q6 6 14 10t16 4q17 0 28.5-11.5T640-241q0-17-11.5-28.5T600-281v-159q17 0 28.5-11.5T640-480q0-17-11.5-28.5T600-520q-8 0-16 3.5t-14 9.5q-5-6-13-9.5t-17-3.5q-17 0-28.5 11.5T500-480q0 17 11.5 28.5T540-440v159q-17 0-28.5 11.5T500-241q0 17 11.5 28.5T540-201ZM480-80q-25-52-33-111t-7.5-109q.5-50 5-83.5L449-417q3-18-7.5-32T413-464l-24-3.5q-24-3.5-60-15t-78.5-32Q208-535 169-570q39 35 81.5 55.5t78.5 32q36 11.5 60 15l24 3.5q18 1 28.5 15t7.5 32l-4.5 33.5q-4.5 33.5-5 83.5t7.5 109q8 59 33 111Z"
                                                         />
                                                     </svg>
+                                                    <span class="tooltiptext">스켈레톤</span>
                                                 </button>
                                                 <div id="skeleton-dropdown-content">
                                                     <button id="addSkeletonButton">Add Skeleton</button>
@@ -290,6 +298,7 @@
                                                             d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Zm0-80h640v-480H638l-73-80H395l-73 80H160v480Zm320-240Z"
                                                         />
                                                     </svg>
+                                                    <span class="tooltiptext">임팩트</span>
                                                 </button>
                                                 <div id="impact-dropdown-content">
                                                     <button id="impactTime1">Impact Time 1</button>
@@ -317,6 +326,7 @@
                                                             d="M400-720q-33 0-56.5-23.5T320-800q0-33 23.5-56.5T400-880q33 0 56.5 23.5T480-800q0 33-23.5 56.5T400-720Zm260 480q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM864-80 756-188q-22 14-46 21t-50 7q-75 0-127.5-52.5T480-340q0-75 52.5-127.5T660-520q75 0 127.5 52.5T840-340q0 26-7 50t-21 46l108 108-56 56Zm-424 0v-121q15 24 35.5 44t44.5 36v41h-80Zm-160 0v-520q-61-5-121-14.5T40-640l20-80q84 23 168.5 31.5T400-680q87 0 171.5-8.5T740-720l20 80q-59 16-119 25.5T520-600v41q-54 35-87 92.5T400-340v10q0 5 1 10h-41v240h-80Z"
                                                         />
                                                     </svg>
+                                                    <span class="tooltiptext">유사도</span>
                                                 </button>
                                             </span>
                                         </div>
@@ -338,6 +348,7 @@
                                                             d="m136-304-92-90q-12-12-12-28t12-28q88-95 203-142.5T480-640q118 0 232.5 47.5T916-450q12 12 12 28t-12 28l-92 90q-11 11-25.5 12t-26.5-8l-116-88q-8-6-12-14t-4-18v-114q-38-12-78-19t-82-7q-42 0-82 7t-78 19v114q0 10-4 18t-12 14l-116 88q-12 9-26.5 8T136-304Zm104-198q-29 15-56 34.5T128-424l40 40 72-56v-62Zm480 2v60l72 56 40-38q-29-26-56-45t-56-33Zm-480-2Zm480 2Z"
                                                         />
                                                     </svg>
+                                                    <span class="tooltiptext">나가기</span>
                                                 </button>
                                             </span>
                                         </div>
