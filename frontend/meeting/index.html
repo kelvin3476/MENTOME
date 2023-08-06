@@ -79,7 +79,7 @@
                 ></canvas>
                 <!-- 그림판 툴즈 바 -->
                 <!-- 임시보관 : reference : https://paint.sumo.app/?lang=ko -->
-                <div id="canvas-tools-wrapper" style="justify-content: flex-start; opacity: 1; display: none;">
+                <div id="canvas-tools-wrapper" style="justify-content: flex-start; opacity: 1; display: none">
                     <!-- guide -->
                     <div id="canvas-tools-inner-wrapper">
                         <button id="clearCanvasButton">
@@ -106,6 +106,28 @@
                 <select id="cameras" class="custom-select" style="display: none">
                     camera
                 </select>
+                <div id="room">
+                    <h3></h3>
+                    <div class="chat">
+                        <div id="chat-info">
+                            <div id="info">
+                                <div class="msg-tab">
+                                    <p></p>
+                                </div>
+                                <!-- <div id="SendMessage-Container"></div> -->
+                                <form id="name">
+                                    <input placeholder="nickname" required type="text" />
+                                    <button>Save</button>
+                                </form>
+                            </div>
+                            <form id="msg">
+                                <input id="SendMessage" required type="text" placeholder="Type your message here" />
+                                <!-- <button id="Send-Btn"></button> -->
+                            </form>
+                        </div>
+                        <!-- class="VfPpkd-Bz112c-LgbsSe yHy1rc eT1oJ JsuyRc boDUxc" -->
+                    </div>
+                </div>
             </main>
             <!-- Toolbar -->
             <footer>
@@ -331,15 +353,11 @@
                             <div class="footer-right-layout-body">
                                 <div class="footer-right-chat-button-head">
                                     <button
-                                        class="VfPpkd-Bz112c-LgbsSe yHy1rc eT1oJ JsuyRc boDUxc"
+                                        id="ToggleChat"
+                                        class="chat-button"
                                         data-disable-idom="true"
+                                        onclick="handleToggleChat()"
                                         aria-label="모든 사용자와 채팅"
-                                        style="
-                                            --mdc-ripple-fg-size: 28px;
-                                            --mdc-ripple-fg-scale: 1.7142857142857142;
-                                            --mdc-ripple-left: 10px;
-                                            --mdc-ripple-top: 10px;
-                                        "
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -353,36 +371,6 @@
                                             />
                                         </svg>
                                     </button>
-                                    <!-- <div id="room">
-                                        <h3></h3>
-                                        <div class="chat">
-                                            <div id="chat-info">
-                                                <p id="info"></p>
-                                                <div id="SendMessage-Container">
-                                                    <form id="msg">
-                                                        <input id="SendMessage" required type="text" />
-                                                        <button id="Send-Btn"></button>
-                                                    </form>
-                                                </div>
-                                                <form id="name">
-                                                    <input placeholder="nickname" required type="text" />
-                                                    <button>Save</button>
-                                                </form>
-                                            </div>
-                                            <button id="ToggleChat" onclick="handleToggleChat()">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    height="20"
-                                                    viewBox="0 -960 960 960"
-                                                    width="20"
-                                                >
-                                                    <path
-                                                        d="M240-384h336v-72H240v72Zm0-132h480v-72H240v72Zm0-132h480v-72H240v72ZM96-96v-696q0-29.7 21.15-50.85Q138.3-864 168-864h624q29.7 0 50.85 21.15Q864-821.7 864-792v480q0 29.7-21.15 50.85Q821.7-240 792-240H240L96-96Zm114-216h582v-480H168v522l42-42Zm-42 0v-480 480Z"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -421,6 +409,7 @@
             <script src="./src/enterroom/enterroom.js"></script>
 
             <!-- 추가해야하는 것들 -->
+            <script></script>
         </div>
     </body>
 </html>

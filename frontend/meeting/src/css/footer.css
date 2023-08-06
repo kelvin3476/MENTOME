@@ -170,13 +170,6 @@
     background-color: #8eb6f7;
 }
 
-/* 채팅 */
-.chat {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-}
-
 /* 채팅 토글 제목 버튼 */
 /* #ToggleChat {
     border: 1px solid #000;
@@ -196,82 +189,6 @@
     letter-spacing: 2px;
 } */
 
-#ToggleChat {
-    position: relative;
-    z-index: 1;
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.535); */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    fill: #000;
-}
-
-#chat-info {
-    display: none;
-}
-
-#name {
-    width: 371px;
-    height: 34px;
-    flex-shrink: 0;
-    display: none;
-}
-
-#SendMessage-Container {
-    border: 1px solid #000;
-    background: #fff;
-    width: 371px;
-    height: 52px;
-    flex-shrink: 0;
-}
-
-#msg {
-    margin-top: 10px;
-}
-
-#SendMessage {
-    border: 1px solid #000;
-    border-radius: 50px;
-    background: #e3e3e3;
-    width: 301px;
-    height: 28px;
-    flex-shrink: 0;
-    margin-left: 1px;
-    padding-top: 10px;
-    margin-bottom: 10px;
-    justify-content: center;
-}
-
-#Send-Btn {
-    border: 1px solid #000;
-    border-radius: 50px;
-    background: url(../../img/Send-Btn.png);
-    background-repeat: no-repeat;
-    width: 35px;
-    height: 28px;
-    flex-shrink: 0;
-    stroke-width: 1px;
-    stroke: #000;
-    margin-left: 10px;
-}
-
-/* 채팅 content */
-#info {
-    border: 1px solid #000;
-    background: #e3e3e3;
-    width: 371px;
-    height: 488px;
-    flex-shrink: 0;
-    margin: 0;
-    overflow: scroll;
-}
 /* 동영상 모달 오버레이, 리사이즈 - 비디오 컨테이너 */
 
 .video-container {
@@ -492,97 +409,6 @@ video {
     position: relative;
 }
 
-/* test */
-
-element.style {
-    --mdc-ripple-fg-size: 28px;
-    --mdc-ripple-fg-scale: 1.7142857142857142;
-    --mdc-ripple-left: 10px;
-    --mdc-ripple-top: 10px;
-}
-.P9KVBf .JsuyRc {
-    color: inherit;
-}
-
-.P9KVBf .eT1oJ {
-    z-index: 0;
-}
-
-.JsuyRc {
-    color: rgb(95, 99, 104);
-}
-
-.JsuyRc {
-    margin: 0.25rem 0;
-}
-
-.yHy1rc {
-    z-index: 0;
-}
-
-.VfPpkd-Bz112c-LgbsSe {
-    --mdc-ripple-fg-size: 0;
-    --mdc-ripple-left: 0;
-    --mdc-ripple-top: 0;
-    --mdc-ripple-fg-scale: 1;
-    --mdc-ripple-fg-translate-end: 0;
-    --mdc-ripple-fg-translate-start: 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    will-change: transform, opacity;
-}
-
-.VfPpkd-Bz112c-LgbsSe {
-    display: inline-block;
-    position: relative;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    fill: currentColor;
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    user-select: none;
-    z-index: 0;
-    overflow: visible;
-}
-
-.VfPpkd-Bz112c-LgbsSe {
-    font-size: 24px;
-    width: 48px;
-    height: 48px;
-    padding: 12px;
-}
-
-.VfPpkd-Bz112c-LgbsSe .VfPpkd-Bz112c-Jh9lGc {
-    height: 100%;
-    left: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-}
-
-.VfPpkd-Bz112c-LgbsSe .VfPpkd-Bz112c-J1Ukfc-LhBDec {
-    max-height: 48px;
-    max-width: 48px;
-}
-
-.VfPpkd-Bz112c-J1Ukfc-LhBDec {
-    pointer-events: none;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    box-sizing: content-box;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100%;
-    width: 100%;
-    display: none;
-}
-
 /* exit */
 
 .exit-button {
@@ -752,16 +578,6 @@ element.style {
     flex-direction: column;
     gap: 10px;
 }
-
-/* 이하 스타일은 원하는 디자인을 적용하면 됩니다. */
-#clearCanvasButton {
-    padding: 8px 16px;
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
 #color {
     width: 100%;
 }

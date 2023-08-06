@@ -34,14 +34,13 @@ main {
 /* 채팅과 방 제목 */
 #room {
     z-index: 8000;
-    position: fixed;
 }
 
 /* 방제목 */
 #room h3 {
     z-index: 7999;
     top: 0;
-    left: 0;
+    right: 0;
 }
 
 /* 그림판 캔버스 (*id: canvas랑 혼동주의)  */
@@ -86,15 +85,8 @@ main {
     visibility: hidden;
 }
 
-/* 채팅 */
-.chat {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-}
-
 /* 채팅 토글 제목 버튼 */
-#ToggleChat {
+/* #ToggleChat {
     border: 1px solid #000;
     border-radius: 0px 10px 0px 0px;
     background: #fff;
@@ -110,32 +102,32 @@ main {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 2px;
-}
+} */
 
-#chat-info {
+/* #chat-info {
     display: none;
-}
+} */
 
-#name {
+/* #name {
     width: 371px;
     height: 34px;
     flex-shrink: 0;
     display: none;
-}
+} */
 
-#SendMessage-Container {
+/* #SendMessage-Container {
     border: 1px solid #000;
     background: #fff;
     width: 371px;
     height: 52px;
     flex-shrink: 0;
-}
+} */
 
-#msg {
+/* #msg {
     margin-top: 10px;
-}
+} */
 
-#SendMessage {
+/* #SendMessage {
     border: 1px solid #000;
     border-radius: 50px;
     background: #e3e3e3;
@@ -146,9 +138,9 @@ main {
     padding-top: 10px;
     margin-bottom: 10px;
     justify-content: center;
-}
+} */
 
-#Send-Btn {
+/* #Send-Btn {
     border: 1px solid #000;
     border-radius: 50px;
     background: url(../../img/Send-Btn.png);
@@ -159,18 +151,8 @@ main {
     stroke-width: 1px;
     stroke: #000;
     margin-left: 10px;
-}
+} */
 
-/* 채팅 content */
-#info {
-    border: 1px solid #000;
-    background: #e3e3e3;
-    width: 371px;
-    height: 488px;
-    flex-shrink: 0;
-    margin: 0;
-    overflow: scroll;
-}
 /* 동영상 모달 오버레이, 리사이즈 - 비디오 컨테이너 */
 
 .video-container {
@@ -404,4 +386,118 @@ video {
     justify-content: center;
     -webkit-box-align: center;
     align-items: center;
+}
+
+/* 채팅 content */
+#info {
+    /* border: 1px solid #000; */
+    box-shadow: 0px 0px 20px 5px rgba(188, 188, 188, 0.3);
+
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.1);
+
+    width: 350px;
+    height: 270px;
+    flex-shrink: 0;
+    margin: 0;
+    overflow: scroll;
+    border-radius: 25px;
+}
+
+/* 채팅 */
+.chat {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+}
+
+#ToggleChat {
+    position: relative;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    fill: #000;
+}
+
+#chat-info {
+    display: none;
+}
+
+#name {
+    width: 371px;
+    height: 34px;
+    flex-shrink: 0;
+    display: none;
+}
+
+#SendMessage-Container {
+    border: 1px solid #000;
+    background: #fff;
+    width: 371px;
+    height: 52px;
+    flex-shrink: 0;
+}
+
+#msg {
+    margin-top: 10px;
+    z-index: 2;
+    /* position: absolute; 요소를 절대 위치로 설정합니다. */
+    /* bottom: 0; 아래쪽으로 0px 떨어진 위치에 배치합니다. */
+    /* left: 0; 왼쪽으로 0px 떨어진 위치에 배치합니다. */
+    /* width: 100%; 부모 요소 너비에 맞게 설정합니다. */
+    /* background-color: #ffffff; */
+    /* padding: 10px; */
+    /* box-sizing: border-box; */
+}
+
+#SendMessage {
+    box-shadow: 0px 0px 20px 5px rgba(188, 188, 188, 0.306);
+    backdrop-filter: blur(3px);
+    background-color: rgba(219, 219, 219, 0.335);
+
+    position: relative;
+    border: 0px solid #000;
+    border-radius: 90px;
+    background: #ffffff1c;
+    width: 320px;
+    height: 30px;
+    color: #000000;
+    flex-shrink: 0;
+    padding: 5px 5px 5px 25px;
+    margin-bottom: 9px;
+    justify-content: center;
+    flex: 1;
+}
+
+.msg-tab {
+    position: relative;
+    z-index: 1;
+    width: 300px;
+    height: 30px;
+    padding: 10px;
+}
+
+.msg-tab p {
+    margin: 1.5px 0px 0px 1.5px;
+}
+
+#Send-Btn {
+    border: 1px solid #000;
+    border-radius: 50px;
+    background: url(../../img/Send-Btn.png);
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 28px;
+    flex-shrink: 0;
+    stroke-width: 1px;
+    stroke: #000;
+    margin-left: 10px;
 }

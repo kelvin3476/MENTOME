@@ -1,12 +1,15 @@
 const form = welcome.querySelector('form');
 const room = document.getElementById('room');
-const userName = document.cookie.split('; ').find(row => row.startsWith('logInUser=')).split('=')[1];
+const userName = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('logInUser='))
+    .split('=')[1];
 
 room.hidden = true;
 
 function addMessage(message) {
     const p = room.querySelector('p');
-    const li = document.createElement('li');
+    const li = document.createElement('p');
     li.innerText = message;
     p.appendChild(li);
 }
@@ -29,9 +32,13 @@ function handleNicknameSubmit(event) {
 
 function handleToggleChat() {
     let div = document.getElementById('chat-info');
+    let svg = document.getElementById('ToggleChat');
+
     if (div.style.display === 'none') {
         div.style.display = 'block';
+        svg.style.fill = '#8eb6f7';
     } else {
+        svg.style.fill = '#000';
         div.style.display = 'none';
     }
 }
