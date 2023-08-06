@@ -80,8 +80,8 @@ socket.on('welcome', (user, newCount) => {
 socket.on('bye', (left, newCount) => {
     const h3 = room.querySelector('h3');
     // h3.innerText = `Room ${roomName} (${newCount})`;
-    h3.innerText = `Room ${roomName}`;
-    addMessage(`${left} left ㅠㅠ`);
+    // h3.innerText = `Room ${roomName}`;
+    addMessage(`${left}님이 방을 나갔습니다.`);
 });
 
 socket.on('new_message', addMessage);
