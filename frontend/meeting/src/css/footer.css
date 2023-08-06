@@ -43,7 +43,7 @@
     justify-content: flex-start;
     margin-left: 0.75rem;
     max-width: 100%;
-    overflow: hidden;
+    overflow: visible;
     text-align: start;
     text-overflow: ellipsis;
 }
@@ -471,25 +471,25 @@ video {
 
     width: 40px;
     height: 40px;
-    background-color: var(--hotlane-custom-background-color);
+    background-color: transparent;
     border: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.535);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    fill: #fff;
+    /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.535); */
+    /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
+    fill: #000000;
 }
 
-.toggleUploadbutton:hover {
+/* .toggleUploadbutton:hover {
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.535);
-}
-.toggleUploadbutton.false {
+} */
+/* .toggleUploadbutton.false {
     fill: #202124;
     background-color: #8eb6f7;
-}
+} */
 
 #skeleton-dropdown-content {
     display: none;
@@ -542,14 +542,16 @@ video {
 #upload-dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #30303091;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 10px;
     z-index: 1;
-    bottom: calc(100% + 5px);
-    left: 50%;
+    bottom: 150%; /* 버튼의 전체 높이와 5픽셀만큼 위에 표시됩니다. */
+    left: 350%;
     transform: translateX(-50%);
     /* 드롭다운 박스가 버튼 위로 올라오도록 설정합니다. */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 #upload-dropdown-content button {
@@ -568,7 +570,7 @@ video {
     top: 50%; /* 수직 중앙 정렬을 위해 top 값을 50%로 설정합니다. */
     left: 10px; /* 왼쪽 사이드에서 10px만큼 떨어지도록 설정합니다. */
     transform: translateY(-50%); /* 수직 중앙 정렬을 적용합니다. */
-    background-color: #f1f1f1;
+    background-color: transparent;
     padding: 10px;
     border-radius: 5px;
 }

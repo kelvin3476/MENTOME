@@ -57,12 +57,12 @@
                     </div>
                 </div> -->
                 <!-- 비디오 업로드 -->
-                <div id="uploadedFile" class="video-container" style="display: none;">
+                <div id="uploadedFile" class="video-container" style="display: none">
                     <canvas id="canvas" style="position: absolute" width="100%" height="100%"></canvas>
                     <video id="fileDisplay" controls loop crossorigin="anonymous"></video>
                     <div class="resizer"></div>
                 </div>
-                <div id="uploadedFile2" class="video-container2" style="display: none;">
+                <div id="uploadedFile2" class="video-container2" style="display: none">
                     <canvas id="canvas2" style="position: absolute" width="100%" height="100%"></canvas>
                     <video id="fileDisplay2" controls loop crossorigin="anonymous"></video>
                     <div class="resizer2"></div>
@@ -107,7 +107,7 @@
                     camera
                 </select>
                 <div id="room">
-                    <h3></h3>
+                    <!-- <h3></h3> -->
                     <div class="chat">
                         <div id="chat-info">
                             <div id="info">
@@ -135,7 +135,35 @@
                     <div class="footer-color-head footer-unknown-size footer-layout footer-color-setting">
                         <!-- 왼쪽 Layout  -->
                         <div class="footer-left-layout-header">
-                            <button></button>
+                            <!-- upload button -->
+                            <div class="footer-mid-layout-button-body">
+                                <div class="footer-mid-layout-button-detail">
+                                    <span>
+                                        <!-- onclick="toggleCanvasPen()" -->
+                                        <button id="upload-dropdown-button" class="toggleUploadbutton">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                height="24"
+                                                viewBox="0 -960 960 960"
+                                                width="24"
+                                            >
+                                                <path
+                                                    d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <div id="upload-dropdown-content">
+                                            <form id="fileUpload" style="display: block">
+                                                <input type="file" id="selectedFile" required />
+                                            </form>
+                                            <!-- 파일 업로드 2 -->
+                                            <form id="fileUpload2" style="display: block">
+                                                <input type="file" id="selectedFile2" required />
+                                            </form>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                         <!-- 생략 -->
                         <!-- 가운데 Layout -->
@@ -220,37 +248,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- upload button -->
-                                <div class="footer-mid-layout-button-header">
-                                    <div class="footer-mid-layout-button-body">
-                                        <div class="footer-mid-layout-button-detail">
-                                            <span>
-                                                <!-- onclick="toggleCanvasPen()" -->
-                                                <button id="upload-dropdown-button" class="toggleUploadbutton">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        height="24"
-                                                        viewBox="0 -960 960 960"
-                                                        width="24"
-                                                    >
-                                                        <path
-                                                            d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"
-                                                        />
-                                                    </svg>
-                                                </button>
-                                                <div id="upload-dropdown-content">
-                                                    <form id="fileUpload" style="display: block">
-                                                        <input type="file" id="selectedFile" required />
-                                                    </form>
-                                                    <!-- 파일 업로드 2 -->
-                                                    <form id="fileUpload2" style="display: block">
-                                                        <input type="file" id="selectedFile2" required />
-                                                    </form>
-                                                </div>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <!-- Add skeleton -->
                                 <div class="footer-mid-layout-button-header">
                                     <div class="footer-mid-layout-button-body">
