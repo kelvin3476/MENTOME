@@ -117,9 +117,9 @@ function toggleCanvasPen() {
 function toggleCanvasButton() {
     socket.emit('toggleCanvasToServer', roomName);
     toggleCanvasPen();
-};
+}
 
 socket.on('toggleCanvasToClient', () => {
-    console.log("respone");
+    console.log('respone');
     toggleCanvasPen();
 });
