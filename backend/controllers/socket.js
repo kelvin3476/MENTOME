@@ -247,5 +247,14 @@ exports.socketManagement = io => {
         socket.on('resize_wb',function(webcamData,roomName){
             socket.to(roomName).emit('resize_wb', webcamData);
         });
+
+        // 파일 업로드 toggle 동기화
+        socket.on("fileuploadtoggleToServer1", (roomName) => {
+            socket.to(roomName).emit("fileuploadtoggleToClient1");
+        });
+
+        socket.on("fileuploadtoggleToServer2", (roomName) => {
+            socket.to(roomName).emit("fileuploadtoggleToClient2");
+        });
     });
 };

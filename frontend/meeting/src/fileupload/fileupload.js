@@ -128,6 +128,7 @@ const uploadedFile2 = document.getElementById('uploadedFile2');
 // 파일 업로드 toggle 버튼
 
 fileUploadForm.addEventListener('click', () => {
+    socket.emit('fileuploadtoggleToServer1', roomName);
     if (uploadedFile.style.display === 'none') {
         uploadedFile.style.display = 'block';
     } else {
@@ -138,6 +139,27 @@ fileUploadForm.addEventListener('click', () => {
 // 파일 업로드 toggle 버튼2
 
 fileUploadForm2.addEventListener('click', () => {
+    socket.emit('fileuploadtoggleToServer2', roomName);
+    if (uploadedFile2.style.display === 'none') {
+        uploadedFile2.style.display = 'block';
+    } else {
+        uploadedFile2.style.display = 'none';
+    }
+});
+
+// 파일 업로드 toggle 동기화
+
+socket.on('fileuploadtoggleToClient1', () => {
+    if (uploadedFile.style.display === 'none') {
+        uploadedFile.style.display = 'block';
+    } else {
+        uploadedFile.style.display = 'none';
+    }
+});
+
+// 파일 업로드 toggle 동기화 2
+
+socket.on('fileuploadtoggleToClient2', () => {
     if (uploadedFile2.style.display === 'none') {
         uploadedFile2.style.display = 'block';
     } else {
