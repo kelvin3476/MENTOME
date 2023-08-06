@@ -131,8 +131,6 @@ fileUploadForm.addEventListener('click', () => {
     socket.emit('fileuploadtoggleToServer1', roomName);
     if (uploadedFile.style.display === 'none') {
         uploadedFile.style.display = 'block';
-    } else {
-        uploadedFile.style.display = 'none';
     }
 });
 
@@ -142,8 +140,6 @@ fileUploadForm2.addEventListener('click', () => {
     socket.emit('fileuploadtoggleToServer2', roomName);
     if (uploadedFile2.style.display === 'none') {
         uploadedFile2.style.display = 'block';
-    } else {
-        uploadedFile2.style.display = 'none';
     }
 });
 
@@ -152,8 +148,6 @@ fileUploadForm2.addEventListener('click', () => {
 socket.on('fileuploadtoggleToClient1', () => {
     if (uploadedFile.style.display === 'none') {
         uploadedFile.style.display = 'block';
-    } else {
-        uploadedFile.style.display = 'none';
     }
 });
 
@@ -162,7 +156,5 @@ socket.on('fileuploadtoggleToClient1', () => {
 socket.on('fileuploadtoggleToClient2', () => {
     if (uploadedFile2.style.display === 'none') {
         uploadedFile2.style.display = 'block';
-    } else {
-        uploadedFile2.style.display = 'none';
     }
 });
