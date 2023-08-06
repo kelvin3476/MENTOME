@@ -22,6 +22,16 @@ main {
     padding: 20px; /* 원하는 여백을 설정 */
 }
 
+footer {
+    z-index: 601;
+    background-color: lightgray; /* 원하는 배경색을 설정 */
+    padding: 10px; /* 원하는 여백을 설정 */
+    text-align: center; /* 푸터 내용을 가운데 정렬 */
+    /* Flexbox를 적용하여 버튼들을 한 줄로 배치 */
+    display: flex;
+    justify-content: center;
+}
+
 /* main과 footer를 나누는 page-container */
 .page-container {
     display: flex;
@@ -49,7 +59,8 @@ main {
     /* position: relative; */
     top: 0px;
     left: 0px;
-    z-index: 1;
+    z-index: 501;
+    border: 1px solid #000;
     box-sizing: border-box;
 }
 
@@ -188,6 +199,7 @@ main {
     position: absolute;
 }
 
+
 video {
     top: 0;
     left: 0;
@@ -321,12 +333,14 @@ video {
     height: 60px;
 }
 
+
 #myStream {
     position: relative;
     width: 704px;
     height: 198px;
     border: 1px solid #000;
 }
+
 
 .webcam-wrapper {
     display: flex;
@@ -335,9 +349,10 @@ video {
 }
 
 .webcam-wrapper video {
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
+    width:50%;
+    height:100%;
+   object-fit: cover;
+   
 }
 
 .resizer-webcam {
