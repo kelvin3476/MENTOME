@@ -35,16 +35,21 @@ function clearCanvas() {
 
 const drawCanvas = document.getElementById('drawcanvas');
 const toggleDrawCanvasButton = document.getElementById('toggleDrawCanvasButton');
+const canvasToolsWrapper = document.getElementById('canvas-tools-wrapper');
 
 toggleDrawCanvasButton.addEventListener('click', () => {
-    if (drawCanvas.style.display === 'none') {
+    if (drawCanvas.style.display === 'none' && canvasToolsWrapper.style.display === 'none') {
         // Show the draw canvas
         drawCanvas.style.display = 'block';
+        // Show the draw canvas tools
+        canvasToolsWrapper.style.display = 'block';
         // 캔버스 토글 상태 동기화
         socket.emit('toggle_drawCanvas', { state: 'block', roomName });
     } else {
         // Hide the draw canvas
         drawCanvas.style.display = 'none';
+        // Hide the draw canvas tools
+        canvasToolsWrapper.style.display = 'none';
         // 캔버스 토글 상태 동기화
         socket.emit('toggle_drawCanvas', { state: 'none', roomName });
     }
@@ -98,6 +103,7 @@ window.onload = () => {
     // 캔버스 토글 상태 동기
     socket.on('toggle_drawCanvas', (data) => {
         drawCanvas.style.display = data.state;
+        canvasToolsWrapper.style.display = data.state;
     });
 };
 
