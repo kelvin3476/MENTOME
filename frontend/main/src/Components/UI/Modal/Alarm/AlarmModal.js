@@ -18,6 +18,7 @@ const AlarmModal = () => {
     const [noticeCount, setNoticeCount] = useState(0);
     const [firstCount, setfirstCount] = useState(0);
     const outside = useRef();
+    const [logInUser] = useCookies(['logInUser']);
 
     // 모달 열기 이벤트 핸들러
     const handleOpenModal = () => {
@@ -45,7 +46,7 @@ const AlarmModal = () => {
                     setNotices(response.data);
                     setNumNotifications(response.data.length);
     
-                    if (noticeCount < response.data.length && firstCount == 1) {
+                    if (noticeCount < response.data.length && firstCount == 1 && logInUser.logInUser !== response.data[response.data.length - 1].roomName.split('-')[0]) {
                         toast.success('새로운 알림이 있습니다.', {
                             position: 'top-center',
                             autoClose: 1000,
@@ -77,7 +78,7 @@ const AlarmModal = () => {
             clearInterval(intervalId); // Clear the interval on component unmount
             window.removeEventListener('click', handleClickOutside);
         };
-        
+
     }, [noticeCount, firstCount]);
 
     const enterRoomHandler = (notice) => {
