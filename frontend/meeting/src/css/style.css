@@ -390,7 +390,7 @@ video {
 
 /* 채팅 content */
 #info {
-    box-shadow: 8px 5px 20px 5px rgb(188, 188, 188);
+    box-shadow: 0px 0px 10px 1px rgb(188, 188, 188);
     backdrop-filter: blur(3px);
     background-color: rgba(255, 255, 255, 0.1);
 
@@ -457,8 +457,8 @@ video {
 }
 
 #SendMessage {
-    box-shadow: 10px 6px 20px 5px rgb(188, 188, 188);
-    backdrop-filter: blur(3px);
+    box-shadow: 0px 0px 0px 0px rgb(188, 188, 188);
+    backdrop-filter: blur(1px);
     background-color: rgba(219, 219, 219, 0.335);
 
     position: relative;
@@ -498,4 +498,149 @@ video {
     stroke-width: 1px;
     stroke: #000;
     margin-left: 10px;
+}
+
+/* 마이크 버튼 툴팁 */
+.mic-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.mic-button .tooltiptext {
+    visibility: hidden;
+    width: 50px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.mic-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 카메라 버튼 툴팁 */
+.camera-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.camera-button .tooltiptext {
+    visibility: hidden;
+    width: 50px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.camera-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 그림판 버튼 툴팁 */
+.canvas-pen-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.canvas-pen-button .tooltiptext {
+    visibility: hidden;
+    width: 50px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.canvas-pen-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Add Skeleton 버튼 툴팁 */
+.toggleAddSkeletonbutton {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.toggleAddSkeletonbutton .tooltiptext {
+    visibility: hidden;
+    width: 50px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.toggleAddSkeletonbutton:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Exit 버튼 툴팁 */
+.exit-button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.exit-button .tooltiptext {
+    visibility: hidden;
+    width: 50px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.exit-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
 }
