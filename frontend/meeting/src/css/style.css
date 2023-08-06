@@ -672,3 +672,21 @@ video {
     visibility: visible;
     opacity: 1;
 }
+
+/* 유사도 alert  */
+
+.alert {
+    position: fixed;
+    bottom: -100px; /* 초기 위치를 화면 밖으로 설정 */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    background-color: #ffffff96;
+    color: rgb(0, 0, 0);
+    border: 1px solid #000000;
+    border-radius: 5px;
+    z-index: 1000;
+    transition: bottom 0.3s ease; /* 애니메이션 효과 */
+    width: fit-content;
+    text-align: center; /* 중앙 정렬 */
+}
