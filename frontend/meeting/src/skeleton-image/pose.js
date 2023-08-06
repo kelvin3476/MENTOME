@@ -24,6 +24,22 @@ let similpos2 = [];
 let flag1 = 0;
 let flag2 = 0;
 
+
+// mediapipe 모델 사전 로드
+async function preloadModels() {
+    const dummyImage = new ImageData(1, 1); // 1x1 픽셀의 빈 이미지
+    try {
+        await pose.send({ image: dummyImage });
+        await pose2.send({ image: dummyImage });
+    } catch (error) {
+        console.error("Error preloading the models:", error);
+    }
+}
+
+// 페이지 로드 시 모델을 미리 로드합니다.
+window.addEventListener('load', preloadModels);
+
+
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({
     locateFile: (file) => {
