@@ -158,3 +158,47 @@ socket.on('fileuploadtoggleToClient2', () => {
         uploadedFile2.style.display = 'block';
     }
 });
+
+
+// 동영상 전체 화면 설정을 막기 위한 함수
+function preventFullscreen(element) {
+    element.addEventListener("fullscreenchange", function (event) {
+        if (document.fullscreenElement) {
+            exitFullscreen(element);
+        }
+    });
+
+    element.addEventListener("webkitfullscreenchange", function (event) {
+        if (document.webkitFullscreenElement) {
+            exitFullscreen(element);
+        }
+    });
+
+    element.addEventListener("mozfullscreenchange", function (event) {
+        if (document.mozFullScreenElement) {
+            exitFullscreen(element);
+        }
+    });
+
+    element.addEventListener("msfullscreenchange", function (event) {
+        if (document.msFullscreenElement) {
+            exitFullscreen(element);
+        }
+    });
+
+    function exitFullscreen(element) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+}
+
+// 업로드된 동영상 컨테이너들에 대해 동영상 전체 화면 설정을 막는 함수 호출
+preventFullscreen(uploadedFile);
+preventFullscreen(uploadedFile2);
