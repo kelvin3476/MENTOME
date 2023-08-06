@@ -247,8 +247,11 @@ video {
 }
 
 #call {
+    display: flex;
+    justify-content: center;
     top: 0px;
-    position: absolute;
+    left: 50%;
+    position: relative;
     z-index: 500;
 }
 
@@ -323,10 +326,10 @@ video {
 }
 
 #myStream {
-    position: relative;
-    width: 704px;
-    height: 198px;
-    border: 1px solid #000;
+    position: absolute;
+    width: 500px;
+    height: 140px;
+    /* border: 1px solid #000; */
 }
 
 .webcam-wrapper {
