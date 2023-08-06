@@ -11,12 +11,15 @@ function extractSkeletonCoordinates(results, bodyPart) {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
 
-
+    const threshold = 0.5;
     if (results && results.poseLandmarks) {
         indices.forEach((index) => {
-            const x = results.poseLandmarks[index].x;
-            const y = results.poseLandmarks[index].y;
-            const confidence = results.poseLandmarks[index].visibility;
+            const x = results.poseLandmarks[index].x.toFixed(3);
+            const y = results.poseLandmarks[index].y.toFixed(3);
+            let confidence = results.poseLandmarks[index].visibility;
+            if (confidence < threshold) {
+                confidence = 0.8;
+            }
             skeletonCoordinates.push({ x, y, confidence });
         });
     }
@@ -36,12 +39,15 @@ function extractSkeletonCoordinates2(results, bodyPart) {
     } else {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
-
+    const threshold2 = 0.5;
     if (results && results.poseLandmarks) {
         indices.forEach((index) => {
-            const x = results.poseLandmarks[index].x;
-            const y = results.poseLandmarks[index].y;
-            const confidence = results.poseLandmarks[index].visibility;
+            const x = results.poseLandmarks[index].x.toFixed(3);
+            const y = results.poseLandmarks[index].y.toFixed(3);
+            let confidence = results.poseLandmarks[index].visibility;
+            if (confidence < threshold2) {
+                confidence = 0.8;
+            }
             skeletonCoordinates2.push({ x, y, confidence });
         });
     }
@@ -147,11 +153,58 @@ let lowerBodySimilarityPercentage = '';
 let fullBodySimilarityPercentage = '';
 
 
-function calculateSimilarity() {
-    // console.log("Video 1 Skeleton Coordinates:", video1SkeletonCoordinates);
-    // console.log("Video 2 Skeleton Coordinates:", video2SkeletonCoordinates);
+// function calculateSimilarity() {
+//     // console.log("Video 1 Skeleton Coordinates:", video1SkeletonCoordinates);
+//     // console.log("Video 2 Skeleton Coordinates:", video2SkeletonCoordinates);
 
-    if (video1upperBodySkeletonCoordinates.length > 0 && video2upperBodySkeletonCoordinates.length > 0) {
+//     if (video1upperBodySkeletonCoordinates.length > 0 && video2upperBodySkeletonCoordinates.length > 0) {
+
+//         // const maxFullBodySimilarity = 2;
+//         // const minFullBodySimilarity = 0.25;
+
+//         const maxUpperBodySimilarity = 2.8;
+//         const minUpperBodySimilarity = 0.4;
+
+//         const maxLowerBodySimilarity = 2.1;
+//         const minLowerBodySimilarity = 0.3;
+
+//         console.log(video1upperBodySkeletonCoordinates);
+//         console.log(video2upperBodySkeletonCoordinates);
+//         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
+//         const uppersimilarity = poseSimilarity(video1upperBodySkeletonCoordinates, video2upperBodySkeletonCoordinates);
+//         // const lowersimilarity = poseSimilarity(video1lowerBodySkeletonCoordinates, video2lowerBodySkeletonCoordinates);
+
+//         // console.log("전체" + similarity);
+//         // console.log("상체" + uppersimilarity);
+//         // console.log("하체" + lowersimilarity);
+
+
+
+
+//         // const fullBodySimilarityPercentage = normalizeAndCalculatePercentage(similarity,minFullBodySimilarity,maxFullBodySimilarity);
+
+//         upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity, minUpperBodySimilarity, maxUpperBodySimilarity);
+//         // lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity, minLowerBodySimilarity, maxLowerBodySimilarity);
+//         // fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(1));
+
+//         // console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage, "%");
+//         console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage, "%");
+//         // console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage, "%");
+        
+
+//     } else {
+//         console.log("스켈레톤 이미지가 없습니다");
+//     }
+// }
+
+function calculateSimilarity() {
+    console.log(impactPositionUpper1[impactIndex]);
+    console.log(impactPositionUpper2[impactIndex]);
+    console.log(impactPositionLower1[impactIndex]);
+    console.log(impactPositionLower2[impactIndex]);
+
+
+    if (impactPositionUpper1.length > 0 && impactPositionUpper2.length > 0) {
 
         // const maxFullBodySimilarity = 2;
         // const minFullBodySimilarity = 0.25;
@@ -162,27 +215,26 @@ function calculateSimilarity() {
         const maxLowerBodySimilarity = 2.1;
         const minLowerBodySimilarity = 0.3;
 
-
         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
-        const uppersimilarity = poseSimilarity(video1upperBodySkeletonCoordinates, video2upperBodySkeletonCoordinates);
-        const lowersimilarity = poseSimilarity(video1lowerBodySkeletonCoordinates, video2lowerBodySkeletonCoordinates);
+        const uppersimilarity = poseSimilarity(impactPositionUpper1[impactIndex], impactPositionUpper2[impactIndex]);
+        const lowersimilarity = poseSimilarity(impactPositionLower1[impactIndex], impactPositionLower2[impactIndex]);
 
         // console.log("전체" + similarity);
-        // console.log("상체" + uppersimilarity);
-        // console.log("하체" + lowersimilarity);
+        console.log("상체" + uppersimilarity);
+        console.log("하체" + lowersimilarity);
 
 
 
 
         // const fullBodySimilarityPercentage = normalizeAndCalculatePercentage(similarity,minFullBodySimilarity,maxFullBodySimilarity);
 
-        upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity, minUpperBodySimilarity, maxUpperBodySimilarity);
-        lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity, minLowerBodySimilarity, maxLowerBodySimilarity);
-        fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(1));
+        // upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity, minUpperBodySimilarity, maxUpperBodySimilarity);
+        // lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity, minLowerBodySimilarity, maxLowerBodySimilarity);
+        // fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(1));
 
-        console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage, "%");
-        console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage, "%");
-        console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage, "%");
+        // console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage, "%");
+        // console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage, "%");
+        // console.log("Lower body Pose Similarity Percentage:", lowerBodySimilarityPercentage, "%");
         
 
     } else {

@@ -20,6 +20,10 @@ let video2lowerBodySkeletonCoordinates =  [];
 
 let similpos1 = [];
 let similpos2 = [];
+let simupper1 = [];
+let simlower1 = [];
+let simupper2 = [];
+let simlower2 = [];
 
 let flag1 = 0;
 let flag2 = 0;
@@ -133,13 +137,13 @@ function onResultsPose(results) {
         canvasCtx5.restore();
         // 유사도 좌표 받아오기 pose1
 
-        if (video.currentTime === recentV1Time && flag1 < 30) {
+        if (video.currentTime === recentV1Time && flag1 < 15) {
             flag1 += 1;
         } else if (video.currentTime !== recentV1Time ) {
             flag1 = 0;
         }
        // 상체 하체 추가
-       if (skeletonEnabled && flag1 < 30) {
+       if (skeletonEnabled && flag1 < 15) {
         // const skeletonCoordinates = extractSkeletonCoordinates(results);
         const upperBodySkeletonCoordinates = extractSkeletonCoordinates(results,'upperBody');
         const lowerBodySkeletonCoordinates = extractSkeletonCoordinates(results,'lowerBody');
@@ -154,6 +158,8 @@ function onResultsPose(results) {
         }
         
         similpos1 = getPosition1(results);
+        simupper1 = extractSkeletonCoordinates(results,'upperBody');
+        simlower1 = extractSkeletonCoordinates(results,'lowerBody');
     } else {
         addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas.getContext('2d');
@@ -257,13 +263,13 @@ function onResultsPose2(results) {
         );
         canvasCtx6.restore();
         // 유사도 측정좌표 pose2
-        if (video2.currentTime === recentV2Time && flag2 < 30) {
+        if (video2.currentTime === recentV2Time && flag2 < 15) {
             flag2 += 1;
         } else if (video2.currentTime !== recentV2Time ) {
             flag2 = 0;
         }
         // 상체 하체 추가 2
-        if (skeletonEnabled && flag2 < 30) {
+        if (skeletonEnabled && flag2 < 15) {
             // const skeletonCoordinates2 = extractSkeletonCoordinates2(results);
             const upperBodySkeletonCoordinates2 = extractSkeletonCoordinates2(results, 'upperBody');
             const lowerBodySkeletonCoordinates2 = extractSkeletonCoordinates2(results, 'lowerBody');
@@ -276,6 +282,8 @@ function onResultsPose2(results) {
         }
 
         similpos2 = getPosition2(results);
+        simupper2 = extractSkeletonCoordinates2(results,'upperBody');
+        simlower2 = extractSkeletonCoordinates2(results,'lowerBody');
     } else {
         addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas2.getContext('2d');
