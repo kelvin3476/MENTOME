@@ -410,10 +410,10 @@ video {
 /* 동영상 */
 #myFace,
 #peerFace {
-    /* width: 300px; */
-    /* height: 200px; */
-    width: 0px;
-    height: 0px;
+    width: 250px;
+    height: 140px;
+    /* width: 0px; */
+    /* height: 0px; */
     flex-shrink: 0;
     border-radius: 15px 15px 15px 15px;
     border: 1px solid #000;
@@ -756,7 +756,7 @@ element.style {
 /* 이하 스타일은 원하는 디자인을 적용하면 됩니다. */
 #clearCanvasButton {
     padding: 8px 16px;
-    background-color: #3498db;
+    background-color: transparent;
     color: #fff;
     border: none;
     cursor: pointer;
