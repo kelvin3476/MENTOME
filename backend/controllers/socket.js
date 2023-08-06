@@ -194,7 +194,7 @@ exports.socketManagement = io => {
         
         socket.on("toggleCanvasToServer", (roomName) => {
             // Broadcast the drawCanvas state to other clients in the same room
-            socket.to(roomName).emit("toggleCanvasToClient",);
+            socket.to(roomName).emit("toggleCanvasToClient");
         });
 
         // 유사도 계산 내보내기
