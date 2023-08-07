@@ -130,3 +130,9 @@ socket.on('seek_video2', (timestamp) => {
         videoPlayer2.currentTime = timestamp;
     }
 });
+
+// 임시방편
+socket.on("doImpactReset", () => {
+    calImpact1();
+    calImpact2();
+});

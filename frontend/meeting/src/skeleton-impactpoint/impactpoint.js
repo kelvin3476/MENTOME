@@ -301,10 +301,10 @@ socket.on("impact3", () => {
     console.log(impactTimes2[2]);
 });
 
-socket.on("doImpactReset", () => {
-    calImpact1();
-    calImpact2();
-});
+// socket.on("doImpactReset", () => {
+//     calImpact1();
+//     calImpact2();
+// });
 
 // 임팩트 드랍다운 버튼
 
