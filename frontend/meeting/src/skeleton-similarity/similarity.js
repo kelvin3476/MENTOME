@@ -169,7 +169,7 @@ function normalizeAndCalculatePercentage(similarity, minPossibleDist, maxPossibl
     var similarityNormalized = (similarity - minPossibleDist) / (maxPossibleDist - minPossibleDist); // 유사도 정규화
 
     var similarityPercentage = (1 - similarityNormalized) * 100;
-    return similarityPercentage.toFixed(1);
+    return similarityPercentage.toFixed(2);
 }
 
 let upperBodySimilarityPercentage = '';
@@ -187,10 +187,10 @@ function calculateSimilarity() {
         // const minFullBodySimilarity = 0.25;
 
         const maxUpperBodySimilarity = 2.8;
-        const minUpperBodySimilarity = 0.34;
+        const minUpperBodySimilarity = 0.45;
 
-        const maxLowerBodySimilarity = 1.2;
-        const minLowerBodySimilarity = 0.45;
+        const maxLowerBodySimilarity = 2.0;
+        const minLowerBodySimilarity = 0.2;
 
 
         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
@@ -208,7 +208,7 @@ function calculateSimilarity() {
 
         upperBodySimilarityPercentage = normalizeAndCalculatePercentage(uppersimilarity, minUpperBodySimilarity, maxUpperBodySimilarity);
         lowerBodySimilarityPercentage = normalizeAndCalculatePercentage(lowersimilarity, minLowerBodySimilarity, maxLowerBodySimilarity);
-        fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(1));
+        fullBodySimilarityPercentage = (((parseFloat(upperBodySimilarityPercentage) + parseFloat(lowerBodySimilarityPercentage)) / 2).toFixed(2));
 
         console.log("Pose Similarity Percentage:", fullBodySimilarityPercentage, "%");
         console.log("Upper body Pose Similarity Percentage:", upperBodySimilarityPercentage, "%");
