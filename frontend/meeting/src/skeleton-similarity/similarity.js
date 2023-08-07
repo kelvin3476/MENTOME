@@ -11,12 +11,26 @@ function extractSkeletonCoordinates(results, bodyPart) {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
 
+    let totalConfidence = 0;
+    let count = 0;
 
     if (results && results.poseLandmarks) {
         indices.forEach((index) => {
+            totalConfidence += results.poseLandmarks[index].visibility;
+            count++;
+        });
+
+        const avgConfidence = totalConfidence / count;
+
+        indices.forEach((index) => {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
-            const confidence = results.poseLandmarks[index].visibility;
+            let confidence = results.poseLandmarks[index].visibility;
+
+            if (confidence < 0.5) {
+                confidence = avgConfidence;
+            }
+
             skeletonCoordinates.push({ x, y, confidence });
         });
     }
@@ -37,17 +51,33 @@ function extractSkeletonCoordinates2(results, bodyPart) {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
 
+    let totalConfidence = 0;
+    let count = 0;
+
     if (results && results.poseLandmarks) {
+        indices.forEach((index) => {
+            totalConfidence += results.poseLandmarks[index].visibility;
+            count++;
+        });
+
+        const avgConfidence = totalConfidence / count;
+
         indices.forEach((index) => {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
-            const confidence = results.poseLandmarks[index].visibility;
+            let confidence = results.poseLandmarks[index].visibility;
+
+            if (confidence < 0.5) {
+                confidence = avgConfidence;
+            }
+
             skeletonCoordinates2.push({ x, y, confidence });
         });
     }
 
     return skeletonCoordinates2;
 }
+
 
 // 함수: weightedDistanceMatching
 /* 두 포즈(2차원 좌표벡터) 사이의 가중거리를 계산하는 함수
@@ -157,10 +187,10 @@ function calculateSimilarity() {
         // const minFullBodySimilarity = 0.25;
 
         const maxUpperBodySimilarity = 2.8;
-        const minUpperBodySimilarity = 0.4;
+        const minUpperBodySimilarity = 0.34;
 
-        const maxLowerBodySimilarity = 2.1;
-        const minLowerBodySimilarity = 0.3;
+        const maxLowerBodySimilarity = 1.2;
+        const minLowerBodySimilarity = 0.45;
 
 
         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
@@ -168,8 +198,8 @@ function calculateSimilarity() {
         const lowersimilarity = poseSimilarity(video1lowerBodySkeletonCoordinates, video2lowerBodySkeletonCoordinates);
 
         // console.log("전체" + similarity);
-        // console.log("상체" + uppersimilarity);
-        // console.log("하체" + lowersimilarity);
+        console.log("상체" + uppersimilarity);
+        console.log("하체" + lowersimilarity);
 
 
 
