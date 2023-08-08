@@ -187,7 +187,7 @@ function calculateSimilarity() {
         // const minFullBodySimilarity = 0.25;
 
         const maxUpperBodySimilarity = 2.8;
-        const minUpperBodySimilarity = 0.45;
+        const minUpperBodySimilarity = 0.4;
 
         const maxLowerBodySimilarity = 2.0;
         const minLowerBodySimilarity = 0.2;
