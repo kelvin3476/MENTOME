@@ -19,6 +19,7 @@ const AlarmModal = () => {
     const [firstCount, setfirstCount] = useState(0);
     const outside = useRef();
     const [logInUser] = useCookies(['logInUser']);
+    const [serverTime, setServerTime] = useState(new Date());
 
     // 모달 열기 이벤트 핸들러
     const handleOpenModal = () => {
@@ -65,8 +66,19 @@ const AlarmModal = () => {
                     console.error('invitation is not done', error);
                 });
         };
-    
+
+        const fetchServerTime = async() => {
+            try {
+                const response = await axios.get('/api/notice/getnoticetimer');
+                const { currentTime } = response.data;
+                setServerTime(new Date(currentTime));
+            } catch (error) {
+                console.error('Failed to fetch server time', error);
+            }
+        };
+
         fetchNotices(); // Fetch initially
+        fetchServerTime();
     
         const intervalId = setInterval(fetchNotices, 2000); // Fetch every 2 seconds
     
@@ -84,6 +96,34 @@ const AlarmModal = () => {
         window.location.href = '/meeting';
     }
 
+    const AlarmTimer = ({ timestamp, serverTime }) => {
+        const [counter, setCounter] = useState(calculateTimeDifference(timestamp, serverTime));
+    
+        useEffect(() => {
+            const interval = setInterval(() => {
+                setCounter((prevCounter) => prevCounter + 1);
+            }, 60000);
+    
+            return () => clearInterval(interval);
+        }, [timestamp, serverTime]);
+    
+        return <>{counter}</>;
+    };
+    
+    const calculateTimeDifference = (timestamp, serverTime) => {
+        const timeDifferenceMinutes = Math.floor((serverTime - new Date(timestamp)) / (1000 * 60));
+    
+        if (timeDifferenceMinutes < 1) {
+            return '방금 전';
+        } else if (timeDifferenceMinutes < 60) {
+            return timeDifferenceMinutes + '분 전';
+        } else if (timeDifferenceMinutes < 1440) {
+            return Math.floor(timeDifferenceMinutes / 60) + '시간 전';
+        } else {
+            return Math.floor(timeDifferenceMinutes / 1440) + '일 전';
+        }
+    };
+    
 
     return (
         <div className={styles.header_member__block}>
@@ -165,7 +205,7 @@ const AlarmModal = () => {
                                                             styles.newsfeed_item_infobox__date
                                                         }
                                                     >
-                                                        초대정보 · 1분 전
+                                                        초대정보 · <AlarmTimer timestamp={notice.noticeDate} serverTime={serverTime} />
                                                     </p>
                                                     <h3
                                                         className={
