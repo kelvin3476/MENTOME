@@ -130,7 +130,6 @@ const uploadedFile2 = document.getElementById('uploadedFile2');
 fileUploadForm.addEventListener('click', () => {
     socket.emit('fileuploadtoggleToServer1', roomName);
     uploadedFile.style.display = 'block';
-    uploadedFile.style.width = '400px';
 });
 
 // 파일 업로드 toggle 버튼2
@@ -138,21 +137,18 @@ fileUploadForm.addEventListener('click', () => {
 fileUploadForm2.addEventListener('click', () => {
     socket.emit('fileuploadtoggleToServer2', roomName);
     uploadedFile2.style.display = 'block';
-    uploadedFile2.style.width = '400px';
 });
 
 // 파일 업로드 toggle 동기화
 
 socket.on('fileuploadtoggleToClient1', () => {
     uploadedFile.style.display = 'block';
-    uploadedFile.style.width = '400px';
 });
 
 // 파일 업로드 toggle 동기화 2
 
 socket.on('fileuploadtoggleToClient2', () => {
     uploadedFile2.style.display = 'block';
-    uploadedFile2.style.width = '400px';
 });
 
 
