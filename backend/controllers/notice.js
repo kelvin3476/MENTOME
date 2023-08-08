@@ -94,3 +94,9 @@ exports.getUserNotices = (req, res) => {
             });
     }
 };
+
+//Send Notice Timer
+exports.getNoticeTimer = (req, res) => {
+    const currentTime = new Date();
+    res.json({ currentTime });
+};

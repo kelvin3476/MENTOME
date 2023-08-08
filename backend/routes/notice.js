@@ -10,4 +10,6 @@ router.post('/api/notice/addinvitenotice/:userid', noticeController.addInviteNot
 
 router.get('/api/notice/getusernotices', noticeController.getUserNotices);
 
+router.get('/api/notice/getNoticeTimer', noticeController.getNoticeTimer);
+
 module.exports = router;
