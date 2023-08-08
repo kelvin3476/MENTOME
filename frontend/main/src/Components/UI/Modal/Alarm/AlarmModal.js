@@ -69,7 +69,7 @@ const AlarmModal = () => {
 
         const fetchServerTime = async() => {
             try {
-                const response = await axios.get('/api/notice/getNoticeTimer');
+                const response = await axios.get('/api/notice/getnoticetimer');
                 const { currentTime } = response.data;
                 setServerTime(new Date(currentTime));
             } catch (error) {
