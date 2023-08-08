@@ -11,29 +11,29 @@ function extractSkeletonCoordinates(results, bodyPart) {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
 
-    let totalConfidence = 0;
-    let count = 0;
+    // let totalConfidence = 0;
+    // let count = 0;
 
-    if (results && results.poseLandmarks) {
-        indices.forEach((index) => {
-            totalConfidence += results.poseLandmarks[index].visibility;
-            count++;
-        });
+    // if (results && results.poseLandmarks) {
+    //     indices.forEach((index) => {
+    //         totalConfidence += results.poseLandmarks[index].visibility;
+    //         count++;
+    //     });
 
-        const avgConfidence = totalConfidence / count;
+        // const avgConfidence = totalConfidence / count;
 
         indices.forEach((index) => {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
             let confidence = results.poseLandmarks[index].visibility;
 
-            if (confidence < 0.5) {
-                confidence = avgConfidence;
-            }
+            // if (confidence < 0.5) {
+            //     confidence = avgConfidence;
+            // }
 
             skeletonCoordinates.push({ x, y, confidence });
         });
-    }
+    // }
 
     return skeletonCoordinates;
 }
@@ -51,44 +51,59 @@ function extractSkeletonCoordinates2(results, bodyPart) {
         indices = [0, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28];
     }
 
-    let totalConfidence = 0;
-    let count = 0;
+    // let totalConfidence = 0;
+    // let count = 0;
 
-    if (results && results.poseLandmarks) {
-        indices.forEach((index) => {
-            totalConfidence += results.poseLandmarks[index].visibility;
-            count++;
-        });
+    // if (results && results.poseLandmarks) {
+    //     indices.forEach((index) => {
+    //         totalConfidence += results.poseLandmarks[index].visibility;
+    //         count++;
+    //     });
 
-        const avgConfidence = totalConfidence / count;
+    //     const avgConfidence = totalConfidence / count;
 
         indices.forEach((index) => {
             const x = results.poseLandmarks[index].x;
             const y = results.poseLandmarks[index].y;
             let confidence = results.poseLandmarks[index].visibility;
 
-            if (confidence < 0.5) {
-                confidence = avgConfidence;
-            }
+            // if (confidence < 0.5) {
+            //     confidence = avgConfidence;
+            // }
 
             skeletonCoordinates2.push({ x, y, confidence });
         });
-    }
+    // }
 
     return skeletonCoordinates2;
 }
 
 
 // 함수: weightedDistanceMatching
-/* 두 포즈(2차원 좌표벡터) 사이의 가중거리를 계산하는 함수
-    점들 사이의 거리를 측정 */
-function weightedDistanceMatching(vectorPose1XY, vectorPose2XY, vectorConfidences) {
+/* 두 포즈(2차원 좌표벡터) 사이의 가중거리를 계산하는 함수 
+    점들 사이의 거리를 측정 */ 
+    // 유클리디안 거리 법으로 바꿈
+// function weightedDistanceMatching(vectorPose1XY, vectorPose2XY, vectorConfidences) {
+//     const summation1 = 1 / vectorConfidences[vectorConfidences.length - 1];
+//     var summation2 = 0;
+
+//     for (var i = 0; i < vectorPose1XY.length; i++) {
+//         var confIndex = Math.floor(i / 2);
+//         summation2 += vectorConfidences[confIndex] * Math.abs(vectorPose1XY[i] - vectorPose2XY[i]);
+//     }
+//     return summation1 * summation2;
+// }
+function weightedEuclideanDistanceMatching(vectorPose1XY, vectorPose2XY, vectorConfidences) {
     const summation1 = 1 / vectorConfidences[vectorConfidences.length - 1];
     var summation2 = 0;
 
-    for (var i = 0; i < vectorPose1XY.length; i++) {
-        var confIndex = Math.floor(i / 2);
-        summation2 += vectorConfidences[confIndex] * Math.abs(vectorPose1XY[i] - vectorPose2XY[i]);
+    for (var i = 0; i < vectorPose1XY.length; i+=2) {  // increment by 2 to consider (x,y) pairs
+        var xDiff = vectorPose1XY[i] - vectorPose2XY[i];
+        var yDiff = vectorPose1XY[i+1] - vectorPose2XY[i+1];
+        
+        var distance = Math.sqrt(xDiff*xDiff + yDiff*yDiff);  // Euclidean distance for (x,y) pair
+
+        summation2 += vectorConfidences[i/2] * distance;  // apply confidence weighting
     }
     return summation1 * summation2;
 }
@@ -159,7 +174,7 @@ function poseSimilarity(pose1, pose2) {
     var vectorPose1Scores = _a[1];
 
     var vectorPose2XY = vectorizeAndNormalize(pose2)[0];
-    return weightedDistanceMatching(vectorPose1XY, vectorPose2XY, vectorPose1Scores);
+    return weightedEuclideanDistanceMatching(vectorPose1XY, vectorPose2XY, vectorPose1Scores);
 }
 
 
@@ -187,10 +202,10 @@ function calculateSimilarity() {
         // const minFullBodySimilarity = 0.25;
 
         const maxUpperBodySimilarity = 2.8;
-        const minUpperBodySimilarity = 0.4;
+        const minUpperBodySimilarity = 0;
 
-        const maxLowerBodySimilarity = 2.0;
-        const minLowerBodySimilarity = 0.2;
+        const maxLowerBodySimilarity = 1.8;
+        const minLowerBodySimilarity = 0.27;
 
 
         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
