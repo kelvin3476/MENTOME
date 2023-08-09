@@ -205,8 +205,8 @@ function calculateSimilarity() {
         const maxUpperBodySimilarity = 2.8;
         const minUpperBodySimilarity = 0;
 
-        const maxLowerBodySimilarity = 1.8;
-        const minLowerBodySimilarity = 0.27;
+        const maxLowerBodySimilarity = 1.9;
+        const minLowerBodySimilarity = 0;
 
 
         // const similarity = poseSimilarity(video1SkeletonCoordinates, video2SkeletonCoordinates);
