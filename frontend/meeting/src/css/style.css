@@ -685,9 +685,13 @@ video {
     color: #000;
 }
 
+.AddSkeletonBtn.active {
+    background-color: #8eb6f7;
+}
+
 .AddSkeletonBtn .tooltiptext {
     visibility: hidden;
-    width: 90px;
+    width: 125px;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -753,6 +757,10 @@ video {
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.535);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* .impactTimeBtn.active {
+    background-color: #8eb6f7;
+} */
 
 .impactTimeBtn .impact {
     color: #fff;

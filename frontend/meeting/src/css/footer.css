@@ -565,9 +565,9 @@ video {
     color: #333;
 }
 
-#skeleton-dropdown-content button:hover {
+/* #skeleton-dropdown-content button:hover {
     background-color: #f1f1f1;
-}
+} */
 
 #impact-dropdown-content {
     display: none;

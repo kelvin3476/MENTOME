@@ -123,3 +123,46 @@ socket.on('toggleCanvasToClient', () => {
     console.log('respone');
     toggleCanvasPen();
 });
+
+function toggleAddSkeleton() {
+    const toggleAddSkeletonbutton = document.getElementById('addSkeletonButton');
+    const tooltipText = toggleAddSkeletonbutton.querySelector('.tooltiptext');
+
+    toggleAddSkeletonbutton.classList.toggle('active');
+
+    if (toggleAddSkeletonbutton.classList.contains('active')) {
+        tooltipText.textContent = 'Add Skeleton1';
+    } else {
+        tooltipText.textContent = 'Remove Skeleton1';
+    }
+
+}
+
+function toggleAddSkeleton2() {
+    const toggleAddSkeletonbutton2 = document.getElementById('addSkeletonButton2');
+    const tooltipText2 = toggleAddSkeletonbutton2.querySelector('.tooltiptext');
+
+    toggleAddSkeletonbutton2.classList.toggle('active');
+
+    if (toggleAddSkeletonbutton2.classList.contains('active')) {
+        tooltipText2.textContent = 'Add Skeleton2';
+    } else {
+        tooltipText2.textContent = 'Remove Skeleton2';
+    }
+
+}
+
+// function toggleImpactTime() {
+//     const toggleImpactTimebutton = document.getElementById('impactTime1');
+//     toggleImpactTimebutton.classList.toggle('active');
+// }
+
+// function toggleImpactTime2() {
+//     const toggleImpactTimebutton2 = document.getElementById('impactTime2');
+//     toggleImpactTimebutton2.classList.toggle('active');
+// }
+
+// function toggleImpactTime3() {
+//     const toggleImpactTimebutton3 = document.getElementById('impactTime3');
+//     toggleImpactTimebutton3.classList.toggle('active');
+// }
