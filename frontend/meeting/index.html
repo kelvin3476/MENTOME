@@ -16,26 +16,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
-    <body>
-        <!-- main과 footer를 감싸는 div :: position 조정 -->
-        <div class="page-container">
-            <main>
-                <select id="cameras" class="custom-select" style="display: none">
-                    camera
-                </select>
-                <!-- 입장 완료 -->
-                <div id="modal" class="modal">
-                    <div class="modal-content">
-                        <span class="hideme-close" id="closeModalBtn">&times;</span>
-                        <div id="welcome">
-                            <form>
-                                <!-- <input id="roomName" placeholder="room name" required type="text" />
+<body>
+    <!-- main과 footer를 감싸는 div :: position 조정 -->
+    <div class="page-container">
+        <main>
+            <select id="cameras" class="custom-select" style="display: none">
+                camera
+            </select>
+            <!-- 입장 완료 -->
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="hideme-close" id="closeModalBtn">&times;</span>
+                    <div id="welcome">
+                        <form>
+                            <!-- <input id="roomName" placeholder="room name" required type="text" />
                                 <button id="buttonToCloseModal">Enter room</button> -->
-                                <p>Error!</p>
-                            </form>
-                        </div>
+                            <p>Error!</p>
+                        </form>
                     </div>
                 </div>
+            </div>
             <!-- 유사도 -->
             <div class="alert" id="similarityAlert">
                 유사도 전체 분석 비율: <span class="full-body-similarity"></span>% | 상체:
@@ -225,11 +225,11 @@
                                                 <span class="tooltiptext">스켈레톤</span>
                                             </button>
                                             <div id="skeleton-dropdown-content">
-                                                <button id="addSkeletonButton" class="AddSkeletonBtn">
+                                                <button id="addSkeletonButton" class="AddSkeletonBtn" onclick="toggleAddSkeleton()">
                                                     <span class="addSkeleton">1</span>
                                                     <span class="tooltiptext">Add Skeleton1</span>
                                                 </button>
-                                                <button id="addSkeletonButton2" class="AddSkeletonBtn">
+                                                <button id="addSkeletonButton2" class="AddSkeletonBtn" onclick="toggleAddSkeleton2()">
                                                     <span class="addSkeleton">2</span>
                                                     <span class="tooltiptext">Add Skeleton2</span>
                                                 </button>
@@ -252,15 +252,15 @@
                                                 <span class="ImpactTooltiptext">임팩트</span>
                                             </button>
                                             <div id="impact-dropdown-content">
-                                                <button id="impactTime1" class="impactTimeBtn">
+                                                <button id="impactTime1" class="impactTimeBtn" onclick="toggleImpactTime()">
                                                     <span class="impact">1</span>
                                                     <span class="tooltiptext">Impact 1</span>
                                                 </button>
-                                                <button id="impactTime2" class="impactTimeBtn">
+                                                <button id="impactTime2" class="impactTimeBtn" onclick="toggleImpactTime2()">
                                                     <span class="impact">2</span>
                                                     <span class="tooltiptext">Impact 2</span>
                                                 </button>
-                                                <button id="impactTime3" class="impactTimeBtn">
+                                                <button id="impactTime3" class="impactTimeBtn" onclick="toggleImpactTime3()">
                                                     <span class="impact">3</span>
                                                     <span class="tooltiptext">Impact 3</span>
                                                 </button>

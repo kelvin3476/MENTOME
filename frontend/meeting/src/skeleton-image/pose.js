@@ -52,7 +52,6 @@ async function addSkeletonToVideo() {
     socket.emit('toggleSkeleton', skeletonEnabled); // skeleton 사용자간 동기화
     if (skeletonEnabled) {
         // 스켈레톤 활성화시 pose 설정
-        addSkeletonButton.textContent = 'Remove Skeleton'; // Add the line to change the button text
 
         // Set the canvas size to the video size
         const videoRect = video.getBoundingClientRect();
@@ -80,7 +79,6 @@ async function addSkeletonToVideo() {
         // start the loop
         updatePose();
     } else {
-        addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         cancelAnimationFrame(animationFrameId);
@@ -155,7 +153,6 @@ function onResultsPose(results) {
         
         similpos1 = getPosition1(results);
     } else {
-        addSkeletonButton.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
@@ -182,7 +179,6 @@ async function addSkeletonToVideo2() {
     socket.emit('toggleSkeleton2', skeletonEnabled2); // skeleton2 사용자간 동기화
     if (skeletonEnabled2) {
         // 스켈레톤 활성화시 pose 설정
-        addSkeletonButton2.textContent = 'Remove Skeleton'; // Add the line to change the button text
 
         // Set the canvas size to the video size
         const videoRect = video2.getBoundingClientRect();
@@ -210,7 +206,6 @@ async function addSkeletonToVideo2() {
         // start the loop
         updatePose2();
     } else {
-        addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx2 = canvas2.getContext('2d');
         ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
         cancelAnimationFrame(animationFrameId2);
@@ -277,7 +272,6 @@ function onResultsPose2(results) {
 
         similpos2 = getPosition2(results);
     } else {
-        addSkeletonButton2.textContent = 'Add Skeleton'; // Add the line to change the button text back
         const ctx = canvas2.getContext('2d');
         ctx.clearRect(0, 0, canvas2.width, canvas2.height);
     }
