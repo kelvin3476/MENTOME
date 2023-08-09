@@ -16,22 +16,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
-<body>
-    <!-- main과 footer를 감싸는 div :: position 조정 -->
-    <div class="page-container">
-        <main>
-            <select id="cameras" class="custom-select" style="display: none">
-                camera
-            </select>
-            <!-- 입장 완료 -->
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <span class="hideme-close" id="closeModalBtn">&times;</span>
-                    <div id="welcome">
-                        <form>
-                            <input id="roomName" placeholder="room name" required type="text" />
-                            <button id="buttonToCloseModal">Enter room</button>
-                        </form>
+    <body>
+        <!-- main과 footer를 감싸는 div :: position 조정 -->
+        <div class="page-container">
+            <main>
+                <select id="cameras" class="custom-select" style="display: none">
+                    camera
+                </select>
+                <!-- 입장 완료 -->
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <span class="hideme-close" id="closeModalBtn">&times;</span>
+                        <div id="welcome">
+                            <form>
+                                <!-- <input id="roomName" placeholder="room name" required type="text" /> -->
+                                <!-- <button id="buttonToCloseModal">Enter room</button> -->
+                                <p>Error!</p>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

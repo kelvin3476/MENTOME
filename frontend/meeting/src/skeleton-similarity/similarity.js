@@ -94,7 +94,8 @@ function extractSkeletonCoordinates2(results, bodyPart) {
 //     return summation1 * summation2;
 // }
 function weightedEuclideanDistanceMatching(vectorPose1XY, vectorPose2XY, vectorConfidences) {
-    const summation1 = 1 / vectorConfidences[vectorConfidences.length - 1];
+    const averageConfidence = vectorConfidences.reduce((acc, val) => acc + val, 0) / vectorConfidences.length;
+    const summation1 = 1 / averageConfidence;
     var summation2 = 0;
 
     for (var i = 0; i < vectorPose1XY.length; i+=2) {  // increment by 2 to consider (x,y) pairs
