@@ -95,12 +95,11 @@ button {
 .toastify {
     font-size: 1rem;
     font-weight: bold;
-
 }
 
 @keyframes sonar {
     0% {
-        transform: scale(.9);
+        transform: scale(0.9);
         opacity: 1;
     }
 
@@ -120,7 +119,7 @@ button {
     }
 
     50% {
-        transform: scale(.9);
+        transform: scale(0.9);
     }
 
     80% {

@@ -20,7 +20,7 @@ const ReplyButton = ({ id, reply }) => {
         <div className={styles.Reply__button_head}>
             {!showReplyBox ? (
                 <PlusReplyButton
-                    name={reply.length === 0 ? '답글 달기' : `${reply.length}개의 답글`}
+                    name={reply?.length === 0 ? '답글 달기' : `${reply?.length}개의 답글`}
                     onClick={toggleReplyBox}
                 />
             ) : (
