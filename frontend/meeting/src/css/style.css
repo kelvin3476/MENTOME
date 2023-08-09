@@ -424,8 +424,8 @@ video {
 #ToggleChat {
     position: relative;
     z-index: 1;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-color: transparent;
     border: none;
     border-radius: 50%;
@@ -830,13 +830,16 @@ video {
     bottom: -100px; /* 초기 위치를 화면 밖으로 설정 */
     left: 50%;
     transform: translateX(-50%);
-    padding: 15px;
-    background-color: #ffffff96;
+    padding: 30px;
+    font-size: xx-large;
+    font-weight: 350;
+    background-color: #9acae4;
     color: rgb(0, 0, 0);
-    border: 1px solid #000000;
-    border-radius: 5px;
+    box-shadow: 0px 3px 11px 0px rgba(0, 0, 0, 0.535);
+    backdrop-filter: blur(1px);
+    border-radius: 15px;
     z-index: 1000;
     transition: bottom 0.3s ease; /* 애니메이션 효과 */
-    width: fit-content;
+    width: 700px;
     text-align: center; /* 중앙 정렬 */
 }
