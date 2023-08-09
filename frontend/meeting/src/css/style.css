@@ -599,6 +599,8 @@ video {
     opacity: 1;
 }
 
+/* ImpactTimeReset */
+
 .impactTimeReset {
     position: relative;
     display: inline-block;
@@ -652,6 +654,134 @@ video {
 }
 
 .toggleAddSkeletonbutton:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.AddSkeletonBtn {
+    position: relative;
+    z-index: 1;
+
+    width: 40px;
+    height: 40px;
+    background-color: var(--hotlane-custom-background-color);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.535);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.AddSkeletonBtn .addSkeleton {
+    color: #fff;
+    font-size: large;
+    font-weight: bold;
+}
+
+.AddSkeletonBtn:hover .addSkeleton {
+    color: #000;
+}
+
+.AddSkeletonBtn .tooltiptext {
+    visibility: hidden;
+    width: 90px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 20%;
+    right: 50%;
+    margin-right: 30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.AddSkeletonBtn:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* toggleImpactTime 버튼 툴팁 */
+
+.toggleImpactTimebutton {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.toggleImpactTimebutton .ImpactTooltiptext {
+    visibility: hidden;
+    width: 50px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.toggleImpactTimebutton:hover .ImpactTooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.impactTimeBtn {
+    position: relative;
+    z-index: 1;
+
+    width: 40px;
+    height: 40px;
+    background-color: var(--hotlane-custom-background-color);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.535);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.impactTimeBtn .impact {
+    color: #fff;
+    font-size: large;
+    font-weight: bold;
+}
+
+.impactTimeBtn:hover .impact {
+    color: #000;
+}
+
+.impactTimeBtn .tooltiptext {
+    visibility: hidden;
+    width: 90px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 20%;
+    left: 50%;
+    margin-left: 30px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.impactTimeBtn:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
