@@ -308,7 +308,7 @@ function calculateSimilarity() {
 
         // 3초 후에 알림창을 다시 화면 밖으로 이동
         setTimeout(() => {
-            document.getElementById('similarityAlert').style.bottom = '-100px';
+            document.getElementById('similarityAlert').style.bottom = '-300px';
         }, 3000);
     }
 
@@ -317,6 +317,6 @@ function calculateSimilarity() {
 
         // 3초 후에 알림창을 다시 화면 밖으로 이동
         setTimeout(() => {
-            document.getElementById('similarityAlert').style.bottom = '-100px';
+            document.getElementById('similarityAlert').style.bottom = '-300px';
         }, 3000);
     });
