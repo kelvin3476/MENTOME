@@ -4,6 +4,14 @@ let timeline2 = [];
 let impactTimes1 = [];
 let impactTimes2 = [];
 
+function videoZero() {
+    video.currentTime = 0.01;
+}
+
+function videoZero2() {
+    video2.currentTime = 0.01;
+}
+
 function videoPauser1() {
     if (video.currentTime > 0.09) {
         requestAnimationFrame(videoPauser1);
@@ -12,6 +20,9 @@ function videoPauser1() {
         video.pause();
         waitImpact = true;
         socket.emit('pause_video', roomName);
+        setTimeout(() => {
+            videoZero()
+        }, 500);
     }
 }
 
@@ -23,6 +34,9 @@ function videoPauser2() {
         video2.pause();
         waitImpact = true;
         socket.emit('pause_video2', roomName);
+        setTimeout(() => {
+            videoZero2()
+        }, 500);
     }
 }
 
