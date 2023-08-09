@@ -11,16 +11,16 @@
     background-color: rgba(0, 0, 0, 0.016);
     padding: 1.5rem;
     border-radius: 4px;
-    margin-top: 1.3125rem;
+    margin-top: 1.5rem;
 }
 
 .Reply__comment_margin_top {
-    margin-top: -1.5rem;
+    margin-top: 1rem;
 }
 
-.Reply__comment_padding_top_down {
+/* .Reply__comment_padding_top_down {
     padding: 1.5rem 0 1.5rem;
-}
+} */
 
 .Reply__comment_profile_head {
     margin-bottom: 1.5rem;

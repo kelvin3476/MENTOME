@@ -19,7 +19,10 @@ const ReplyButton = ({ id, reply }) => {
     return (
         <div className={styles.Reply__button_head}>
             {!showReplyBox ? (
-                <PlusReplyButton name='답글 달기' onClick={toggleReplyBox} />
+                <PlusReplyButton
+                    name={reply.length === 0 ? '답글 달기' : `${reply.length}개의 답글`}
+                    onClick={toggleReplyBox}
+                />
             ) : (
                 <>
                     <MinusReplyButton onClick={toggleReplyBox} />
@@ -27,7 +30,7 @@ const ReplyButton = ({ id, reply }) => {
                         <div className={styles.Reply__comment_margin_top}></div>
                         <div>
                             {reply.map((reply) => (
-                                <div className={styles.Reply__comment_padding_top_down}>
+                                <>
                                     <div className={styles.Reply__comment_profile_head}>
                                         <div className={styles.Reply__comment_profile}>
                                             {/* a태그 생략 */}
@@ -53,16 +56,17 @@ const ReplyButton = ({ id, reply }) => {
                                         </div>
                                     </div>
                                     <div className={styles.Reply__comment_detail_line}></div>
-                                </div>
+                                </>
                             ))}
-                            {!showReplyReplyBox ? (
-                                <button onClick={toggleReplyReplyBox} className={styles.Reply__comment_Reply_button}>
-                                    답글 작성하기
-                                </button>
-                            ) : (
-                                <CommentTextarea id={id} onClick={toggleReplyReplyBox} />
-                            )}
                         </div>
+
+                        {!showReplyReplyBox ? (
+                            <button onClick={toggleReplyReplyBox} className={styles.Reply__comment_Reply_button}>
+                                답글 작성하기
+                            </button>
+                        ) : (
+                            <CommentTextarea id={id} onClick={toggleReplyReplyBox} />
+                        )}
                     </div>
                 </>
             )}
