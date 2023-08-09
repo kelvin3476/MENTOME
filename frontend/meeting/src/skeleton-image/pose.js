@@ -39,6 +39,12 @@ async function preloadModels() {
 // 페이지 로드 시 모델을 미리 로드합니다.
 window.addEventListener('load', preloadModels);
 
+// 얼굴 connectors 제외 위한 함수
+function filterFaceConnectors(connections) {
+    return connections.filter(([startIdx, endIdx]) => startIdx > 10 && endIdx > 10);
+}
+
+
 
 // 동영상 위에 스켈레톤 이미지를 씌우는 함수
 const pose = new Pose({
@@ -97,7 +103,7 @@ function onResultsPose(results) {
         canvasCtx5.save();
         canvasCtx5.clearRect(0, 0, canvas.width, canvas.height);
         canvasCtx5.drawImage(results.image, 0, 0, canvas.width, canvas.height);
-        drawConnectors(canvasCtx5, results.poseLandmarks, POSE_CONNECTIONS, {
+        drawConnectors(canvasCtx5, results.poseLandmarks, filterFaceConnectors(POSE_CONNECTIONS), {
             color: (data) => {
                 const x0 = canvas.width * data.from.x;
                 const y0 = canvas.height * data.from.y;
@@ -115,17 +121,17 @@ function onResultsPose(results) {
         });
         drawLandmarks(
             canvasCtx5,
-            Object.values(POSE_LANDMARKS_LEFT).map((index) => results.poseLandmarks[index]),
+            Object.values(POSE_LANDMARKS_LEFT).filter(index => index > 10).map(index => results.poseLandmarks[index]),
             { color: zColor, fillColor: '#FF0000' }
         );
         drawLandmarks(
             canvasCtx5,
-            Object.values(POSE_LANDMARKS_RIGHT).map((index) => results.poseLandmarks[index]),
+            Object.values(POSE_LANDMARKS_RIGHT).filter(index => index > 10).map(index => results.poseLandmarks[index]),
             { color: zColor, fillColor: '#00FF00' }
         );
         drawLandmarks(
             canvasCtx5,
-            Object.values(POSE_LANDMARKS_NEUTRAL).map((index) => results.poseLandmarks[index]),
+            Object.values(POSE_LANDMARKS_NEUTRAL).filter(index => index > 10).map(index => results.poseLandmarks[index]),
             { color: zColor, fillColor: '#AAAAAA' }
         );
         canvasCtx5.restore();
@@ -219,7 +225,7 @@ function onResultsPose2(results) {
         canvasCtx6.save();
         canvasCtx6.clearRect(0, 0, canvas2.width, canvas2.height);
         canvasCtx6.drawImage(results.image, 0, 0, canvas2.width, canvas2.height);
-        drawConnectors(canvasCtx6, results.poseLandmarks, POSE_CONNECTIONS, {
+        drawConnectors(canvasCtx6, results.poseLandmarks, filterFaceConnectors(POSE_CONNECTIONS), {
             color: (data) => {
                 const x0 = canvas2.width * data.from.x;
                 const y0 = canvas2.height * data.from.y;
@@ -237,17 +243,17 @@ function onResultsPose2(results) {
         });
         drawLandmarks(
             canvasCtx6,
-            Object.values(POSE_LANDMARKS_LEFT).map((index) => results.poseLandmarks[index]),
+            Object.values(POSE_LANDMARKS_LEFT).filter(index => index > 10).map(index => results.poseLandmarks[index]),
             { color: zColor, fillColor: '#FF0000' }
         );
         drawLandmarks(
             canvasCtx6,
-            Object.values(POSE_LANDMARKS_RIGHT).map((index) => results.poseLandmarks[index]),
+            Object.values(POSE_LANDMARKS_RIGHT).filter(index => index > 10).map(index => results.poseLandmarks[index]),
             { color: zColor, fillColor: '#00FF00' }
         );
         drawLandmarks(
             canvasCtx6,
-            Object.values(POSE_LANDMARKS_NEUTRAL).map((index) => results.poseLandmarks[index]),
+            Object.values(POSE_LANDMARKS_NEUTRAL).filter(index => index > 10).map(index => results.poseLandmarks[index]),
             { color: zColor, fillColor: '#AAAAAA' }
         );
         canvasCtx6.restore();
