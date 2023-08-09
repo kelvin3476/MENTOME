@@ -365,24 +365,6 @@
         <script src="./src/toolbar/SkeletonButton.js"></script>
         <script src="./src/action/action_webcam.js"></script>
         <script src="./src/enterroom/enterroom.js"></script>
-
-        <!-- 추가해야하는 것들 -->
-        <script>
-            function showAlert() {
-                // 예시 값을 설정합니다.
-                document.querySelector('.full-body-similarity').textContent = '85';
-                document.querySelector('.upper-body-similarity').textContent = '80';
-                document.querySelector('.lower-body-similarity').textContent = '90';
-
-                // 알림창을 하단 바 위로 이동 (하단 바의 높이를 4rem으로 설정)
-                document.getElementById('similarityAlert').style.bottom = '6rem';
-
-                // 3초 후에 알림창을 다시 화면 밖으로 이동
-                setTimeout(() => {
-                    document.getElementById('similarityAlert').style.bottom = '-100px';
-                }, 3000);
-            }
-        </script>
     </div>
 </body>
 

@@ -294,3 +294,29 @@ function calculateSimilarity() {
             $('.alert').addClass("hide");
         }, 3000);
     });
+
+    function showAlert() {
+        console.log("하잇!");
+        socket.emit('alertsimilToServer', roomName);
+        // 예시 값을 설정합니다.
+        // document.querySelector('.full-body-similarity').textContent = '85';
+        // document.querySelector('.upper-body-similarity').textContent = '80';
+        // document.querySelector('.lower-body-similarity').textContent = '90';
+
+        // 알림창을 하단 바 위로 이동 (하단 바의 높이를 4rem으로 설정)
+        document.getElementById('similarityAlert').style.bottom = '6rem';
+
+        // 3초 후에 알림창을 다시 화면 밖으로 이동
+        setTimeout(() => {
+            document.getElementById('similarityAlert').style.bottom = '-100px';
+        }, 3000);
+    }
+
+    socket.on('alertsimilToClient', () => {
+        document.getElementById('similarityAlert').style.bottom = '6rem';
+
+        // 3초 후에 알림창을 다시 화면 밖으로 이동
+        setTimeout(() => {
+            document.getElementById('similarityAlert').style.bottom = '-100px';
+        }, 3000);
+    });

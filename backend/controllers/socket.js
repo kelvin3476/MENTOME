@@ -259,5 +259,9 @@ exports.socketManagement = io => {
         socket.on("fileuploadtoggleToServer2", (roomName) => {
             socket.to(roomName).emit("fileuploadtoggleToClient2");
         });
+
+        socket.on("alertsimilToServer", (roomName) => {
+            socket.to(roomName).emit("alertsimilToClient");
+        })
     });
 };
