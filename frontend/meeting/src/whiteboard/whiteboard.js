@@ -57,7 +57,14 @@ toggleDrawCanvasButton.addEventListener('click', () => {
 
 window.onload = () => {
     // onload 중복으로 인해 여기에 추가 (방 자동 입장)
-    autoEnterRoom();
+    if (document.cookie.split('; ').find(row => row.startsWith('roomName='))) {
+        console.log("!!!");
+        autoEnterRoom();
+    } else {
+        console.log("!!");
+        window.location.href = '/';
+    }
+    
     const canvas = document.getElementById('drawcanvas');
     canvas.addEventListener('mousedown', (e) => {
         isDrawing = true;
