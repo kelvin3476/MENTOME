@@ -599,10 +599,8 @@ video {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 10px;
     z-index: 1;
-    bottom: 150%; /* 버튼의 전체 높이와 5픽셀만큼 위에 표시됩니다. */
-    left: 350%;
-    transform: translateX(-50%);
-    /* 드롭다운 박스가 버튼 위로 올라오도록 설정합니다. */
+    bottom: 140%; /* 버튼의 전체 높이와 5픽셀만큼 위에 표시됩니다. */
+    left: 30%;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }

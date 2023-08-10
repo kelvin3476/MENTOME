@@ -469,7 +469,17 @@
             <script src="./src/toolbar/SkeletonButton.js"></script>
             <script src="./src/action/action_webcam.js"></script>
             <script src="./src/enterroom/enterroom.js"></script>
-            <script></script>
+            <!-- <script>
+                document.querySelector('#ToggleChat').addEventListener('click', function (event) {
+                    event.preventDefault(); // form submit 방지
+                    const infoDiv = document.getElementById('chat-info');
+                    if (infoDiv.style.opacity == '0' || infoDiv.style.opacity == '') {
+                        infoDiv.style.opacity = '1';
+                    } else {
+                        infoDiv.style.opacity = '0';
+                    }
+                });
+            </script> -->
         </div>
     </body>
 </html>
