@@ -30,18 +30,24 @@ function handleNicknameSubmit(event) {
     socket.emit('nickname', input.value);
 }
 
-function handleToggleChat() {
-    let div = document.getElementById('chat-info');
-    let svg = document.getElementById('ToggleChat');
+const btn = document.getElementById('ToggleChat');
+const div = document.getElementById('chat-info');
 
-    if (div.style.display === 'none') {
-        div.style.display = 'block';
-        svg.style.fill = '#8eb6f7';
+btn.addEventListener('click', function () {
+    if (div.style.opacity === '1' || getComputedStyle(div).opacity === '1') {
+        div.style.opacity = '0';
+        setTimeout(function () {
+            div.style.display = 'none';
+        }, 300); // 300ms is the duration of the transition set in CSS
     } else {
-        svg.style.fill = '#000';
-        div.style.display = 'none';
+        div.style.display = 'block';
+        // Using setTimeout to ensure display: block; is applied first before changing opacity
+        setTimeout(function () {
+            div.style.opacity = '1';
+            btn.style.fill = '#8eb6f7';
+        }, 10);
     }
-}
+});
 
 function showRoom() {
     welcome.hidden = true;
