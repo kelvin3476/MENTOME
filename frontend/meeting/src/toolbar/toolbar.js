@@ -124,6 +124,7 @@ socket.on('toggleCanvasToClient', () => {
     toggleCanvasPen();
 });
 
+// Skeleton button 활성화 및 tooltip 글자 변경
 function toggleAddSkeleton() {
     const toggleAddSkeletonbutton = document.getElementById('addSkeletonButton');
     const tooltipText = toggleAddSkeletonbutton.querySelector('.tooltiptext');
@@ -131,9 +132,9 @@ function toggleAddSkeleton() {
     toggleAddSkeletonbutton.classList.toggle('active');
 
     if (toggleAddSkeletonbutton.classList.contains('active')) {
-        tooltipText.textContent = 'Add Skeleton1';
-    } else {
         tooltipText.textContent = 'Remove Skeleton1';
+    } else {
+        tooltipText.textContent = 'Add Skeleton1';
     }
 
 }
@@ -145,9 +146,9 @@ function toggleAddSkeleton2() {
     toggleAddSkeletonbutton2.classList.toggle('active');
 
     if (toggleAddSkeletonbutton2.classList.contains('active')) {
-        tooltipText2.textContent = 'Add Skeleton2';
-    } else {
         tooltipText2.textContent = 'Remove Skeleton2';
+    } else {
+        tooltipText2.textContent = 'Add Skeleton2';
     }
 
 }
