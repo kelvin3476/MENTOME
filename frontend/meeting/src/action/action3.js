@@ -51,3 +51,12 @@ ImpactButton.addEventListener('click', () => {
     ImpactDropdownActive = !ImpactDropdownActive;
     toggleImpactTooltipVisibility();
 });
+
+// toggleUploadbutton 다른곳 클릭시 드랍다운 메뉴 안보이게 설정
+const toggleUploadbutton = document.getElementById('upload-dropdown-button');
+
+toggleUploadbutton.addEventListener('blur', () => {
+    const dropdown = document.getElementById('upload-dropdown-content');
+    dropdown.style.display = 'none';
+    dropdown.style.opacity = 0;
+});
