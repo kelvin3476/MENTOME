@@ -38,6 +38,11 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 상대방 입,퇴장 효과음 -->
+                <audio id="enterSound" src="./assets/In.mp3"></audio>
+                <audio id="enterSound" src="./assets/Out.mp3"></audio>
+
                 <!-- 유사도 -->
                 <div class="alert" id="similarityAlert">
                     유사도 전체 분석 비율: <span class="full-body-similarity"></span>%
@@ -45,6 +50,7 @@
                     상체: <span class="upper-body-similarity"></span>% | 하체:
                     <span class="lower-body-similarity"></span>%
                 </div>
+
                 <!-- 비디오 업로드 -->
                 <div id="uploadedFile" class="video-container">
                     <canvas id="canvas" style="position: absolute" width="100%" height="100%"></canvas>
@@ -483,6 +489,41 @@
                     }
                 });
             </script>
+            <!-- <script>
+                // script.js
+                const enterSound = document.getElementById('enterSound');
+                const exitSound = document.getElementById('exitSound');
+
+                // 상대방이 입장했을 때 효과음 재생
+                function playEnterSound() {
+                    enterSound.currentTime = 0; // 재생 위치를 처음으로 되돌림
+                    enterSound.play();
+                }
+
+                // 상대방이 퇴장했을 때 효과음 재생
+                function playExitSound() {
+                    exitSound.currentTime = 0; // 재생 위치를 처음으로 되돌림
+                    exitSound.play();
+                }
+
+                // 상대방 입장 및 퇴장 시 효과음 재생
+                // 이 함수를 호출하면 효과음이 재생됩니다.
+                function handleUserEnter() {
+                    playEnterSound();
+                }
+
+                function handleUserExit() {
+                    playExitSound();
+                }
+
+                // 예시: 상대방 입장 버튼을 클릭했을 때
+                const enterButton = document.getElementById('enterButton');
+                enterButton.addEventListener('click', handleUserEnter);
+
+                // 예시: 상대방 퇴장 버튼을 클릭했을 때
+                const exitButton = document.getElementById('exitButton');
+                exitButton.addEventListener('click', handleUserExit);
+            </script> -->
         </div>
     </body>
 </html>

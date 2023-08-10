@@ -9,7 +9,7 @@ body {
     width: 100%;
     height: 100%;
     position: relative;
-    background: url(../../img/canvas-background.png), lightgray 50% / cover no-repeat;
+    background: url(../../assets/canvas-background.png), lightgray 50% / cover no-repeat;
 }
 /* ???? 이게 뭐지 */
 #root {
@@ -140,19 +140,6 @@ main {
     justify-content: center;
 } */
 
-/* #Send-Btn {
-    border: 1px solid #000;
-    border-radius: 50px;
-    background: url(../../img/Send-Btn.png);
-    background-repeat: no-repeat;
-    width: 35px;
-    height: 28px;
-    flex-shrink: 0;
-    stroke-width: 1px;
-    stroke: #000;
-    margin-left: 10px;
-} */
-
 /* 동영상 모달 오버레이, 리사이즈 - 비디오 컨테이너 */
 
 .video-container {
@@ -275,25 +262,6 @@ video {
     border: 1px solid #000;
     background: #d9d9d9;
 }
-
-/* #mute {
-    border: #000;
-    background: url(../../img/mute.png);
-    background-repeat: no-repeat;
-    width: 38px;
-    height: 41px;
-    flex-shrink: 0;
-} */
-
-/* #camera {
-    border: #000;
-    background: url(../../img/camera.png);
-    background-repeat: no-repeat;
-    width: 38px;
-    height: 41px;
-    flex-shrink: 0;
-    margin-left: 5px;
-} */
 
 /* #exit {
     border: #000;
@@ -505,7 +473,7 @@ video {
 #Send-Btn {
     border: 1px solid #000;
     border-radius: 50px;
-    background: url(../../img/Send-Btn.png);
+    background: url(../../assets/Send-Btn.png);
     background-repeat: no-repeat;
     width: 35px;
     height: 28px;
