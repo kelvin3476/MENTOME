@@ -469,17 +469,20 @@
             <script src="./src/toolbar/SkeletonButton.js"></script>
             <script src="./src/action/action_webcam.js"></script>
             <script src="./src/enterroom/enterroom.js"></script>
-            <!-- <script>
-                document.querySelector('#ToggleChat').addEventListener('click', function (event) {
-                    event.preventDefault(); // form submit 방지
-                    const infoDiv = document.getElementById('chat-info');
-                    if (infoDiv.style.opacity == '0' || infoDiv.style.opacity == '') {
-                        infoDiv.style.opacity = '1';
+            <script>
+                const pencil = document.getElementById('toggleDrawCanvasButton');
+                let pencilMode = false;
+
+                pencil.addEventListener('click', function () {
+                    pencilMode = !pencilMode;
+
+                    if (pencilMode) {
+                        document.body.classList.add('button-pointer');
                     } else {
-                        infoDiv.style.opacity = '0';
+                        document.body.classList.remove('button-pointer');
                     }
                 });
-            </script> -->
+            </script>
         </div>
     </body>
 </html>

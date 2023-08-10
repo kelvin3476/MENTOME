@@ -595,9 +595,12 @@ video {
 #upload-dropdown-content {
     display: none;
     position: absolute;
-    background-color: #30303091;
+    background-color: #ffffff91;
+    color: black;
+    border-radius: 25px;
+    backdrop-filter: blur(3px);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 10px 30px 10px;
     z-index: 1;
     bottom: 140%; /* 버튼의 전체 높이와 5픽셀만큼 위에 표시됩니다. */
     left: 30%;
@@ -637,4 +640,8 @@ video {
 
 #line-width {
     width: 100%;
+}
+
+.button-pointer {
+    cursor: url('../../img/pencil_big.cur'), auto;
 }
