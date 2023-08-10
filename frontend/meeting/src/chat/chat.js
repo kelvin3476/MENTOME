@@ -38,6 +38,7 @@ btn.addEventListener('click', function () {
         div.style.opacity = '0';
         setTimeout(function () {
             div.style.display = 'none';
+            btn.style.fill = '#000';
         }, 300); // 300ms is the duration of the transition set in CSS
     } else {
         div.style.display = 'block';
