@@ -417,8 +417,8 @@ video {
 /* 채팅 */
 .chat {
     position: fixed;
-    bottom: 60px;
-    right: 20px;
+    bottom: 80px;
+    right: 15px;
 }
 
 #ToggleChat {
