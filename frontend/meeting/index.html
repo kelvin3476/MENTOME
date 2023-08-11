@@ -41,7 +41,7 @@
 
                 <!-- 상대방 입,퇴장 효과음 -->
                 <audio id="enterSound" src="./assets/In.mp3"></audio>
-                <audio id="enterSound" src="./assets/Out.mp3"></audio>
+                <audio id="exitSound" src="./assets/Out.mp3"></audio>
 
                 <!-- 유사도 -->
                 <div class="alert" id="similarityAlert">
@@ -276,17 +276,11 @@
                                                     <span class="tooltiptext">스켈레톤</span>
                                                 </button>
                                                 <div id="skeleton-dropdown-content">
-                                                    <button
-                                                        id="addSkeletonButton"
-                                                        class="AddSkeletonBtn"
-                                                        >
+                                                    <button id="addSkeletonButton" class="AddSkeletonBtn">
                                                         <span class="addSkeleton">1</span>
                                                         <span class="tooltiptext">Add Skeleton1</span>
                                                     </button>
-                                                    <button
-                                                        id="addSkeletonButton2"
-                                                        class="AddSkeletonBtn"
-                                                        >
+                                                    <button id="addSkeletonButton2" class="AddSkeletonBtn">
                                                         <span class="addSkeleton">2</span>
                                                         <span class="tooltiptext">Add Skeleton2</span>
                                                     </button>
@@ -314,27 +308,15 @@
                                                     <span class="ImpactTooltiptext">임팩트</span>
                                                 </button>
                                                 <div id="impact-dropdown-content">
-                                                    <button
-                                                        id="impactTime1"
-                                                        class="impactTimeBtn"
-                                                        onclick="toggleImpactTime()"
-                                                    >
+                                                    <button id="impactTime1" class="impactTimeBtn">
                                                         <span class="impact">1</span>
                                                         <span class="tooltiptext">Impact 1</span>
                                                     </button>
-                                                    <button
-                                                        id="impactTime2"
-                                                        class="impactTimeBtn"
-                                                        onclick="toggleImpactTime2()"
-                                                    >
+                                                    <button id="impactTime2" class="impactTimeBtn">
                                                         <span class="impact">2</span>
                                                         <span class="tooltiptext">Impact 2</span>
                                                     </button>
-                                                    <button
-                                                        id="impactTime3"
-                                                        class="impactTimeBtn"
-                                                        onclick="toggleImpactTime3()"
-                                                    >
+                                                    <button id="impactTime3" class="impactTimeBtn">
                                                         <span class="impact">3</span>
                                                         <span class="tooltiptext">Impact 3</span>
                                                     </button>
@@ -422,9 +404,9 @@
                                         id="ToggleChat"
                                         class="chat-button"
                                         data-disable-idom="true"
-                                        onclick="handleToggleChat()"
                                         aria-label="모든 사용자와 채팅"
                                     >
+                                        <!-- onclick="handleToggleChat()" -->
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             height="48"
