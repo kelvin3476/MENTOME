@@ -138,6 +138,11 @@ socket.on('welcome', async () => {
     handleUserEnter();
 });
 
+socket.on('user_exit', () => {
+    // 상대방이 퇴장 효과음 재생
+    playExitSound();
+});
+
 // Firefox
 socket.on('offer', async (offer) => {
     myPeerConnection.addEventListener('datachannel', (event) => {

@@ -35,7 +35,11 @@ function autoEnterRoom() {
 }
 
 exitButton.addEventListener('click', () => {
-    handleUserExit();
-    console.log('dodododo');
-    window.location.href = '/';
+        handleUserExit();
+        console.log('dodododo');
+        socket.emit('user_exit', roomName); // 상대방에게 나가기 이벤트 보내기
+        console.log('유저 퇴장');
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 350);
 });
