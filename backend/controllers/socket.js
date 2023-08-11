@@ -263,5 +263,9 @@ exports.socketManagement = io => {
         socket.on("alertsimilToServer", (roomName) => {
             socket.to(roomName).emit("alertsimilToClient");
         })
+
+        socket.on("user_exitToServer", (roomName) => {
+            socket.to(roomName).emit("user_exitToClient");
+        });
     });
 };

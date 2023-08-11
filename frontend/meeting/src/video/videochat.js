@@ -135,7 +135,7 @@ socket.on('welcome', async () => {
     handleUserEnter();
 });
 
-socket.on('user_exit', () => {
+socket.on('user_exitToClient', () => {
     // 상대방이 퇴장 효과음 재생
     playExitSound();
 });
