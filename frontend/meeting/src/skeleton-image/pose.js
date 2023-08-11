@@ -59,6 +59,9 @@ async function addSkeletonToVideo() {
     if (skeletonEnabled) {
         // 스켈레톤 활성화시 pose 설정
 
+        // 파일이 선택된 경우에만 스켈레톤 토글 함수 호출
+        socket.emit('toggleSkelToServer', roomName);
+
         // Set the canvas size to the video size
         const videoRect = video.getBoundingClientRect();
         canvas.width = videoRect.width;
@@ -85,6 +88,7 @@ async function addSkeletonToVideo() {
         // start the loop
         updatePose();
     } else {
+        socket.emit('toggleSkelToServer', roomName);
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         cancelAnimationFrame(animationFrameId);
@@ -186,13 +190,16 @@ async function addSkeletonToVideo2() {
     if (skeletonEnabled2) {
         // 스켈레톤 활성화시 pose 설정
 
+        // 파일이 선택된 경우에만 스켈레톤 토글 함수 호출
+        socket.emit('toggleSkelToServer2', roomName);
+
         // Set the canvas size to the video size
         const videoRect = video2.getBoundingClientRect();
         canvas2.width = videoRect.width;
         canvas2.height = videoRect.height;
 
         pose2.setOptions({
-            modelComplexity: 1,
+            modelComplexity: 1, 
             smoothLandmarks: true,
             minDetectionConfidence: 0.5,
             minTrackingConfidence: 0.5,
@@ -212,6 +219,7 @@ async function addSkeletonToVideo2() {
         // start the loop
         updatePose2();
     } else {
+        socket.emit('toggleSkelToServer2', roomName);
         const ctx2 = canvas2.getContext('2d');
         ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
         cancelAnimationFrame(animationFrameId2);
@@ -302,4 +310,13 @@ socket.on('toggleSkeleton2', (enabled) => {
     if (enabled !== skeletonEnabled2) {
         addSkeletonToVideo2(); // 로컬에서 스켈레톤 상태 토글
     }
+});
+
+// 스켈레톤 토글 버튼 동기화
+socket.on('toggleSkelToClient', () => {
+    toggleAddSkeleton();
+});
+
+socket.on('toggleSkelToClient2', () => {
+    toggleAddSkeleton2();
 });
