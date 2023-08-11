@@ -21,7 +21,7 @@ function videoPauser1() {
         waitImpact = true;
         socket.emit('pause_video', roomName);
         setTimeout(() => {
-            videoZero()
+            videoZero();
         }, 500);
     }
 }
@@ -35,7 +35,7 @@ function videoPauser2() {
         waitImpact = true;
         socket.emit('pause_video2', roomName);
         setTimeout(() => {
-            videoZero2()
+            videoZero2();
         }, 500);
     }
 }
@@ -80,25 +80,38 @@ function getImpact1(results) {
     let righthigh = 1;
     let rightTime;
 
-
     for (let i = 1; i < timeline1.length; i++) {
-        if (saveFlag1 && timeline1[i].positions[5][1] < timeline1[i].positions[3][1] && timeline1[i].positions[5][1] < lefthigh ) {
+        if (
+            saveFlag1 &&
+            timeline1[i].positions[5][1] < timeline1[i].positions[3][1] &&
+            timeline1[i].positions[5][1] < lefthigh
+        ) {
             lefthigh = timeline1[i].positions[5][1];
             leftTime = timeline1[i].videoTime;
             checkFlag1 = false;
-        } 
-        
+        }
+
         if (saveFlag1 && !checkFlag1 && timeline1[i].positions[5][1] > timeline1[i].positions[3][1]) {
             impactTimes1.push(leftTime);
             saveFlag1 = false;
         }
 
-        if (!saveFlag1 && saveFlag2 && timeline1[i].positions[4][0] > timeline1[i].positions[1][0] && timeline1[i].positions[4][0] >= timeline1[i].positions[6][0]) {
+        if (
+            !saveFlag1 &&
+            saveFlag2 &&
+            timeline1[i].positions[4][0] > timeline1[i].positions[1][0] &&
+            timeline1[i].positions[4][0] >= timeline1[i].positions[6][0]
+        ) {
             impactTimes1.push(timeline1[i].videoTime);
             saveFlag2 = false;
         }
-        
-        if (!saveFlag1 && !saveFlag2 && timeline1[i].positions[5][1] < righthigh && timeline1[i].positions[5][0] >= timeline1[i].positions[0][0]) {
+
+        if (
+            !saveFlag1 &&
+            !saveFlag2 &&
+            timeline1[i].positions[5][1] < righthigh &&
+            timeline1[i].positions[5][0] >= timeline1[i].positions[0][0]
+        ) {
             righthigh = timeline1[i].positions[5][1];
             rightTime = timeline1[i].videoTime;
         }
@@ -117,25 +130,38 @@ function getImpact2(results) {
     let righthigh = 1;
     let rightTime;
 
-
     for (let i = 1; i < timeline2.length; i++) {
-        if (saveFlag1 && timeline2[i].positions[5][1] < timeline2[i].positions[3][1] && timeline2[i].positions[5][1] < lefthigh ) {
+        if (
+            saveFlag1 &&
+            timeline2[i].positions[5][1] < timeline2[i].positions[3][1] &&
+            timeline2[i].positions[5][1] < lefthigh
+        ) {
             lefthigh = timeline2[i].positions[5][1];
             leftTime = timeline2[i].videoTime;
             checkFlag1 = false;
-        } 
-        
+        }
+
         if (saveFlag1 && !checkFlag1 && timeline2[i].positions[5][1] > timeline2[i].positions[3][1]) {
             impactTimes2.push(leftTime);
             saveFlag1 = false;
         }
 
-        if (!saveFlag1 && saveFlag2 && timeline2[i].positions[4][0] > timeline2[i].positions[1][0] && timeline2[i].positions[4][0] >= timeline2[i].positions[6][0]) {
+        if (
+            !saveFlag1 &&
+            saveFlag2 &&
+            timeline2[i].positions[4][0] > timeline2[i].positions[1][0] &&
+            timeline2[i].positions[4][0] >= timeline2[i].positions[6][0]
+        ) {
             impactTimes2.push(timeline2[i].videoTime);
             saveFlag2 = false;
         }
-        
-        if (!saveFlag1 && !saveFlag2 && timeline2[i].positions[5][1] < righthigh && timeline2[i].positions[5][0] >= timeline2[i].positions[0][0]) {
+
+        if (
+            !saveFlag1 &&
+            !saveFlag2 &&
+            timeline2[i].positions[5][1] < righthigh &&
+            timeline2[i].positions[5][0] >= timeline2[i].positions[0][0]
+        ) {
             righthigh = timeline2[i].positions[5][1];
             rightTime = timeline2[i].videoTime;
         }
@@ -143,7 +169,6 @@ function getImpact2(results) {
 
     impactTimes2.push(rightTime);
 }
-
 
 // function getImpact1() {
 //     let saveFlag1 = true;
@@ -196,7 +221,7 @@ function timelinePusher1() {
     } else {
         console.log('stop');
         getImpact1();
-    }   
+    }
 }
 
 function timelinePusher2() {
@@ -212,7 +237,7 @@ function timelinePusher2() {
     } else {
         console.log('stop');
         getImpact2();
-    }   
+    }
 }
 
 function calImpact1() {
@@ -245,8 +270,8 @@ function calImpact2() {
     timelinePusher2();
 }
 
-document.getElementById('impactTime1').addEventListener('click', function() {
-    socket.emit("impact1", roomName);
+document.getElementById('impactTime1').addEventListener('click', function () {
+    socket.emit('impact1', roomName);
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[0];
@@ -255,8 +280,8 @@ document.getElementById('impactTime1').addEventListener('click', function() {
     console.log(impactTimes2[0]);
 });
 
-document.getElementById('impactTime2').addEventListener('click', function() {
-    socket.emit("impact2", roomName);
+document.getElementById('impactTime2').addEventListener('click', function () {
+    socket.emit('impact2', roomName);
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[1];
@@ -265,8 +290,8 @@ document.getElementById('impactTime2').addEventListener('click', function() {
     console.log(impactTimes2[1]);
 });
 
-document.getElementById('impactTime3').addEventListener('click', function() {
-    socket.emit("impact3", roomName);
+document.getElementById('impactTime3').addEventListener('click', function () {
+    socket.emit('impact3', roomName);
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[2];
@@ -275,20 +300,20 @@ document.getElementById('impactTime3').addEventListener('click', function() {
     console.log(impactTimes2[2]);
 });
 
-document.getElementById('impactTimeReset').addEventListener('click', function() {
-    socket.emit("doImpactReset", roomName);
+document.getElementById('impactTimeReset').addEventListener('click', function () {
+    socket.emit('doImpactReset', roomName);
     calImpact1();
     calImpact2();
 });
 
-document.getElementById('testbutton').addEventListener('click', function() {
-    console.log(timeline1);
-    console.log(timeline2);
-    console.log(impactTimes1);
-    console.log(impactTimes2);
-});
+// document.getElementById('testbutton').addEventListener('click', function() {
+//     console.log(timeline1);
+//     console.log(timeline2);
+//     console.log(impactTimes1);
+//     console.log(impactTimes2);
+// });
 
-socket.on("impact1", () => {
+socket.on('impact1', () => {
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[0];
@@ -297,7 +322,7 @@ socket.on("impact1", () => {
     console.log(impactTimes2[0]);
 });
 
-socket.on("impact2", () => {
+socket.on('impact2', () => {
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[1];
@@ -306,7 +331,7 @@ socket.on("impact2", () => {
     console.log(impactTimes2[1]);
 });
 
-socket.on("impact3", () => {
+socket.on('impact3', () => {
     video.pause();
     video2.pause();
     video.currentTime = impactTimes1[2];

@@ -136,7 +136,6 @@ function toggleAddSkeleton() {
     } else {
         tooltipText.textContent = 'Add Skeleton1';
     }
-
 }
 
 function toggleAddSkeleton2() {
@@ -150,20 +149,4 @@ function toggleAddSkeleton2() {
     } else {
         tooltipText2.textContent = 'Add Skeleton2';
     }
-
 }
-
-// function toggleImpactTime() {
-//     const toggleImpactTimebutton = document.getElementById('impactTime1');
-//     toggleImpactTimebutton.classList.toggle('active');
-// }
-
-// function toggleImpactTime2() {
-//     const toggleImpactTimebutton2 = document.getElementById('impactTime2');
-//     toggleImpactTimebutton2.classList.toggle('active');
-// }
-
-// function toggleImpactTime3() {
-//     const toggleImpactTimebutton3 = document.getElementById('impactTime3');
-//     toggleImpactTimebutton3.classList.toggle('active');
-// }
