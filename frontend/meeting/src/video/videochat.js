@@ -106,9 +106,6 @@ async function initCall() {
     call.hidden = false;
     await getMedia();
     makeConnection();
-
-    // 상대방이 입장할 때 효과음 재생
-    handleUserEnter();
 }
 
 async function handleWelcomeSubmit() {
@@ -186,9 +183,6 @@ function makeConnection() {
     myPeerConnection.addEventListener('icecandidate', handleIce);
     myPeerConnection.addEventListener('addstream', handleAddStream);
     myStream.getTracks().forEach((track) => myPeerConnection.addTrack(track, myStream));
-
-    // 상대방이 입장할 때 효과음 재생
-    handleUserEnter();
 }
 
 function handleIce(data) {
