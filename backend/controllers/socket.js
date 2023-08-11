@@ -267,5 +267,10 @@ exports.socketManagement = io => {
         socket.on("user_exitToServer", (roomName) => {
             socket.to(roomName).emit("user_exitToClient");
         });
+
+        // 색연필 on off
+        socket.on('pencilClickToServer', (roomName) => {
+            socket.to(roomName).emit("pencilClickToClient");
+        });
     });
 };

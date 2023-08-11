@@ -126,3 +126,28 @@ function handleChangeColor(event) {
 
 linewidth.addEventListener("change", handleChangeWidth);
 color.addEventListener("change", handleChangeColor);
+
+const pencil = document.getElementById('toggleDrawCanvasButton');
+let pencilMode = false;
+
+pencil.addEventListener('click', function () {
+    socket.emit('pencilClickToServer', roomName);
+
+    if (!pencilMode) {
+        document.body.classList.add('button-pointer');
+        pencilMode = true;
+    } else {
+        document.body.classList.remove('button-pointer');
+        pencilMode = false;
+    }
+});
+
+socket.on('pencilClickToClient', () => {
+    if (!pencilMode) {
+        document.body.classList.add('button-pointer');
+        pencilMode = true;
+    } else {
+        document.body.classList.remove('button-pointer');
+        pencilMode = false;
+    }
+});
