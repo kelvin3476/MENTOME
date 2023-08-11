@@ -106,6 +106,9 @@ async function initCall() {
     call.hidden = false;
     await getMedia();
     makeConnection();
+
+    // 상대방이 입장할 때 효과음 재생
+    handleUserEnter();
 }
 
 async function handleWelcomeSubmit() {
@@ -130,6 +133,9 @@ socket.on('welcome', async () => {
     myPeerConnection.setLocalDescription(offer);
     console.log('sent the offer');
     socket.emit('offer', offer, roomName);
+
+    // 상대방이 입장할 때 효과음 재생
+    handleUserEnter();
 });
 
 // Firefox
@@ -175,6 +181,9 @@ function makeConnection() {
     myPeerConnection.addEventListener('icecandidate', handleIce);
     myPeerConnection.addEventListener('addstream', handleAddStream);
     myStream.getTracks().forEach((track) => myPeerConnection.addTrack(track, myStream));
+
+    // 상대방이 입장할 때 효과음 재생
+    handleUserEnter();
 }
 
 function handleIce(data) {
