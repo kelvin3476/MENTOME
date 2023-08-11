@@ -11,6 +11,8 @@ function playEnterSound() {
 function playExitSound() {
     exitSound.currentTime = 0; // 재생 위치를 처음으로 되돌림
     exitSound.play();
+
+    socket.emit('user_exit', roomName); // 상대방에게 나가기 이벤트 보내기
 }
 
 // 상대방 입장 및 퇴장 시 효과음 재생
@@ -37,7 +39,6 @@ function autoEnterRoom() {
 exitButton.addEventListener('click', () => {
         handleUserExit();
         console.log('dodododo');
-        socket.emit('user_exit', roomName); // 상대방에게 나가기 이벤트 보내기
         console.log('유저 퇴장');
         setTimeout(() => {
             window.location.href = '/';
