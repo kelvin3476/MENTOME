@@ -28,19 +28,16 @@ function handleUserExit() {
 const exitButton = document.getElementById('exit');
 
 function autoEnterRoom() {
-    console.log('do it');
     handleWelcomeSubmit();
     handleRoomSubmit();
 
     handleUserEnter(); // 영훈 입장 효과음
-    console.log('dodoit;');
 }
 
 exitButton.addEventListener('click', () => {
         handleUserExit();
-        console.log('dodododo');
         console.log('유저 퇴장');
         setTimeout(() => {
             window.location.href = '/';
-        }, 350);
+        }, 300);
 });

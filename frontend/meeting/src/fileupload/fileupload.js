@@ -23,13 +23,6 @@ fileUploadForm.addEventListener('change', (event) => {
     const selectedFile = selectedFileInput.files[0];
     console.log(selectedFile.name);
     if (selectedFile) {
-        // addSkeletonButton 클릭시 호출
-        const addSkeletonButton = document.getElementById('addSkeletonButton');
-        addSkeletonButton.addEventListener('click', () => {
-            // 파일이 선택된 경우에만 스켈레톤 토글 함수 호출
-            toggleAddSkeleton();
-        });
-
         // Create a FormData object
         let formData = new FormData();
         // Add the file to the form data
@@ -85,13 +78,6 @@ fileUploadForm2.addEventListener('change', (event) => {
     loadingSpinner2.style.display = 'block';
 
     if (selectedFile) {
-        // addSkeletonButton 클릭시 호출
-        const addSkeletonButton2 = document.getElementById('addSkeletonButton2');
-        addSkeletonButton2.addEventListener('click', () => {
-            // 파일이 선택된 경우에만 스켈레톤 토글 함수 호출
-            toggleAddSkeleton2();
-        });
-
         // Create a FormData object
         let formData = new FormData();
         // Add the file to the form data

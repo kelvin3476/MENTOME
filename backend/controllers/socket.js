@@ -267,5 +267,19 @@ exports.socketManagement = io => {
         socket.on("user_exitToServer", (roomName) => {
             socket.to(roomName).emit("user_exitToClient");
         });
+
+        // 색연필 on off
+        socket.on('pencilClickToServer', (roomName) => {
+            socket.to(roomName).emit("pencilClickToClient");
+        });
+
+        // 스켈레톤버튼 on off
+        socket.on('toggleSkelToServer', (roomName) => {
+            socket.to(roomName).emit('toggleSkelToClient');
+        });
+
+        socket.on('toggleSkelToServer2', (roomName) => {
+            socket.to(roomName).emit('toggleSkelToClient2');
+        });
     });
 };
