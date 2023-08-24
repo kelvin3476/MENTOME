@@ -1,10 +1,7 @@
-<div  align="center"">
-
-<img  src="https://capsule-render.vercel.app/api?type=waving&color=85E4F8&height=200&section=header&text=🏌️‍♂️멘토미🏌️‍♀️
-&fontSize=60&animation=fadeIn&fontAlignY=38&desc=&descAlignY=51&descAlign=62"  />
-<br/>
-
+<div align="center">
+    <img src="https://capsule-render.vercel.app/api?type=waving&color=05d183&height=200&section=header&text=🏌️‍♂️멘토미🏌️‍♀️&fontSize=60&&animation=fadeIn&fontAlignY=38&desc=&descAlignY=51&descAlign=62" alt="멘토미">
 </div>
+
 
 ## 📖 목차
 
@@ -87,11 +84,8 @@
 ## 👥 Team members
 
   
-
-| 정영상 | 김인제 | 김현수 | 이영훈 | 이승우 |
-
+|               정영상                |                   김인제                   |                   김현수                   |                   이영훈                    |                 이승우                 |
 | :---------------------------------: | :----------------------------------------: | :----------------------------------------: | :-----------------------------------------: | :-----------------------------------: |
-
 | [Github](https://github.com/imagejung) | [Github](https://github.com/kijen723) | [Github](https://github.com/HyNS00) | [Github](https://github.com/kr-younghoon) | [Github](https://github.com/kelvin3476) |
 
   
